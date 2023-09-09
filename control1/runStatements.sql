@@ -3,6 +3,13 @@
 -- profesores jefe y alumnos de su jefatura, si corresponde.
 ---------------------------------------------------------------
 
+SELECT profesor.nombre, profesor.sueldo, profesor_curso.jefatura, alumno.nombre
+FROM profesor, profesor_curso, curso, alu_curso, alumno
+WHERE profesor.id_profesor = profesor_curso.id_profesor
+AND profesor_curso.id_curso = alu_curso.id_curso
+AND alu_curso.id_alumno = alumno.id_alumno
+GROUP BY profesor.nombre, profesor.sueldo, profesor_curso.jefatura;
+
 ---------------------------------------------------------------
 -- 2. Lista de alumnos con más inasistencias por mes por curso
 -- el 2019.
