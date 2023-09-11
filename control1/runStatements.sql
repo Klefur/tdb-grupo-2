@@ -73,9 +73,10 @@ FROM  (SELECT a.id_apoderado ,a.nombre,alu_curso.id_curso
 		
 		(SELECT *
 		FROM apoderado AS ap
-		WHERE ap.relacion <> 'Padre' and ap.relacion <> 'Madre' ) AS no_mp
+		WHERE lower(ap.relacion) not like '%padre%' and lower(ap.relacion) not like '%madre%' ) AS no_mp
 		
 WHERE ac.id_apoderado = no_mp.id 
+
 ---------------------------------------------------------------
 -- 9. Colegio con mayor promedio de asistencia el año 2019,
 -- identificando la comuna.
