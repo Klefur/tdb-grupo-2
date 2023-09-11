@@ -98,6 +98,20 @@ WHERE ac.id_apoderado = no_mp.id
 -- identificando la comuna.
 ---------------------------------------------------------------
 
+SELECT nombre_colegio, comuna, MAX(promedio_asistencia) AS maximo_promedio
+FROM (
+    SELECT col.nombre AS nombre_colegio, com.nombre AS comuna, AVG(a.presente::int) AS promedio_asistencia
+    FROM asistencia AS a
+    INNER JOIN alu_curso AS a_c ON a.id_alu_curso = a_c.id
+    INNER JOIN alumno AS al ON a_c.id_alumno = al.id
+    INNER JOIN colegio AS col ON al.id_colegio = col.id
+    INNER JOIN comuna AS com ON com.id = col.id_comuna
+    WHERE EXTRACT(YEAR FROM a.fecha) = 2023 AND a.presente = 'true'
+    GROUP BY col.nombre, com.nombre) AS PromediosColegios
+	
+GROUP BY nombre_colegio, comuna
+LIMIT 1;
+
 ---------------------------------------------------------------
 -- 10. Listado de colegios con mayor número de alumnos por año.
 ---------------------------------------------------------------
