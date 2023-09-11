@@ -37,11 +37,27 @@ WHERE alumnos.inasistencias = (SELECT MAX(inasistencias) FROM alumnos);
 -- 3. Lista de empleados identificando su rol, sueldo y comuna
 -- de residencia. Debe estar ordenada por comuna y sueldo.
 ---------------------------------------------------------------
-
+SELECT emp.rol, emp.sueldo, comuna.nombre
+FROM empleado as emp
+INNER JOIN comuna ON emp.id_comuna = comuna.id
+ORDER BY comuna.nombre, emp.sueldo
 ---------------------------------------------------------------
 -- 4. Curso con menos alumnos por año.
 ---------------------------------------------------------------
-
+SELECT curso.id, course_year, nombre, COUNT(id_alumno) AS cantidad_alumnos
+FROM alu_curso
+JOIN curso ON alu_curso.id_curso = curso.id
+GROUP BY course.id, course_year, nombre
+HAVING COUNT(id_alumno) = (
+  SELECT MIN(contador_alumnos)
+  FROM (
+    SELECT course_year, COUNT(id_alumno) AS contador_alumnos
+    FROM alu_curso
+    GROUP BY course_year, id_curso
+  ) AS subconsulta
+  WHERE alu_curso.course_year = subconsulta.course_year
+)
+ORDER BY course_year;
 ---------------------------------------------------------------
 -- 5. Identificar al alumno que no ha faltado nunca por curso.
 ---------------------------------------------------------------
