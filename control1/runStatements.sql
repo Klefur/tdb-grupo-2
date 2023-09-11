@@ -65,6 +65,17 @@ WHERE alumnos.inasistencias = (SELECT MAX(inasistencias) FROM alumnos);
 -- padre o madre.
 ---------------------------------------------------------------
 
+SELECT ac.nombre AS Nombre_Alumno ,ac.id_curso AS ID_Curso , no_mp.relacion AS Relacion  
+FROM  (SELECT a.id_apoderado ,a.nombre,alu_curso.id_curso
+		FROM alumno AS a
+		INNER JOIN alu_curso on alu_curso.id_alumno = a.id
+		GROUP BY (a.id_apoderado,alu_curso.id_curso,a.nombre)) AS ac ,
+		
+		(SELECT *
+		FROM apoderado AS ap
+		WHERE ap.relacion <> 'Padre' and ap.relacion <> 'Madre' ) AS no_mp
+		
+WHERE ac.id_apoderado = no_mp.id 
 ---------------------------------------------------------------
 -- 9. Colegio con mayor promedio de asistencia el año 2019,
 -- identificando la comuna.
