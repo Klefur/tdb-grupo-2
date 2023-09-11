@@ -3,17 +3,35 @@
 -- profesores jefe y alumnos de su jefatura, si corresponde.
 ---------------------------------------------------------------
 
-SELECT profesor.nombre, profesor.sueldo, profesor_curso.jefatura, alumno.nombre
-FROM profesor, profesor_curso, curso, alu_curso, alumno
-WHERE profesor.id_profesor = profesor_curso.id_profesor
-AND profesor_curso.id_curso = alu_curso.id_curso
-AND alu_curso.id_alumno = alumno.id_alumno
-GROUP BY profesor.nombre, profesor.sueldo, profesor_curso.jefatura;
+SELECT profesor.nombre, profesor.sueldo, profesor_curso.jefatura, curso.nombre, alumnos
+CASE WHEN profesor_curso.jefatura = 1 THEN 'Si' ELSE 'No' END AS jefatura,
+CASE WHEN profesor_curso.jefatura = 1 THEN ARRAY_AGG(alumno.nombre) ELSE NULL END AS alumnos
+FROM public."Profesor" AS profesor
+LEFT JOIN "ProfesorCurso" AS profesor_curso ON profesor.id_profesor = profesor_curso.id_profesor
+LEFT JOIN "Curso" AS curso ON profesor_curso.id_curso = curso.id_curso
+LEFT JOIN "AlumnoCurso" AS alumno_curso ON curso.id_curso = alumno_curso.id_curso
+LEFT JOIN "Alumno" AS alumno ON alumno_curso.id_alumno = alumno.id_alumno
+GROUP BY (profesor.nombre, profesor.sueldo, profesor_curso.jefatura);
 
 ---------------------------------------------------------------
 -- 2. Lista de alumnos con más inasistencias por mes por curso
 -- el 2019.
 ---------------------------------------------------------------
+
+SELECT alumno.nombre
+FROM 
+(SELECT alumno.nombre AS nombre, 
+EXTRACT(MONTH FROM asistencia.fecha_asistencia) AS mes,
+EXTRACT(YEAR FROM aistencia.fecha_asistencia) AS anio,
+COUNT(alumno.nombre) AS inasistencias
+FROM public."Alumno" AS alu
+INNER JOIN "AlumnoCurso" AS alu_curso ON alu.id_alumno = alu_curso.id_alumno
+INNER JOIN "Curso" AS curso ON alu_curso.id_curso = curso.id_curso
+INNER JOIN "Asistencia" AS asistencia ON alu.id_alumno = asistencia.id_alumno
+WHERE asistencia.presente = 0 AND mes = 2019
+GROUP BY (alu.nombre, mes, anio)) AS alumnos
+WHERE alumnos.inasistencias = (SELECT MAX(inasistencias) FROM alumnos);
+
 
 ---------------------------------------------------------------
 -- 3. Lista de empleados identificando su rol, sueldo y comuna
