@@ -84,7 +84,7 @@ ORDER BY course_year;
 SELECT ac.nombre AS Nombre_Alumno ,ac.id_curso AS ID_Curso , no_mp.relacion AS Relacion  
 FROM  (SELECT a.id_apoderado ,a.nombre,alu_curso.id_curso
 		FROM alumno AS a
-		INNER JOIN alu_curso on alu_curso.id_alumno = a.id
+		INNER JOIN alu_curso ON alu_curso.id_alumno = a.id
 		GROUP BY (a.id_apoderado,alu_curso.id_curso,a.nombre)) AS ac ,
 		
 		(SELECT *
@@ -92,24 +92,27 @@ FROM  (SELECT a.id_apoderado ,a.nombre,alu_curso.id_curso
 		WHERE lower(ap.relacion) not like '%padre%' and lower(ap.relacion) not like '%madre%' ) AS no_mp
 		
 WHERE ac.id_apoderado = no_mp.id 
+GROUP BY ac.id_curso,ac.nombre,no_mp.relacion
+
 
 ---------------------------------------------------------------
 -- 9. Colegio con mayor promedio de asistencia el año 2019,
 -- identificando la comuna.
 ---------------------------------------------------------------
 
-SELECT nombre_colegio, comuna, MAX(promedio_asistencia) AS maximo_promedio
+SELECT col_asis.nombre AS nombre_colegio,comuna.nombre AS nombre_comuna,AVG(col_asis.contador) AS promedio_maximo
 FROM (
-    SELECT col.nombre AS nombre_colegio, com.nombre AS comuna, AVG(a.presente::int) AS promedio_asistencia
-    FROM asistencia AS a
-    INNER JOIN alu_curso AS a_c ON a.id_alu_curso = a_c.id
-    INNER JOIN alumno AS al ON a_c.id_alumno = al.id
-    INNER JOIN colegio AS col ON al.id_colegio = col.id
-    INNER JOIN comuna AS com ON com.id = col.id_comuna
-    WHERE EXTRACT(YEAR FROM a.fecha) = 2023 AND a.presente = 'true'
-    GROUP BY col.nombre, com.nombre) AS PromediosColegios
-	
-GROUP BY nombre_colegio, comuna
+    SELECT colegio.nombre,alu_curso.id_curso,comuna.id,COUNT(alu_curso.id_curso) AS contador
+    FROM asistencia
+    INNER JOIN alu_curso ON asistencia.id_alu_curso = alu_curso.id
+    INNER JOIN alumno ON alu_curso.id_alumno = alumno.id
+    INNER JOIN colegio ON colegio.id = alumno.id_colegio
+    INNER JOIN comuna ON colegio.id_comuna = comuna.id
+    WHERE EXTRACT(YEAR FROM fecha) = 2019 AND asistencia.presente = 'true'
+    GROUP BY colegio.nombre, alu_curso.id_curso, comuna.id ) AS col_asis
+INNER JOIN comuna ON col_asis.id = comuna.id
+GROUP BY col_asis.nombre, col_asis.id, comuna.nombre
+ORDER BY promedio_maximo DESC
 LIMIT 1;
 
 ---------------------------------------------------------------
