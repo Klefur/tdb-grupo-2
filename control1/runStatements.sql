@@ -66,14 +66,50 @@ ORDER BY course_year;
 
 ---------------------------------------------------------------
 -- 6. Profesor con más horas de clases y mostrar su sueldo.
+-- ( En caso de empate, mostrar el que tenga mayor sueldo )
 ---------------------------------------------------------------
-
+SELECT
+    hp.nombre_profesor,
+	hp.horas_clases,
+    e.sueldo
+FROM (
+	SELECT
+        p.id AS id_profesor,
+        p.nombre AS nombre_profesor,
+        ROUND(SUM(EXTRACT(EPOCH FROM (fh.hona_fin - fh.hora_inicio))) / 3600, 2) AS horas_clases
+    FROM profesor p
+    INNER JOIN prof_curso pc ON p.id = pc.id_profesor
+    INNER JOIN franja_horaria fh ON pc.id = fh.id_prof_curso
+    GROUP BY p.id, p.nombre) hp
+INNER JOIN empleado e ON hp.id_profesor = e.id
+ORDER BY
+    hp.horas_clases DESC,
+	sueldo DESC
+LIMIT 1;
 ---------------------------------------------------------------
 
 ---------------------------------------------------------------
 -- 7. Profesor con menos horas de clases y mostrar su sueldo.
+-- ( En caso de empate, mostrar el que tenga mayor sueldo )
 ---------------------------------------------------------------
-
+SELECT
+    hp.nombre_profesor,
+	hp.horas_clases,
+    e.sueldo
+FROM (
+	SELECT
+        p.id AS id_profesor,
+        p.nombre AS nombre_profesor,
+        ROUND(SUM(EXTRACT(EPOCH FROM (fh.hona_fin - fh.hora_inicio))) / 3600, 2) AS horas_clases
+    FROM profesor p
+    INNER JOIN prof_curso pc ON p.id = pc.id_profesor
+    INNER JOIN franja_horaria fh ON pc.id = fh.id_prof_curso
+    GROUP BY p.id, p.nombre) hp
+INNER JOIN empleado e ON hp.id_profesor = e.id
+ORDER BY
+    hp.horas_clases ASC,
+	sueldo DESC
+LIMIT 1;
 ---------------------------------------------------------------
 
 ---------------------------------------------------------------
