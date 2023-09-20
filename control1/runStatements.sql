@@ -24,38 +24,22 @@ GROUP BY profesor.nombre, empleado.sueldo, profesor_curso.profesor_jefe, curso.n
 -- 2. Lista de alumnos con más inasistencias por mes por curso
 -- el 2019.
 ---------------------------------------------------------------
--- NO FUNCA
-SELECT alumno.nombre
-FROM 
-	(SELECT alumno.nombre AS nombre 
-	EXTRACT(MONTH FROM asistencia.fecha) AS mes,
-	EXTRACT(YEAR FROM asistencia.fecha) AS anio,
-	COUNT(alumno.nombre) AS inasistencias
-FROM alumno 
-INNER JOIN  alu_curso  ON alumno.id = alu_curso.id_alumno
-INNER JOIN  curso ON alu_curso.id_curso = curso.id
-INNER JOIN  asistencia ON alu_curso.id = asistencia.id_alu_curso
-WHERE asistencia.presente = 'false' AND mes = 2019
-GROUP BY (alumno.nombre, mes, anio)) AS alumnos
-WHERE alumnos.inasistencias = (SELECT MAX(inasistencias) FROM alumnos);
-
-----ESTE SI 
-
 WITH InasistenciasPorAlumno AS (
-    SELECT alumno.nombre AS nombre,curso.id AS id_curso,EXTRACT(MONTH FROM asistencia.fecha) AS mes,COUNT(*) AS inasistencias
+    SELECT alumno.nombre AS nombre, curso.id AS id_curso, EXTRACT(MONTH FROM asistencia.fecha) AS mes, COUNT(*) AS inasistencias
     FROM alumno
     INNER JOIN alu_curso ON alumno.id = alu_curso.id_alumno
     INNER JOIN curso ON alu_curso.id_curso = curso.id
     INNER JOIN asistencia ON alu_curso.id = asistencia.id_alu_curso
-    WHERE asistencia.presente = 'false' AND EXTRACT(YEAR FROM asistencia.fecha) = 2019
+    WHERE asistencia.presente = false AND EXTRACT(YEAR FROM asistencia.fecha) = 2019
     GROUP BY alumno.nombre, curso.id, mes
 )
+
 SELECT nombre, mes, id_curso
 FROM (
-    SELECT nombre, mes,id_curso,ROW_NUMBER() OVER(PARTITION BY mes, id_curso ORDER BY inasistencias DESC) AS rn
+    SELECT nombre, mes,id_curso, ROW_NUMBER() OVER(PARTITION BY mes, id_curso ORDER BY inasistencias DESC) AS ranking
     FROM InasistenciasPorAlumno
 ) AS ranked
-WHERE rn = 1;
+WHERE ranking = 1;
 
 ---------------------------------------------------------------
 -- 3. Lista de empleados identificando su rol, sueldo y comuna
