@@ -58,11 +58,13 @@ HAVING COUNT(id_alumno) = (
   WHERE alu_curso.course_year = subconsulta.course_year
 )
 ORDER BY course_year;
+
+
 ---------------------------------------------------------------
 -- 5. Identificar al alumno que no ha faltado nunca por curso.
 ---------------------------------------------------------------
 
----------------------------------------------------------------
+
 
 ---------------------------------------------------------------
 -- 6. Profesor con más horas de clases y mostrar su sueldo.
@@ -154,3 +156,15 @@ LIMIT 1;
 ---------------------------------------------------------------
 -- 10. Listado de colegios con mayor número de alumnos por año.
 ---------------------------------------------------------------
+
+WITH infocolegios AS (
+	SELECT c.nombre AS nombre, ac.course_year AS anio, COUNT(a.id_colegio) AS cantidad_alumnos,
+		RANK() OVER (PARTITION BY ac.course_year ORDER BY COUNT(a.id_colegio) DESC) AS ranking
+	FROM alu_curso AS ac, alumno a, colegio c
+	WHERE ac.id_alumno = a.id AND a.id_colegio = c.id
+	GROUP BY c.nombre, ac.course_year
+)
+
+SELECT nombre, anio, cantidad_alumnos
+FROM infocolegios
+WHERE ranking = 1;
