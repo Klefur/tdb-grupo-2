@@ -1,0 +1,5 @@
+
+psql -U usuario -h servidor -d basededatos -a -f dbCreate.sql
+psql -U usuario -h servidor -d basededatos -a -f loadData.sql
+psql -U usuario -h servidor -d basededatos -a -f runStatements.sql
+
