@@ -72,7 +72,10 @@ ORDER BY course_year;
 -- 5. Identificar al alumno que no ha faltado nunca por curso.
 ---------------------------------------------------------------
 
-
+SELECT al.nombre, c.nombre
+FROM alu_curso AS ac, curso AS c, alumno AS al, asistencia AS ast
+WHERE ac.id = ast.id_alu_curso AND ac.id_alumno = al.id AND c.id = ac.id_curso AND ast.presente = true
+GROUP BY c.nombre, al.nombre
 
 ---------------------------------------------------------------
 -- 6. Profesor con más horas de clases y mostrar su sueldo.

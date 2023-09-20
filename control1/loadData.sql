@@ -67,7 +67,7 @@ VALUES
     (3, 2002, 3, 3),
     (4, 2002, 3, 4),
     (5, 2001, 1, 2),
-    (6, 2002, 1, 2);
+    (6, 2002, 3, 2);
 
 INSERT INTO FRANJA_HORARIA (id, hora_inicio, hona_fin, presente, dia, id_prof_curso)
 VALUES
@@ -81,4 +81,4 @@ VALUES
     (1, '2023-09-10', 1, 1, true),
     (2, '2023-09-10', 2, 2, true),
     (3, '2023-09-10', 3, 3, true),
-    (4, '2023-09-10', 4, 4, true);
+    (4, '2023-09-10', 4, 4, false);
