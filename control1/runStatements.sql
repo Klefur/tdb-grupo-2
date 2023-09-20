@@ -34,9 +34,9 @@ WITH InasistenciasPorAlumno AS (
     GROUP BY alumno.nombre, curso.id, mes
 )
 
-SELECT nombre, mes, id_curso
+SELECT nombre, mes, id_curso, inasistencias
 FROM (
-    SELECT nombre, mes,id_curso, ROW_NUMBER() OVER(PARTITION BY mes, id_curso ORDER BY inasistencias DESC) AS ranking
+    SELECT nombre, mes, id_curso, ROW_NUMBER() OVER(PARTITION BY mes, id_curso ORDER BY inasistencias DESC) AS ranking, inasistencias
     FROM InasistenciasPorAlumno
 ) AS ranked
 WHERE ranking = 1;
