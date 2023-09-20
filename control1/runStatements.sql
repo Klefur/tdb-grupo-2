@@ -6,7 +6,12 @@
 
 SELECT profesor.nombre AS nombre_profesor,empleado.sueldo,
   CASE WHEN profesor_curso.profesor_jefe = true THEN 'Si' ELSE 'No' END AS es_profesor_jefe,
-  curso.nombre AS nombre_curso, ARRAY_AGG(alumno.nombre) AS alumnos_de_jefatura
+  curso.nombre AS nombre_curso, 
+  (CASE WHEN profesor_curso.profesor_jefe = true
+  		THEN ARRAY_AGG(alumno.nombre) 
+  		ELSE NULL
+  		END)
+  AS alumnos_de_jefatura
 FROM profesor
 INNER JOIN empleado ON empleado.id = profesor.id_empleado 
 LEFT JOIN prof_curso AS profesor_curso ON profesor.id = profesor_curso.id_profesor
