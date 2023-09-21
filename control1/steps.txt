@@ -1,5 +1,6 @@
-
-psql -U usuario -h servidor -d basededatos -a -f dbCreate.sql
-psql -U usuario -h servidor -d basededatos -a -f loadData.sql
-psql -U usuario -h servidor -d basededatos -a -f runStatements.sql
+1. Abrir pgAdmin 4
+2. Abrir la opción "Query Tool"
+3. Copiar contenido de dbCreate.sql y ejecutar.
+4. Copiar contenido de loadData.sql y ejecutar.
+5. Copiar contenido de runStatements.sql y ejecutar.
 
