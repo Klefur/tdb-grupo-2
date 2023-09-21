@@ -55,7 +55,7 @@ ORDER BY comuna.nombre, emp.sueldo
 SELECT curso.id, course_year, nombre, COUNT(id_alumno) AS cantidad_alumnos
 FROM alu_curso
 JOIN curso ON alu_curso.id_curso = curso.id
-GROUP BY course.id, course_year, nombre
+GROUP BY curso.id, course_year, nombre
 HAVING COUNT(id_alumno) = (
   SELECT MIN(contador_alumnos)
   FROM (
