@@ -1,15 +1,15 @@
 # tdb-grupo-2
-## Control N°1 - Base de Datos Avanzadas\n
+## Control N°1 - Base de Datos Avanzadas
 En este repositorio se encuentran los archivos requeridos para el primer control del ramo, desarrollado por el equipo 2.
 
-Integrantes equipo 2
+## Integrantes equipo 2
 * Diego Valdés
 * Lucas Mesías
 * Joaquín Saldivia
 * Valentina Campos
 * Nicolás Aguilera
 
-Descripción
+## Descripción
 Cada archivo contiene lo siguiente:
 * dbCreate.sql: Script que crea la base de datos ColegioDB y las tablas requeridas.
 * loadData.sql: Script que pobla las tablas de la base de datos.
