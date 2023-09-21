@@ -1,5 +1,5 @@
 # tdb-grupo-2
-Control N°1 - Base de Datos Avanzadas
+## Control N°1 - Base de Datos Avanzadas\n
 En este repositorio se encuentran los archivos requeridos para el primer control del ramo, desarrollado por el equipo 2.
 
 Integrantes equipo 2
