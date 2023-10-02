@@ -11,11 +11,10 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "Emergency")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class EmergencyEntity {
+@Data
+public class Emergency {
 
         @Id
         @NotNull

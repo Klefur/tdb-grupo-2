@@ -6,26 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Date;
-
 /**
- * Clase que representa una Ability
+ * Clase que representa una Task_Ability
  */
 @Entity
-@Table(name = "Abiliy")
-@Data
+@Table(name = "Task_Ability")
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class AbiliyEntity {
+@Data
+public class Task_Ability {
 
         @Id
         @NotNull
         @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id_task_ability;
+        private Integer id_task;
         private Integer id_ability;
-        private String names;
-        private String items;
-        private String description;
 
 
 }

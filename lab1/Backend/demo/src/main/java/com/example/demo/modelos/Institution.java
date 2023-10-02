@@ -6,27 +6,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Date;
-
 /**
- * Clase que representa una
+ * Clase que representa una Institucion
  */
 @Entity
-@Table(name = "Voluntary_Ability")
-@Data
+@Table(name = "Institution")
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Voluntary_AbilityEntity {
+@Data
+public class Institution {
 
         @Id
         @NotNull
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id_voluntary_ability;
-        private Integer id_voluntary;
-        private Integer id_ability;
-
-
+        private Integer id_institution;
+        private String name;
+        private String coordinator_name;
+        private String email;
+        private String password;
 
 
 }

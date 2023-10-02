@@ -7,22 +7,22 @@ import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Clase que representa una Emergency_Ability
+ * Clase que representa una Ability
  */
 @Entity
-@Table(name = "Emergency_Ability")
-@Data
+@Table(name = "Ability")
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Emergency_AbilityEntity {
+@Data
+public class Ability {
 
         @Id
         @NotNull
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id_emergency_ability;
-        private Integer id_emergency;
         private Integer id_ability;
+        private String names;
+        private String items;
+        private String description;
 
 
 }

@@ -1,27 +1,26 @@
 package com.example.demo.modelos;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.Date;
+
 @Entity
-@Table(name = "Voluntary")
-@Data
+@Table(name = "Task")
 @NoArgsConstructor
 @AllArgsConstructor
-public class VoluntaryEntity {
-
+@Data
+public class Task {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_voluntary;
-    private String rut;
-    private String fullname;
-    private String birthday;
+    private Integer id_task;
+    private String name;
+    private String description;
+    private Date date;
     private boolean state;
-    private String email;
-    private String password;
+    private Integer id_istitution;
 
 }

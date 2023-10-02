@@ -7,22 +7,23 @@ import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Clase que representa una Task_Ability
+ * Clase que representa una
  */
 @Entity
-@Table(name = "Task_Ability")
-@Data
+@Table(name = "Voluntary_Ability")
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class Task_AbilityEntity {
+@Data
+public class Voluntary_Ability {
 
         @Id
         @NotNull
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id_task_ability;
-        private Integer id_task;
+        private Integer id_voluntary_ability;
+        private Integer id_voluntary;
         private Integer id_ability;
+
+
 
 
 }
