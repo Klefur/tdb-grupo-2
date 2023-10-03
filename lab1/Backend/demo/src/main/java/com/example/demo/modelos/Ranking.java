@@ -7,22 +7,14 @@ import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Clase que representa una Rankig
+ * Clase que representa un ranking
  */
-@Entity
-@Table(name = "Ranking")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class Ranking {
 
+public class Ranking {
         @Id
         @NotNull
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id_ranking;
         private Integer id_task;
         private Integer id_voluntary;
-
-
-
 }

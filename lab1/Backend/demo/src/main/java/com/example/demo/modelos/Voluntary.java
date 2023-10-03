@@ -6,14 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
-@Entity
-@Table(name = "Voluntary")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+/*
+* Clase que representa un voluntario
+* */
+
 public class Voluntary {
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_voluntary;
     private String rut;
@@ -22,5 +20,4 @@ public class Voluntary {
     private boolean state;
     private String email;
     private String password;
-
 }

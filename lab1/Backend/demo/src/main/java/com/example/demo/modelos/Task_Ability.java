@@ -7,13 +7,9 @@ import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Clase que representa una Task_Ability
+ * Clase que representa una tarea con una habilidad
  */
-@Entity
-@Table(name = "Task_Ability")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+
 public class Task_Ability {
 
         @Id
@@ -22,6 +18,4 @@ public class Task_Ability {
         private Integer id_task_ability;
         private Integer id_task;
         private Integer id_ability;
-
-
 }

@@ -7,20 +7,18 @@ import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "Task")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+
+/*
+* Clase que representa una tarea
+* */
+
 public class Task {
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_task;
     private String name;
     private String description;
     private Date date;
     private boolean state;
-    private Integer id_istitution;
-
+    private Integer id_institution;
 }

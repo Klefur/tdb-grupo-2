@@ -7,15 +7,9 @@ import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Clase que representa una Ability
+ * Clase que representa una habilidad
  */
-@Entity
-@Table(name = "Ability")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class Ability {
-
         @Id
         @NotNull
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +17,4 @@ public class Ability {
         private String names;
         private String items;
         private String description;
-
-
 }

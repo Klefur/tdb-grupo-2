@@ -7,15 +7,10 @@ import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Clase que representa una Institucion
+ * Clase que representa una institución
  */
-@Entity
-@Table(name = "Institution")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class Institution {
 
+public class Institution {
         @Id
         @NotNull
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +19,4 @@ public class Institution {
         private String coordinator_name;
         private String email;
         private String password;
-
-
 }

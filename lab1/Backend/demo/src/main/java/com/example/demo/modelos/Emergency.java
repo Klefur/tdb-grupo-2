@@ -7,15 +7,9 @@ import lombok.*;
 import java.util.Date;
 
 /**
- * Clase que representa una Emergencia
+ * Clase que representa una emergencia
  */
-@Entity
-@Table(name = "Emergency")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class Emergency {
-
         @Id
         @NotNull
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +18,5 @@ public class Emergency {
         private String description;
         private Date date;
         private String state;
-        private Integer id_intitution;
-
-
+        private Integer id_institution;
 }
