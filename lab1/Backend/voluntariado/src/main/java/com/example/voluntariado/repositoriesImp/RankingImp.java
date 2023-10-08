@@ -1,13 +1,14 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.demo.modelos.Ranking;
-import com.example.demo.repositorios.RankingRepository;
+import com.example.voluntariado.models.Ranking;
+import com.example.voluntariado.repositories.RankingRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RankingImp implements RankingRepository {
     @Override
-    public ArrayList<Ranking> getAllRankings() {
+    public List<Ranking> getAllRankings() {
         return null;
     }
 

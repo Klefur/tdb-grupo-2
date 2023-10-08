@@ -1,12 +1,11 @@
 package com.example.voluntariado.repositories;
 
-import com.example.demo.modelos.Institution;
-import org.springframework.stereotype.Repository;
+import com.example.voluntariado.models.Institution;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface InstitutionRepository {
-    public ArrayList<Institution> getAllInstitutions();
+    public List<Institution> getAllInstitutions();
     public Institution getInstitutionById(Integer id);
     public Institution createInstitution(Institution institution);
     public Institution editInstitution(Institution institution);

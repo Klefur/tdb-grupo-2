@@ -1,13 +1,13 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.demo.modelos.Task_Ability;
-import com.example.demo.repositorios.Task_AbilityRepository;
+import com.example.voluntariado.models.Task_Ability;
+import com.example.voluntariado.repositories.Task_AbilityRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Task_AbilityImp implements Task_AbilityRepository {
     @Override
-    public ArrayList<Task_Ability> getAllTasksAbilities() {
+    public List<Task_Ability> getAllTasksAbilities() {
         return null;
     }
 

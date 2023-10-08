@@ -1,13 +1,14 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.demo.modelos.Voluntary_Ability;
-import com.example.demo.repositorios.Voluntary_AbilityRepository;
+import com.example.voluntariado.models.Voluntary_Ability;
+import com.example.voluntariado.repositories.Voluntary_AbilityRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     @Override
-    public ArrayList<Voluntary_Ability> getAllVoluntariesAbilities() {
+    public List<Voluntary_Ability> getAllVoluntariesAbilities() {
         return null;
     }
 

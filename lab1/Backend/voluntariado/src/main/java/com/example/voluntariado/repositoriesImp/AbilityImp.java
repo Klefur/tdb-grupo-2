@@ -1,19 +1,22 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.demo.modelos.Ability;
-import com.example.demo.repositorios.AbilityRepository;
+import com.example.voluntariado.models.Ability;
+import com.example.voluntariado.repositories.AbilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-import java.util.ArrayList;
+import java.util.List;
 
+@Repository
 public class AbilityImp implements AbilityRepository {
+
     @Autowired
     private Sql2o sql2o;
 
     @Override
-    public ArrayList<Ability> getAllAbilities() {
+    public List<Ability> getAllAbilities() {
         try(Connection connection = sql2o.open()){
             return connection.createQuery("SELECT * FROM \"Ability\"").executeAndFetch(Ability.class);
         }catch(Exception e){

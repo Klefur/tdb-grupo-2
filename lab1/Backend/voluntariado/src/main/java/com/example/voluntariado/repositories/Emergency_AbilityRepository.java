@@ -1,12 +1,12 @@
 package com.example.voluntariado.repositories;
 
-import com.example.demo.modelos.Emergency_Ability;
-import org.springframework.stereotype.Repository;
+import com.example.voluntariado.models.Emergency_Ability;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface Emergency_AbilityRepository {
-    public ArrayList<Emergency_Ability> getAllEmergenciesAbilities();
+    public List<Emergency_Ability> getAllEmergenciesAbilities();
     public Emergency_Ability getEmergencyAbilityById(Integer id);
     public Emergency_Ability createEmergencyAbility(Emergency_Ability emergencyAbility);
     public Emergency_Ability editEmergencyAbility(Emergency_Ability emergencyAbility);

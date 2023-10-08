@@ -1,11 +1,4 @@
 package com.example.voluntariado.models;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
-
-import java.util.Date;
 
 
 /*
@@ -13,12 +6,9 @@ import java.util.Date;
 * */
 
 public class Task {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_task;
     private String name;
     private String description;
-    private Date date;
     private boolean state;
     private Integer id_institution;
 }

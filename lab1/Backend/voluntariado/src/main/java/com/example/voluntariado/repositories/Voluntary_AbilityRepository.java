@@ -1,12 +1,11 @@
 package com.example.voluntariado.repositories;
 
-import com.example.demo.modelos.Voluntary_Ability;
-import org.springframework.stereotype.Repository;
+import com.example.voluntariado.models.Voluntary_Ability;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Voluntary_AbilityRepository {
-    public ArrayList<Voluntary_Ability> getAllVoluntariesAbilities();
+    public List<Voluntary_Ability> getAllVoluntariesAbilities();
     public Voluntary_Ability getVoluntaryById(Integer id);
     public Voluntary_Ability createVoluntary(Voluntary_Ability voluntaryAbility);
     public Voluntary_Ability editVoluntary(Voluntary_Ability voluntaryAbility);

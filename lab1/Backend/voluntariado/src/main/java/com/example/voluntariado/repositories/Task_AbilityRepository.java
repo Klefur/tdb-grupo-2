@@ -1,11 +1,11 @@
 package com.example.voluntariado.repositories;
 
-import com.example.demo.modelos.Task_Ability;
+import com.example.voluntariado.models.Task_Ability;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Task_AbilityRepository {
-    public ArrayList<Task_Ability> getAllTasksAbilities();
+    public List<Task_Ability> getAllTasksAbilities();
     public Task_Ability getTaskAbilityById(Integer id);
     public Task_Ability createTaskAbility(Task_Ability taskAbility);
     public Task_Ability editTaskAbility(Task_Ability taskAbility);

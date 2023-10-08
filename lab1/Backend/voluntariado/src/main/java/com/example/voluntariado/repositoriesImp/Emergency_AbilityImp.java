@@ -1,13 +1,13 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.demo.modelos.Emergency_Ability;
-import com.example.demo.repositorios.Emergency_AbilityRepository;
+import com.example.voluntariado.models.Emergency_Ability;
+import com.example.voluntariado.repositories.Emergency_AbilityRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Emergency_AbilityImp implements Emergency_AbilityRepository {
     @Override
-    public ArrayList<Emergency_Ability> getAllEmergenciesAbilities() {
+    public List<Emergency_Ability> getAllEmergenciesAbilities() {
         return null;
     }
 

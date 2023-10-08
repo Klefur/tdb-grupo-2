@@ -1,13 +1,13 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.demo.modelos.Task;
-import com.example.demo.repositorios.TaskRepository;
+import com.example.voluntariado.models.Task;
+import com.example.voluntariado.repositories.TaskRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TaskImp implements TaskRepository {
     @Override
-    public ArrayList<Task> getAllTasks() {
+    public List<Task> getAllTasks() {
         return null;
     }
 

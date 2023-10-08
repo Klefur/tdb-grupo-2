@@ -1,12 +1,11 @@
 package com.example.voluntariado.repositories;
 
-import com.example.demo.modelos.Task;
-import org.springframework.stereotype.Repository;
+import com.example.voluntariado.models.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskRepository {
-    public ArrayList<Task> getAllTasks();
+    public List<Task> getAllTasks();
     public int countTasksByEmergencyId(Integer id);
     public Task getTaskById(Integer id);
     public Task createTask(Task task);

@@ -1,12 +1,11 @@
 package com.example.voluntariado.repositories;
 
-import com.example.demo.modelos.Ranking;
-import org.springframework.stereotype.Repository;
+import com.example.voluntariado.models.Ranking;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface RankingRepository {
-    public ArrayList<Ranking> getAllRankings();
+    public List<Ranking> getAllRankings();
     public Ranking getRankingById(Integer id);
     public Ranking createRanking(Ranking ranking);
     public Ranking editRanking(Ranking ranking);

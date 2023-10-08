@@ -1,11 +1,12 @@
 package com.example.voluntariado.repositories;
 
-import com.example.demo.modelos.Ability;
 
-import java.util.ArrayList;
+import com.example.voluntariado.models.Ability;
+
+import java.util.List;
 
 public interface AbilityRepository {
-    public ArrayList<Ability> getAllAbilities();
+    public List<Ability> getAllAbilities();
     public Ability getAbilityById(Integer id);
     public Ability createAbility(Ability ability);
     public Ability editAbility(Ability ability);

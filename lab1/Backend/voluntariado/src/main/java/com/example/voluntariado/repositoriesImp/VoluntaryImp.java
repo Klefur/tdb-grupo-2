@@ -1,13 +1,14 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.demo.modelos.Voluntary;
-import com.example.demo.repositorios.VoluntaryRepository;
+import com.example.voluntariado.models.Voluntary;
+import com.example.voluntariado.repositories.VoluntaryRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VoluntaryImp implements VoluntaryRepository {
     @Override
-    public ArrayList<Voluntary> getAllVoluntaries() {
+    public List<Voluntary> getAllVoluntaries() {
         return null;
     }
 

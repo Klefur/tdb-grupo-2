@@ -1,13 +1,14 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.demo.modelos.Institution;
-import com.example.demo.repositorios.InstitutionRepository;
+import com.example.voluntariado.models.Institution;
+import com.example.voluntariado.repositories.InstitutionRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InstitutionImp implements InstitutionRepository {
     @Override
-    public ArrayList<Institution> getAllInstitutions() {
+    public List<Institution> getAllInstitutions() {
         return null;
     }
 
