@@ -15,6 +15,10 @@ public class AbilityImp implements AbilityRepository {
     @Autowired
     private Sql2o sql2o;
 
+    /**
+     * This method gets all the abilities from the database.
+     * @return List<Ability>
+     * */
     @Override
     public List<Ability> getAllAbilities() {
         try(Connection connection = sql2o.open()){
@@ -27,6 +31,11 @@ public class AbilityImp implements AbilityRepository {
         }
     }
 
+    /**
+     * This method gets all the abilities with a specific id.
+     * @param id
+     * @return List<Ability>
+     * */
     @Override
     public List<Ability> getAbilityById(Integer id) {
         try(Connection connection = sql2o.open()){
@@ -40,6 +49,11 @@ public class AbilityImp implements AbilityRepository {
         }
     }
 
+    /**
+     * This method receives an ability object and inserts it to the database.
+     * @param ability
+     * @return Ability
+     * */
     @Override
     public Ability createAbility(Ability ability) {
         try(Connection connection = sql2o.open()){
@@ -57,6 +71,11 @@ public class AbilityImp implements AbilityRepository {
         }
     }
 
+    /**
+     * This method receives an ability object and updates it to the database.
+     * @param ability
+     * @return Ability
+     * */
     @Override
     public Ability editAbility(Ability ability) {
         try(Connection connection = sql2o.open()){
@@ -73,6 +92,11 @@ public class AbilityImp implements AbilityRepository {
         }
     }
 
+    /**
+     * This method deletes an ability given an id.
+     * @param id
+     * @return boolean
+     * */
     @Override
     public boolean deleteAbilityById(Integer id) {
         int deletedAbility;
@@ -85,6 +109,10 @@ public class AbilityImp implements AbilityRepository {
         return deletedAbility == 1;
     }
 
+    /**
+     * This method deletes all the abilities on the database.
+     * @return boolean
+     * */
     @Override
     public boolean deleteAllAbilities() {
         try(Connection connection = sql2o.open()){
