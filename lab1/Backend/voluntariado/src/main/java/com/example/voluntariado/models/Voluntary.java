@@ -13,7 +13,7 @@ public class Voluntary {
     private String rut;
     private String fullname;
     private String birthday;
-    private int state;
+    private Integer state;
     private String email;
     private String password;
 }

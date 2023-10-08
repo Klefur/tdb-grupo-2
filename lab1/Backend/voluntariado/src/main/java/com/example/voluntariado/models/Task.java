@@ -12,6 +12,6 @@ public class Task {
     private Integer id_task;
     private String name;
     private String description;
-    private boolean state;
+    private Integer state;
     private Integer id_institution;
 }
