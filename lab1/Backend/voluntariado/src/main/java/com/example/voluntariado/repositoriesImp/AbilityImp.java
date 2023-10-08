@@ -3,16 +3,22 @@ package com.example.demo.reposImplementados;
 import com.example.demo.modelos.Ability;
 import com.example.demo.repositorios.AbilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.sql2o.Sql2o;
 
 import java.util.ArrayList;
 
 public class AbilityImp implements AbilityRepository {
-    //@Autowired
-    //private Sql2o sql2o;
+    @Autowired
+    private Sql2o sql2o;
 
     @Override
     public ArrayList<Ability> getAllAbilities() {
-        return null;
+        try(Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM \"Ability\"").executeAndFetch(Ability.class);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override
