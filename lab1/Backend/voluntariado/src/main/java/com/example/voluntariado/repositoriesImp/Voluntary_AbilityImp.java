@@ -1,6 +1,6 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.voluntariado.models.Voluntary;
+
 import com.example.voluntariado.models.Voluntary_Ability;
 import com.example.voluntariado.repositories.Voluntary_AbilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
