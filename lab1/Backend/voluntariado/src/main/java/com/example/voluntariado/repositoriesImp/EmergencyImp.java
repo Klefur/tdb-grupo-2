@@ -17,6 +17,10 @@ public class EmergencyImp implements EmergencyRepository {
 
     @Autowired
     private Sql2o sql2o;
+    /**
+     * This method gets all the existing emergencies on the database.
+     * @return List<Emergency>
+     * */
     @Override
     public List<Emergency> getAllEmergencies() {
         try(Connection connection = sql2o.open()){
@@ -29,6 +33,11 @@ public class EmergencyImp implements EmergencyRepository {
         }
     }
 
+    /**
+     * This method gets an emergency on the database given an id.
+     * @param id
+     * @return List<Emergency>
+     * */
     @Override
     public List<Emergency> getEmergencyById(Integer id) {
         try(Connection connection = sql2o.open()){
@@ -40,6 +49,11 @@ public class EmergencyImp implements EmergencyRepository {
         }
     }
 
+    /**
+     * This method creates an emergency and puts it on the database.
+     * @param emergency
+     * @return Emergency
+     * */
     @Override
     public Emergency createEmergency(Emergency emergency) {
         try(Connection connection = sql2o.open()){
@@ -58,6 +72,11 @@ public class EmergencyImp implements EmergencyRepository {
         }
     }
 
+    /**
+     * This method edits an emergency and updates it on the database.
+     * @param emergency
+     * @return Emergency
+     * */
     @Override
     public Emergency editEmergency(Emergency emergency) {
         try(Connection connection = sql2o.open()){
@@ -75,6 +94,11 @@ public class EmergencyImp implements EmergencyRepository {
         }
     }
 
+    /**
+     * This method deletes an emergency on the database given an id.
+     * @param id
+     * @return boolean
+     * */
     @Override
     public boolean deleteEmergencyById(Integer id) {
         int deletedEmergency;
@@ -87,6 +111,10 @@ public class EmergencyImp implements EmergencyRepository {
         return deletedEmergency == 1;
     }
 
+    /**
+     * This method deletes all the emergencies on the database.
+     * @return boolean
+     * */
     @Override
     public boolean deleteAllEmergencies() {
         try(Connection connection = sql2o.open()){
