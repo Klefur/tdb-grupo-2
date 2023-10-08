@@ -4,6 +4,9 @@ import com.example.voluntariado.models.Institution;
 
 import java.util.List;
 
+/*
+ * This interface class represents the institution repository.
+ * */
 public interface InstitutionRepository {
     public List<Institution> getAllInstitutions();
     public List<Institution> getInstitutionById(Integer id);

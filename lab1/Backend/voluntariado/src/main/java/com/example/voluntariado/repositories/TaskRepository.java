@@ -4,6 +4,9 @@ import com.example.voluntariado.models.Task;
 
 import java.util.List;
 
+/*
+ * This interface class represents the task repository.
+ * */
 public interface TaskRepository {
     public List<Task> getAllTasks();
     public int countTasksByEmergencyId(Integer id);

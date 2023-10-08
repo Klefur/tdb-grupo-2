@@ -4,6 +4,9 @@ import com.example.voluntariado.models.Ranking;
 
 import java.util.List;
 
+/*
+ * This interface class represents the ranking repository.
+ * */
 public interface RankingRepository {
     public List<Ranking> getAllRankings();
     public List<Ranking> getRankingById(Integer id);

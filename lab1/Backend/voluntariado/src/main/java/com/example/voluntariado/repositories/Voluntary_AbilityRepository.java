@@ -4,6 +4,9 @@ import com.example.voluntariado.models.Voluntary_Ability;
 
 import java.util.List;
 
+/*
+ * This interface class represents the voluntary with an ability repository.
+ * */
 public interface Voluntary_AbilityRepository {
     public List<Voluntary_Ability> getAllVoluntariesAbilities();
     public List<Voluntary_Ability> getVoluntaryById(Integer id);

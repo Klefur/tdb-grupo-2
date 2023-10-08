@@ -4,6 +4,9 @@ import com.example.voluntariado.models.Emergency;
 
 import java.util.List;
 
+/*
+ * This interface class represents the emergency repository.
+ * */
 public interface EmergencyRepository {
     public List<Emergency> getAllEmergencies();
     public List<Emergency> getEmergencyById(Integer id);

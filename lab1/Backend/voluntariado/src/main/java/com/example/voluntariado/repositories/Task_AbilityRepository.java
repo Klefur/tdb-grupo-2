@@ -4,6 +4,9 @@ import com.example.voluntariado.models.Task_Ability;
 
 import java.util.List;
 
+/*
+ * This interface class represents the task with an ability repository.
+ * */
 public interface Task_AbilityRepository {
     public List<Task_Ability> getAllTasksAbilities();
     public List<Task_Ability> getTaskAbilityById(Integer id);

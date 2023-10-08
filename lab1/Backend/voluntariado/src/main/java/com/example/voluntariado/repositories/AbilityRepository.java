@@ -5,6 +5,9 @@ import com.example.voluntariado.models.Ability;
 
 import java.util.List;
 
+/*
+* This interface class represents the ability repository.
+* */
 public interface AbilityRepository {
     public List<Ability> getAllAbilities();
     public List<Ability> getAbilityById(Integer id);
