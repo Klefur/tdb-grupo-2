@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface VoluntaryRepository {
     public List<Voluntary> getAllVoluntaries();
-    public Voluntary getVoluntaryById(Integer id);
+    public List<Voluntary> getVoluntaryById(Integer id);
     public Voluntary createVoluntary(Voluntary voluntary);
     public Voluntary editVoluntary(Voluntary voluntary);
     public boolean deleteVoluntaryById(Integer id);

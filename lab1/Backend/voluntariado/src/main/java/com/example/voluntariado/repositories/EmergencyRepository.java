@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EmergencyRepository {
     public List<Emergency> getAllEmergencies();
-    public Emergency getEmergencyById(Integer id);
+    public List<Emergency> getEmergencyById(Integer id);
     public Emergency createEmergency(Emergency emergency);
     public Emergency editEmergency(Emergency emergency);
     public boolean deleteEmergencyById(Integer id);

@@ -26,27 +26,69 @@ public class AbilityImp implements AbilityRepository {
     }
 
     @Override
-    public Ability getAbilityById(Integer id) {
-        return null;
+    public List<Ability> getAbilityById(Integer id) {
+        try(Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM \"Ability\" WHERE id_ability =:id").addParameter("id", id).executeAndFetch(Ability.class);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public Ability createAbility(Ability ability) {
-        return null;
+        try(Connection connection = sql2o.open()){
+            connection.createQuery("INSERT INTO \"Ability\" (names, description, items) "
+            + "VALUES (:names, :description, items)")
+                    .addParameter("names", ability.getNames())
+                    .addParameter("description", ability.getDescription())
+                    .addParameter("items", ability.getItems())
+                    .executeUpdate().getKey();
+            return ability;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public Ability editAbility(Ability ability) {
-        return null;
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("UPDATE \"Ability\" SET names =:names, description =:description, items =:items WHERE id_ability =:id_ability")
+                    .addParameter("names", ability.getNames())
+                    .addParameter("description", ability.getDescription())
+                    .addParameter("items", ability.getItems())
+                    .executeUpdate().getKey();
+            return ability;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public boolean deleteAbilityById(Integer id) {
-        return false;
+        int deletedAbility;
+        try(Connection connection = sql2o.open()){
+            deletedAbility = connection
+                    .createQuery("DELETE FROM \"Ability\" WHERE id_ability =:id")
+                    .addParameter("id", id)
+                    .executeUpdate().getResult();
+        }
+        return deletedAbility == 1;
     }
 
     @Override
     public boolean deleteAllAbilities() {
-        return false;
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("TRUNCATE \"Ability\" CASCADE")
+                    .executeUpdate();
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }

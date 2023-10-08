@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AbilityRepository {
     public List<Ability> getAllAbilities();
-    public Ability getAbilityById(Integer id);
+    public List<Ability> getAbilityById(Integer id);
     public Ability createAbility(Ability ability);
     public Ability editAbility(Ability ability);
     public boolean deleteAbilityById(Integer id);
