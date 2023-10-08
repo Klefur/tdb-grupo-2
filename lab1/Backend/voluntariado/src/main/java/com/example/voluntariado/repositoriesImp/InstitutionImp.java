@@ -13,7 +13,7 @@ public class InstitutionImp implements InstitutionRepository {
     }
 
     @Override
-    public Institution getInstitutionById(Integer id) {
+    public List<Institution> getInstitutionById(Integer id) {
         return null;
     }
 

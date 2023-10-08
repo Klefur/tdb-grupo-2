@@ -12,7 +12,7 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
     }
 
     @Override
-    public Emergency_Ability getEmergencyAbilityById(Integer id) {
+    public List<Emergency_Ability> getEmergencyAbilityById(Integer id) {
         return null;
     }
 

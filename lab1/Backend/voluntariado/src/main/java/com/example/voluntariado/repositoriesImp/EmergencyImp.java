@@ -2,37 +2,98 @@ package com.example.voluntariado.repositoriesImp;
 
 import com.example.voluntariado.models.Emergency;
 import com.example.voluntariado.repositories.EmergencyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 
 import java.util.List;
 
+@Repository
 public class EmergencyImp implements EmergencyRepository {
+
+    @Autowired
+    private Sql2o sql2o;
     @Override
     public List<Emergency> getAllEmergencies() {
-        return null;
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery("SELECT * FROM \"Emergency\"")
+                    .executeAndFetch(Emergency.class);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override
-    public Emergency getEmergencyById(Integer id) {
-        return null;
+    public List<Emergency> getEmergencyById(Integer id) {
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery("SELECT * FROM \"Emergency\" WHERE id_emergency =:id")
+                    .executeAndFetch(Emergency.class);
+        }catch(Exception e){
+            return null;
+        }
     }
 
     @Override
     public Emergency createEmergency(Emergency emergency) {
-        return null;
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("INSERT INTO \"Emergency\" (name, description, state, id_institution)"
+                    + "VALUES (:name, :description, :state, :id_institution)")
+                    .addParameter("name", emergency.getName())
+                    .addParameter("description", emergency.getDescription())
+                    .addParameter("state", emergency.getState())
+                    .addParameter("id_institution", emergency.getId_institution())
+                    .executeUpdate().getKey();
+            return emergency;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public Emergency editEmergency(Emergency emergency) {
-        return null;
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("UPDATE \"Emergency\" SET name =:name, description =:description, state =:state, id_institution =:id_institution WHERE id_emergency =:id_emergency")
+                    .addParameter("name", emergency.getName())
+                    .addParameter("description", emergency.getDescription())
+                    .addParameter("state", emergency.getState())
+                    .addParameter("id_institution", emergency.getId_institution())
+                    .executeUpdate().getKey();
+            return emergency;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Override
     public boolean deleteEmergencyById(Integer id) {
-        return false;
+        int deletedEmergency;
+        try(Connection connection = sql2o.open()){
+            deletedEmergency = connection
+                    .createQuery("DELETE FROM \"Emergency\" WHERE id_emergency =:id")
+                    .addParameter("id_emergency", id)
+                    .executeUpdate().getResult();
+        }
+        return deletedEmergency == 1;
     }
 
     @Override
     public boolean deleteAllEmergencies() {
-        return false;
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("TRUNCATE \"Emergency\" CASCADE")
+                    .executeUpdate();
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 }

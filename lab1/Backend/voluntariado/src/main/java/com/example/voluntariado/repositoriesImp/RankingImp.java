@@ -13,7 +13,7 @@ public class RankingImp implements RankingRepository {
     }
 
     @Override
-    public Ranking getRankingById(Integer id) {
+    public List<Ranking> getRankingById(Integer id) {
         return null;
     }
 

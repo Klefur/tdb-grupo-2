@@ -18,7 +18,9 @@ public class AbilityImp implements AbilityRepository {
     @Override
     public List<Ability> getAllAbilities() {
         try(Connection connection = sql2o.open()){
-            return connection.createQuery("SELECT * FROM \"Ability\"").executeAndFetch(Ability.class);
+            return connection
+                    .createQuery("SELECT * FROM \"Ability\"")
+                    .executeAndFetch(Ability.class);
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
@@ -28,7 +30,10 @@ public class AbilityImp implements AbilityRepository {
     @Override
     public List<Ability> getAbilityById(Integer id) {
         try(Connection connection = sql2o.open()){
-            return connection.createQuery("SELECT * FROM \"Ability\" WHERE id_ability =:id").addParameter("id", id).executeAndFetch(Ability.class);
+            return connection
+                    .createQuery("SELECT * FROM \"Ability\" WHERE id_ability =:id")
+                    .addParameter("id", id)
+                    .executeAndFetch(Ability.class);
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
@@ -38,8 +43,9 @@ public class AbilityImp implements AbilityRepository {
     @Override
     public Ability createAbility(Ability ability) {
         try(Connection connection = sql2o.open()){
-            connection.createQuery("INSERT INTO \"Ability\" (names, description, items) "
-            + "VALUES (:names, :description, items)")
+            connection
+                    .createQuery("INSERT INTO \"Ability\" (names, description, items) "
+                            + "VALUES (:names, :description, items)")
                     .addParameter("names", ability.getNames())
                     .addParameter("description", ability.getDescription())
                     .addParameter("items", ability.getItems())
