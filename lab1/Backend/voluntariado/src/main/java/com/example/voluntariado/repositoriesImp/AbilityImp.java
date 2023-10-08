@@ -9,6 +9,9 @@ import org.sql2o.Sql2o;
 
 import java.util.List;
 
+/*
+* This interface class implements the ability repository.
+* */
 @Repository
 public class AbilityImp implements AbilityRepository {
 

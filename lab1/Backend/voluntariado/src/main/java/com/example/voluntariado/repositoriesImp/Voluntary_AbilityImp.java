@@ -8,9 +8,11 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/*
+* This interface class implements the voluntary_ability repository.
+* */
 @Repository
 public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
 

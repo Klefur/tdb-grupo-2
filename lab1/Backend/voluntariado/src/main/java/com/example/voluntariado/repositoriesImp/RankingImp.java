@@ -8,6 +8,9 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import java.util.List;
 
+/*
+* This interface class implements the ranking repository.
+* */
 @Repository
 public class RankingImp implements RankingRepository {
     @Autowired

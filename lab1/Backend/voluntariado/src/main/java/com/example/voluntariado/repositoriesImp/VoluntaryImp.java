@@ -7,9 +7,11 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/*
+* This interface class implements the voluntary repository.
+* */
 @Repository
 public class VoluntaryImp implements VoluntaryRepository {
     @Autowired

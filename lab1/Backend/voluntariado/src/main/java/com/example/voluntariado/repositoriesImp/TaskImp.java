@@ -10,6 +10,9 @@ import org.sql2o.Sql2o;
 
 import java.util.List;
 
+/*
+* This interface class implements the task repository.
+* */
 @Repository
 public class TaskImp implements TaskRepository {
     @Autowired

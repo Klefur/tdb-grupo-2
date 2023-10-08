@@ -9,11 +9,18 @@ import org.sql2o.Sql2o;
 
 import java.util.List;
 
+/*
+* This interface class implements the emergency_ability repository.
+* */
 @Repository
 public class Emergency_AbilityImp implements Emergency_AbilityRepository {
     @Autowired
     private Sql2o sql2o;
 
+    /**
+     * This method gets all the emergencies with abilities of the database.
+     * @return List<Emergency_Ability>
+     * */
     @Override
     public List<Emergency_Ability> getAllEmergenciesAbilities() {
         try(Connection connection = sql2o.open()){
@@ -26,6 +33,11 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
         }
     }
 
+    /**
+     * This method gets all the emergencies with abilities given an id.
+     * @param id
+     * @return List<Emergency_Ability>
+     * */
     @Override
     public List<Emergency_Ability> getEmergencyAbilityById(Integer id) {
         try(Connection connection = sql2o.open()){
@@ -39,6 +51,11 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
         }
     }
 
+    /**
+     * This method creates an emergency with an ability and puts it on the database, given an emergencyAbility.
+     * @param emergencyAbility
+     * @return Emergency_Ability
+     * */
     @Override
     public Emergency_Ability createEmergencyAbility(Emergency_Ability emergencyAbility) {
         try(Connection connection = sql2o.open()){
@@ -55,6 +72,11 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
         }
     }
 
+    /**
+     * This method edits an emergency with an ability and puts it on the database, given an emergencyAbility.
+     * @param emergencyAbility
+     * @return Emergency_Ability
+     * */
     @Override
     public Emergency_Ability editEmergencyAbility(Emergency_Ability emergencyAbility) {
         try(Connection connection = sql2o.open()){
@@ -70,6 +92,11 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
         }
     }
 
+    /**
+     * This method deletes an emergency with an ability given an id.
+     * @param id
+     * @return boolean
+     * */
     @Override
     public boolean deleteEmergencyAbilityById(Integer id) {
         int deletedEmergencyAbility;
@@ -82,6 +109,10 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
         return deletedEmergencyAbility == 1;
     }
 
+    /**
+     * This method deletes all the emergencies with abilities on the database.
+     * @return boolean
+     * */
     @Override
     public boolean deleteAllEmergenciesAbilities() {
         try(Connection connection = sql2o.open()){
