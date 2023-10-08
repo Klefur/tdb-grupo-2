@@ -2,7 +2,7 @@ package com.example.voluntariado.models;
 
 
 /*
-* Clase que representa una tarea
+* This class represents a task.
 * */
 
 import lombok.Data;

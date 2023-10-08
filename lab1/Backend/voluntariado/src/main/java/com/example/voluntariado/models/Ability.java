@@ -3,7 +3,7 @@ package com.example.voluntariado.models;
 import lombok.Data;
 
 /**
- * Clase que representa una habilidad
+ * This class represents an ability.
  */
 @Data
 public class Ability {

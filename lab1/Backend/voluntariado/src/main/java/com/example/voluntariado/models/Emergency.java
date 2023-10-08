@@ -3,7 +3,7 @@ package com.example.voluntariado.models;
 import lombok.Data;
 
 /**
- * Clase que representa una emergencia
+ * This class represents an emergency.
  */
 @Data
 public class Emergency {

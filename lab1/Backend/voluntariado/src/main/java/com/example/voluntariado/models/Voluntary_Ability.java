@@ -3,7 +3,7 @@ package com.example.voluntariado.models;
 import lombok.Data;
 
 /**
- * Clase que representa un voluntario con una habilidad
+ * This class represents a voluntary with an ability.
  */
 
 @Data

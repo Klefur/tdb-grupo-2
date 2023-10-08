@@ -2,7 +2,7 @@ package com.example.voluntariado.models;
 
 
 /*
-* Clase que representa un voluntario
+* This class represents a voluntary.
 * */
 
 import lombok.Data;
