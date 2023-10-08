@@ -1,4 +1,4 @@
-package com.example.demo.repositorios;
+package com.example.voluntariado.repositories;
 
 import com.example.demo.modelos.Voluntary_Ability;
 import org.springframework.stereotype.Repository;

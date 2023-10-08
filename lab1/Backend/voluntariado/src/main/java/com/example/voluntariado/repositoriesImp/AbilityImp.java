@@ -1,8 +1,9 @@
-package com.example.demo.reposImplementados;
+package com.example.voluntariado.repositoriesImp;
 
 import com.example.demo.modelos.Ability;
 import com.example.demo.repositorios.AbilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.ArrayList;

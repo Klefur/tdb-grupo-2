@@ -1,4 +1,4 @@
-package com.example.demo.reposImplementados;
+package com.example.voluntariado.repositoriesImp;
 
 import com.example.demo.modelos.Emergency_Ability;
 import com.example.demo.repositorios.Emergency_AbilityRepository;

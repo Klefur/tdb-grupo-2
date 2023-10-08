@@ -1,6 +1,5 @@
 package com.example.demo.repositorios;
 
-import com.example.demo.modelos.Emergency;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.demo.repositorios;
+package com.example.voluntariado.repositories;
 
 import com.example.demo.modelos.Institution;
 import org.springframework.stereotype.Repository;

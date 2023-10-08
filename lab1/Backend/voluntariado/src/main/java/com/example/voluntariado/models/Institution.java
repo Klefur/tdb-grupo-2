@@ -1,5 +1,4 @@
-package com.example.demo.modelos;
-
+package com.example.voluntariado.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
