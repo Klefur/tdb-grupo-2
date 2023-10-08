@@ -13,7 +13,7 @@ public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     }
 
     @Override
-    public Voluntary_Ability getVoluntaryById(Integer id) {
+    public List<Voluntary_Ability> getVoluntaryById(Integer id) {
         return null;
     }
 
