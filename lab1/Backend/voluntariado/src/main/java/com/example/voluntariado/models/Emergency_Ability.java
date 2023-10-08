@@ -3,7 +3,7 @@ package com.example.voluntariado.models;
 import lombok.Data;
 
 /**
- * Clase que representa una emergencia con habilidad
+ * This class represents an emergency with one ability or more.
  */
 @Data
 public class Emergency_Ability {

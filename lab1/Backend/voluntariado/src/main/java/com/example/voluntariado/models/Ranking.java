@@ -3,7 +3,7 @@ package com.example.voluntariado.models;
 import lombok.Data;
 
 /**
- * Clase que representa un ranking
+ * This class represents a ranking.
  */
 
 @Data

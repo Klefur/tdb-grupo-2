@@ -3,7 +3,7 @@ package com.example.voluntariado.models;
 import lombok.Data;
 
 /**
- * Clase que representa una institución
+ * This class represents an institution.
  */
 
 @Data

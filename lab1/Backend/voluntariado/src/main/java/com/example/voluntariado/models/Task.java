@@ -2,7 +2,7 @@ package com.example.voluntariado.models;
 
 
 /*
-* Clase que representa una tarea
+* This class represents a task.
 * */
 
 import lombok.Data;
@@ -12,6 +12,6 @@ public class Task {
     private Integer id_task;
     private String name;
     private String description;
-    private boolean state;
+    private Integer state;
     private Integer id_institution;
 }

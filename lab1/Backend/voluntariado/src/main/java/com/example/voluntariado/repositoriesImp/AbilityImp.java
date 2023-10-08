@@ -32,7 +32,7 @@ public class AbilityImp implements AbilityRepository {
         try(Connection connection = sql2o.open()){
             return connection
                     .createQuery("SELECT * FROM \"Ability\" WHERE id_ability =:id")
-                    .addParameter("id", id)
+                    .addParameter("id_ability", id)
                     .executeAndFetch(Ability.class);
         }catch(Exception e){
             System.out.println(e.getMessage());

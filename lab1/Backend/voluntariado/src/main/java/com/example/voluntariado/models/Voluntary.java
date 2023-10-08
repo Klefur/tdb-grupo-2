@@ -2,7 +2,7 @@ package com.example.voluntariado.models;
 
 
 /*
-* Clase que representa un voluntario
+* This class represents a voluntary.
 * */
 
 import lombok.Data;
@@ -13,7 +13,7 @@ public class Voluntary {
     private String rut;
     private String fullname;
     private String birthday;
-    private int state;
+    private Integer state;
     private String email;
     private String password;
 }
