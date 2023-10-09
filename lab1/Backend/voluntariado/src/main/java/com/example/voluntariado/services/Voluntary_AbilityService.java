@@ -50,10 +50,10 @@ public class Voluntary_AbilityService {
     public String deleteVoluntaryAbility(@PathVariable("id_voluntary_ability") int id_voluntary_ability){
         boolean result = voluntary_AbilityRepository.deleteVoluntaryAbilityById(id_voluntary_ability);
         if(result){
-            return "Edited Voluntary Ability ";
+            return "Edited Voluntary_Ability";
         }
         else{
-            return "Voluntary Ability not found";
+            return "Voluntary_Ability not found";
         }
     }
 

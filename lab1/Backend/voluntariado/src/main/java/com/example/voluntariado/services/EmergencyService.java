@@ -22,7 +22,7 @@ public class EmergencyService {
     }
 
     @GetMapping("/emergencies/{id_emergency}")
-    public List<Emergency> getEmergencyById(@RequestParam("id_emergency") Integer id_emergency){
+    public List<Emergency> getEmergencyById(@PathVariable("id_emergency") Integer id_emergency){
         return emergencyRepository.getEmergencyById(id_emergency);
     }
 
