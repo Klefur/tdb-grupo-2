@@ -26,6 +26,7 @@ import Input from "../components/Input.vue"
 import Boton from "../components/Boton.vue"
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { store } from '../store'
 
 const url = 'http://localhost:8086'
 const router = useRouter()
@@ -58,9 +59,8 @@ const registerFunc = async () => {
 
     await axios.post(url + '/register', data)
     .then(response => {
-		localStorage.setItem('token', response.data)
         console.log('Respuesta del servidor:', response.data)
-		router.push('/home')
+		router.push('/')
     })
     .catch(error => {
         console.error('Error en la solicitud:', error)

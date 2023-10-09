@@ -4,12 +4,10 @@
   <div class="bg-white p-8 rounded-lg shadow-md w-80">
     <h2 class="text-2xl font-semibold mb-4">Iniciar Sesión</h2>
     <form>
-      <Input Label="Usuario" forLabel="usuario" type="text" placeholder="Nombre de usuario" />
-      <Input Label="Contrasena" forLabel="contrasena" type="password" placeholder="Contraseña" />
+      <Input Label="Usuario" forLabel="username" type="text" placeholder="Nombre de usuario" />
+      <Input Label="Contrasena" forLabel="password" type="password" placeholder="Contraseña" />
       <div class="flex flex-col gap-5 justify-between items-center mb-4">
-        <button type="submit" class="bg-blue-500 w-full text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
-          Ingresar
-        </button>
+        <Boton label="Iniciar Sesión" href="/" @click="loginFunc()" class="bg-orange-400 hover:bg-orange-500"/>
         <a class="text-blue-500 hover:underline"><router-link to="/register"><p>¿No tienes una cuenta?</p></router-link></a>
       </div>
     </form>
@@ -21,11 +19,14 @@
 
 <script setup>
 import { useRouter } from "vue-router";
+import { store } from "../store";
+import axios from 'axios'
 import { ref } from "vue";
 import Input from "../components/Input.vue"
+import Boton from "../components/Boton.vue"
 
 const router = useRouter()
-const url = 'https://pindarosql.pindarousach.workers.dev'
+const url = 'http://localhost:8086'
 
 const guestFunc = () => {
 	router.push("/home")
@@ -33,19 +34,15 @@ const guestFunc = () => {
 
 const loginFunc = async () => {
 	const data = {
-		"email" : email.value,
+		"username" : username.value,
 		"password" : password.value
 	}
 
     await axios.post(url + '/login', data)
     .then(response => {
-        console.log('Respuesta del servidor:', response.data)
-		const resp = response.data.payload.user[0]
-        store.email = resp.email
-        store.password = resp.password
-        store.user = resp.name
-        store.curso = resp.course
-        router.push("/home")
+      store.token = response.data
+      console.log('Respuesta del servidor:', response.data)  
+      router.push("/home")
     })
     .catch(error => {
         console.error('Error en la solicitud:', error)
