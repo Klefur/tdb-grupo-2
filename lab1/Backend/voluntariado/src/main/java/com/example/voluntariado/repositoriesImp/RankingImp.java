@@ -16,6 +16,10 @@ public class RankingImp implements RankingRepository {
     @Autowired
     private Sql2o sql2o;
 
+    /**
+     * This method gets all the rankings from the database.
+     * @return List<Ranking>
+     * */
     @Override
     public List<Ranking> getAllRankings() {
         try(Connection conn = sql2o.open()){
@@ -27,6 +31,11 @@ public class RankingImp implements RankingRepository {
         }
     }
 
+    /**
+     * This method gets a ranking given an id.
+     * @param id
+     * @return List<Ranking>
+     * */
     @Override
     public List<Ranking> getRankingById(Integer id) {
         try(Connection conn = sql2o.open()){
@@ -39,6 +48,11 @@ public class RankingImp implements RankingRepository {
         }
     }
 
+    /**
+     * This method creates a ranking and puts it on the database.
+     * @param ranking
+     * @return Ranking
+     * */
     @Override
     public Ranking createRanking(Ranking ranking) {
         try(Connection conn = sql2o.open()){
@@ -54,6 +68,11 @@ public class RankingImp implements RankingRepository {
         }
     }
 
+    /**
+     * This method edits a ranking and updates it on the database.
+     * @param ranking
+     * @return Ranking
+     * */
     @Override
     public Ranking editRanking(Ranking ranking) {
         try(Connection conn = sql2o.open()){
@@ -69,6 +88,11 @@ public class RankingImp implements RankingRepository {
         }
     }
 
+    /**
+     * This method deletes a ranking on the database given an id.
+     * @param id
+     * @return boolean
+     * */
     @Override
     public boolean deleteRankingById(Integer id) {
         int deletedRanking;
@@ -80,6 +104,10 @@ public class RankingImp implements RankingRepository {
         return deletedRanking == 1;
     }
 
+    /**
+     * This method deletes all the rankings on the database.
+     * @return boolean
+     * */
     @Override
     public boolean deleteAllRankings() {
         try(Connection conn = sql2o.open()){
