@@ -1,37 +1,45 @@
 ---------------------------------------------------------------
+---------------------------------------------------------------
 -- 1. Lista de profesores con su sueldo, indicando si son o no
 -- profesores jefe y alumnos de su jefatura, si corresponde.
 ---------------------------------------------------------------
 
-SELECT profesor.nombre, profesor.sueldo, profesor_curso.jefatura, curso.nombre, alumnos
-CASE WHEN profesor_curso.jefatura = 1 THEN 'Si' ELSE 'No' END AS jefatura,
-CASE WHEN profesor_curso.jefatura = 1 THEN ARRAY_AGG(alumno.nombre) ELSE NULL END AS alumnos
-FROM public."Profesor" AS profesor
-LEFT JOIN "ProfesorCurso" AS profesor_curso ON profesor.id_profesor = profesor_curso.id_profesor
-LEFT JOIN "Curso" AS curso ON profesor_curso.id_curso = curso.id_curso
-LEFT JOIN "AlumnoCurso" AS alumno_curso ON curso.id_curso = alumno_curso.id_curso
-LEFT JOIN "Alumno" AS alumno ON alumno_curso.id_alumno = alumno.id_alumno
-GROUP BY (profesor.nombre, profesor.sueldo, profesor_curso.jefatura);
+SELECT profesor.nombre AS nombre_profesor,empleado.sueldo,
+  CASE WHEN profesor_curso.profesor_jefe = true THEN 'Si' ELSE 'No' END AS es_profesor_jefe,
+  curso.nombre AS nombre_curso, 
+  (CASE WHEN profesor_curso.profesor_jefe = true
+  		THEN ARRAY_AGG(alumno.nombre) 
+  		ELSE NULL
+  		END)
+  AS alumnos_de_jefatura
+FROM profesor
+INNER JOIN empleado ON empleado.id = profesor.id_empleado 
+LEFT JOIN prof_curso AS profesor_curso ON profesor.id = profesor_curso.id_profesor
+LEFT JOIN curso ON profesor_curso.id_curso = curso.id
+LEFT JOIN alu_curso AS alumno_curso ON curso.id = alumno_curso.id_curso
+LEFT JOIN alumno ON alumno_curso.id_alumno = alumno.id
+GROUP BY profesor.nombre, empleado.sueldo, profesor_curso.profesor_jefe, curso.nombre;
 
 ---------------------------------------------------------------
 -- 2. Lista de alumnos con más inasistencias por mes por curso
 -- el 2019.
 ---------------------------------------------------------------
+WITH InasistenciasPorAlumno AS (
+    SELECT alumno.nombre AS nombre, curso.id AS id_curso, EXTRACT(MONTH FROM asistencia.fecha) AS mes, COUNT(*) AS inasistencias
+    FROM alumno
+    INNER JOIN alu_curso ON alumno.id = alu_curso.id_alumno
+    INNER JOIN curso ON alu_curso.id_curso = curso.id
+    INNER JOIN asistencia ON alu_curso.id = asistencia.id_alu_curso
+    WHERE asistencia.presente = false AND EXTRACT(YEAR FROM asistencia.fecha) = 2019
+    GROUP BY alumno.nombre, curso.id, mes
+)
 
-SELECT alumno.nombre
-FROM 
-(SELECT alumno.nombre AS nombre, 
-EXTRACT(MONTH FROM asistencia.fecha_asistencia) AS mes,
-EXTRACT(YEAR FROM aistencia.fecha_asistencia) AS anio,
-COUNT(alumno.nombre) AS inasistencias
-FROM public."Alumno" AS alu
-INNER JOIN "AlumnoCurso" AS alu_curso ON alu.id_alumno = alu_curso.id_alumno
-INNER JOIN "Curso" AS curso ON alu_curso.id_curso = curso.id_curso
-INNER JOIN "Asistencia" AS asistencia ON alu.id_alumno = asistencia.id_alumno
-WHERE asistencia.presente = 0 AND mes = 2019
-GROUP BY (alu.nombre, mes, anio)) AS alumnos
-WHERE alumnos.inasistencias = (SELECT MAX(inasistencias) FROM alumnos);
-
+SELECT nombre, mes, id_curso, inasistencias
+FROM (
+    SELECT nombre, mes, id_curso, ROW_NUMBER() OVER(PARTITION BY mes, id_curso ORDER BY inasistencias DESC) AS ranking, inasistencias
+    FROM InasistenciasPorAlumno
+) AS ranked
+WHERE ranking = 1;
 
 ---------------------------------------------------------------
 -- 3. Lista de empleados identificando su rol, sueldo y comuna
@@ -47,7 +55,7 @@ ORDER BY comuna.nombre, emp.sueldo
 SELECT curso.id, course_year, nombre, COUNT(id_alumno) AS cantidad_alumnos
 FROM alu_curso
 JOIN curso ON alu_curso.id_curso = curso.id
-GROUP BY course.id, course_year, nombre
+GROUP BY curso.id, course_year, nombre
 HAVING COUNT(id_alumno) = (
   SELECT MIN(contador_alumnos)
   FROM (
@@ -58,11 +66,16 @@ HAVING COUNT(id_alumno) = (
   WHERE alu_curso.course_year = subconsulta.course_year
 )
 ORDER BY course_year;
+
+
 ---------------------------------------------------------------
 -- 5. Identificar al alumno que no ha faltado nunca por curso.
 ---------------------------------------------------------------
 
----------------------------------------------------------------
+SELECT al.nombre, c.nombre
+FROM alu_curso AS ac, curso AS c, alumno AS al, asistencia AS ast
+WHERE ac.id = ast.id_alu_curso AND ac.id_alumno = al.id AND c.id = ac.id_curso AND ast.presente = true
+GROUP BY c.nombre, al.nombre
 
 ---------------------------------------------------------------
 -- 6. Profesor con más horas de clases y mostrar su sueldo.
@@ -154,3 +167,15 @@ LIMIT 1;
 ---------------------------------------------------------------
 -- 10. Listado de colegios con mayor número de alumnos por año.
 ---------------------------------------------------------------
+
+WITH infocolegios AS (
+	SELECT c.nombre AS nombre, ac.course_year AS anio, COUNT(a.id_colegio) AS cantidad_alumnos,
+		RANK() OVER (PARTITION BY ac.course_year ORDER BY COUNT(a.id_colegio) DESC) AS ranking
+	FROM alu_curso AS ac, alumno a, colegio c
+	WHERE ac.id_alumno = a.id AND a.id_colegio = c.id
+	GROUP BY c.nombre, ac.course_year
+)
+
+SELECT nombre, anio, cantidad_alumnos
+FROM infocolegios
+WHERE ranking = 1;
