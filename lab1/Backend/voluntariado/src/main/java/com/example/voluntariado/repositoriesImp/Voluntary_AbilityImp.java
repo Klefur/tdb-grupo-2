@@ -59,17 +59,17 @@ public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     }
 
     @Override
-    public Voluntary_Ability editVoluntaryAbility(Voluntary_Ability voluntaryAbility) {
+    public boolean editVoluntaryAbility(Voluntary_Ability voluntaryAbility) {
         try(Connection conn = sql2o.open()){
             conn.createQuery("UPDATE \"Voluntary_Ability\" SET id_voluntary = :id_voluntary, id_ability = :id_ability WHERE id_voluntary_ability = :id")
                     .addParameter("id_voluntary", voluntaryAbility.getId_voluntary())
                     .addParameter("id_ability", voluntaryAbility.getId_ability())
                     .addParameter("id", voluntaryAbility.getId_voluntary_ability())
                     .executeUpdate();
-            return voluntaryAbility;
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return voluntaryAbility;
+            return false;
         }
     }
 

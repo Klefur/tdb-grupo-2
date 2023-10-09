@@ -77,7 +77,7 @@ public class RankingImp implements RankingRepository {
      * @return Ranking
      * */
     @Override
-    public Ranking editRanking(Ranking ranking) {
+    public boolean editRanking(Ranking ranking) {
         try(Connection connection = sql2o.open()){
             connection
                     .createQuery("UPDATE \"Ranking\" SET id_task = :taskID, id_voluntary = :voluntaryID WHERE id_ranking = :id_ranking")
@@ -85,10 +85,10 @@ public class RankingImp implements RankingRepository {
                     .addParameter("taskID", ranking.getId_task())
                     .addParameter("voluntaryID", ranking.getId_voluntary())
                     .executeUpdate();
-            return ranking;
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 

@@ -75,20 +75,20 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
     /**
      * This method edits an emergency with an ability and puts it on the database, given an emergencyAbility.
      * @param emergencyAbility
-     * @return Emergency_Ability
+     * @return boolean
      * */
     @Override
-    public Emergency_Ability editEmergencyAbility(Emergency_Ability emergencyAbility) {
+    public boolean editEmergencyAbility(Emergency_Ability emergencyAbility) {
         try(Connection connection = sql2o.open()){
             connection
                     .createQuery("UPDATE \"Emergency_Ability\" SET id_emergency =:id_emergency, id_ability =:id_ability WHERE id_emergency_ability =: id_emergency_ability")
                     .addParameter("id_emergency", emergencyAbility.getId_emergency())
                     .addParameter("id_ability", emergencyAbility.getId_ability())
                     .executeUpdate().getKey();
-            return emergencyAbility;
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 

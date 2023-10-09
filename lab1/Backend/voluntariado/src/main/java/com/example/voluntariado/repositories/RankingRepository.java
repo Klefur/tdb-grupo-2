@@ -11,7 +11,7 @@ public interface RankingRepository {
     public List<Ranking> getAllRankings();
     public List<Ranking> getRankingById(Integer id);
     public Ranking createRanking(Ranking ranking);
-    public Ranking editRanking(Ranking ranking);
+    public boolean editRanking(Ranking ranking);
     public boolean deleteRankingById(Integer id);
     public boolean deleteAllRankings();
 }
