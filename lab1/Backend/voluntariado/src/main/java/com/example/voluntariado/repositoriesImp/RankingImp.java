@@ -22,8 +22,9 @@ public class RankingImp implements RankingRepository {
      * */
     @Override
     public List<Ranking> getAllRankings() {
-        try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Ranking\"")
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery("SELECT * FROM \"Ranking\"")
                     .executeAndFetch(Ranking.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -38,8 +39,9 @@ public class RankingImp implements RankingRepository {
      * */
     @Override
     public List<Ranking> getRankingById(Integer id) {
-        try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Ranking\" WHERE id_ranking = :id")
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery("SELECT * FROM \"Ranking\" WHERE id_ranking = :id")
                     .addParameter("id_ranking", id)
                     .executeAndFetch(Ranking.class);
         } catch (Exception e) {
@@ -55,8 +57,9 @@ public class RankingImp implements RankingRepository {
      * */
     @Override
     public Ranking createRanking(Ranking ranking) {
-        try(Connection conn = sql2o.open()){
-            conn.createQuery("INSERT INTO \"Ranking\" (id_task, id_voluntary)" +
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("INSERT INTO \"Ranking\" (id_task, id_voluntary)" +
                             "values (:taskID, :voluntaryID)")
                     .addParameter("taskID", ranking.getId_task())
                     .addParameter("voluntaryID", ranking.getId_voluntary())
@@ -75,8 +78,9 @@ public class RankingImp implements RankingRepository {
      * */
     @Override
     public Ranking editRanking(Ranking ranking) {
-        try(Connection conn = sql2o.open()){
-            conn.createQuery("UPDATE \"Ranking\" SET id_task = :taskID, id_voluntary = :voluntaryID WHERE id_ranking = :id_ranking")
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("UPDATE \"Ranking\" SET id_task = :taskID, id_voluntary = :voluntaryID WHERE id_ranking = :id_ranking")
                     .addParameter("id_ranking", ranking.getId_ranking())
                     .addParameter("taskID", ranking.getId_task())
                     .addParameter("voluntaryID", ranking.getId_voluntary())
@@ -96,8 +100,9 @@ public class RankingImp implements RankingRepository {
     @Override
     public boolean deleteRankingById(Integer id) {
         int deletedRanking;
-        try(Connection conn = sql2o.open()){
-            deletedRanking = conn.createQuery("DELETE FROM \"Ranking\" WHERE id_ranking = :id")
+        try(Connection connection = sql2o.open()){
+            deletedRanking = connection
+                    .createQuery("DELETE FROM \"Ranking\" WHERE id_ranking = :id")
                     .addParameter("id_ranking", id)
                     .executeUpdate().getResult();
         }
@@ -110,8 +115,9 @@ public class RankingImp implements RankingRepository {
      * */
     @Override
     public boolean deleteAllRankings() {
-        try(Connection conn = sql2o.open()){
-            conn.createQuery("TRUNCATE \"Ranking\" CASCADE")
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("TRUNCATE \"Ranking\" CASCADE")
                     .executeUpdate().getResult();
             return true;
         }catch(Exception e){

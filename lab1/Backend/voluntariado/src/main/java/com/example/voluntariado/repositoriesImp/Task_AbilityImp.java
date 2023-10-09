@@ -17,10 +17,15 @@ public class Task_AbilityImp implements Task_AbilityRepository {
     @Autowired
     private Sql2o sql2o;
 
+    /**
+     * This method gets all the tasks with abilities from the database.
+     * @return List<Task_Ability>
+     * */
     @Override
     public List<Task_Ability> getAllTasksAbilities() {
-        try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Task_Ability\"")
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery("SELECT * FROM \"Task_Ability\"")
                     .executeAndFetch(Task_Ability.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -28,6 +33,11 @@ public class Task_AbilityImp implements Task_AbilityRepository {
         }
     }
 
+    /**
+     * This method get all the tasks with abilities given an id.
+     * @param id
+     * @return List<Task_Ability>
+     * */
     @Override
     public List<Task_Ability> getTaskAbilityById(Integer id) {
         try(Connection conn = sql2o.open()){
@@ -40,6 +50,11 @@ public class Task_AbilityImp implements Task_AbilityRepository {
         }
     }
 
+    /**
+     * This method creates a task with an ability and puts it on the database.
+     * @param taskAbility
+     * @return Task_Ability
+     * */
     @Override
     public Task_Ability createTaskAbility(Task_Ability taskAbility) {
         try(Connection conn = sql2o.open()){
@@ -55,6 +70,9 @@ public class Task_AbilityImp implements Task_AbilityRepository {
         }
     }
 
+    /**
+     * This method edits a
+     * */
     @Override
     public Task_Ability editTaskAbility(Task_Ability taskAbility) {
         try(Connection conn = sql2o.open()){
