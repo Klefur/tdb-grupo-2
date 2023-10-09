@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" @click="onClick" class="bg-orange-400 w-full text-white py-2 px-4 rounded hover:bg-orange-500 focus:outline-none focus:ring focus:ring-blue-300">
+    <button :type="type" @click="onClick" class="bg-orange-400 w-full text-white py-2 px-4 rounded-lg hover:bg-orange-500 focus:outline-none focus:ring focus:ring-blue-300">
           <a>{{ label }}</a>
         </button>
         <slot></slot>
