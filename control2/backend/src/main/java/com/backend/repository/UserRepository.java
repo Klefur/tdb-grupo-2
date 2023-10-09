@@ -22,8 +22,8 @@ public class UserRepository implements UserRepositoryI{
                             "INSERT INTO \"user\" (username, password) values (:name, :pass)",
                             true
                     )
-                    .addParameter("name", user.getUsername())
-                    .addParameter("pass", user.getPassword())
+                    .addParameter("username", user.getUsername())
+                    .addParameter("password", user.getPassword())
                     .executeUpdate().getKey();
             user.setId(insertedId.longValue());
             return JWT.generateToken(user);
