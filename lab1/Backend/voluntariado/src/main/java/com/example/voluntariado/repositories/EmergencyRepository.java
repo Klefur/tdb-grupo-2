@@ -11,7 +11,7 @@ public interface EmergencyRepository {
     public List<Emergency> getAllEmergencies();
     public List<Emergency> getEmergencyById(Integer id);
     public Emergency createEmergency(Emergency emergency);
-    public Emergency editEmergency(Emergency emergency);
+    public boolean editEmergency(Emergency emergency);
     public boolean deleteEmergencyById(Integer id);
     public boolean deleteAllEmergencies();
 }

@@ -72,7 +72,7 @@ public class VoluntaryImp implements VoluntaryRepository {
         }
     }
     @Override
-    public Voluntary editVoluntary(Voluntary voluntary) {
+    public boolean editVoluntary(Voluntary voluntary) {
         try(Connection conn = sql2o.open()){
             conn.createQuery("UPDATE \"Voluntary\" SET fullname = :fullname, birthday = :birthday , state = :state, email=:email, password=:password WHERE rut = :rut")
                     .addParameter("rut", voluntary.getRut())
@@ -82,10 +82,10 @@ public class VoluntaryImp implements VoluntaryRepository {
                     .addParameter("email", voluntary.getEmail())
                     .addParameter("password", voluntary.getPassword())
                     .executeUpdate();
-            return voluntary;
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 

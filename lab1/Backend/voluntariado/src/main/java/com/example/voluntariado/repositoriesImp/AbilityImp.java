@@ -77,10 +77,10 @@ public class AbilityImp implements AbilityRepository {
     /**
      * This method receives an ability object and updates it to the database.
      * @param ability
-     * @return Ability
+     * @return boolean
      * */
     @Override
-    public Ability editAbility(Ability ability) {
+    public boolean editAbility(Ability ability) {
         try(Connection connection = sql2o.open()){
             connection
                     .createQuery("UPDATE \"Ability\" SET names =:names, description =:description, items =:items WHERE id_ability =:id_ability")
@@ -88,10 +88,10 @@ public class AbilityImp implements AbilityRepository {
                     .addParameter("description", ability.getDescription())
                     .addParameter("items", ability.getItems())
                     .executeUpdate().getKey();
-            return ability;
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 

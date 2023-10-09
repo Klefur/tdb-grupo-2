@@ -74,17 +74,17 @@ public class Task_AbilityImp implements Task_AbilityRepository {
      * This method edits a
      * */
     @Override
-    public Task_Ability editTaskAbility(Task_Ability taskAbility) {
+    public boolean editTaskAbility(Task_Ability taskAbility) {
         try(Connection conn = sql2o.open()){
             conn.createQuery("UPDATE \"Task_Ability\" SET id_task = :taskID, id_ability = :abilityID WHERE id_task_ability = :id_task_ability")
                     .addParameter("id_task_ability", taskAbility.getId_task_ability())
                     .addParameter("taskID", taskAbility.getId_task())
                     .addParameter("abilityID", taskAbility.getId_ability())
                     .executeUpdate();
-            return taskAbility;
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 

@@ -12,7 +12,7 @@ public interface TaskRepository {
     public int countTasksByEmergencyId(Integer id);
     public List<Task> getTaskById(Integer id);
     public Task createTask(Task task);
-    public Task editTask(Task task);
+    public boolean editTask(Task task);
     public boolean deleteTaskById(Integer id);
     public boolean deleteAllTasks();
 }

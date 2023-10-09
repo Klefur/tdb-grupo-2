@@ -11,7 +11,7 @@ public interface InstitutionRepository {
     public List<Institution> getAllInstitutions();
     public List<Institution> getInstitutionById(Integer id);
     public Institution createInstitution(Institution institution);
-    public Institution editInstitution(Institution institution);
+    public boolean editInstitution(Institution institution);
     public boolean deleteInstitutionById(Integer id);
     public boolean deleteAllInstitutions();
 }

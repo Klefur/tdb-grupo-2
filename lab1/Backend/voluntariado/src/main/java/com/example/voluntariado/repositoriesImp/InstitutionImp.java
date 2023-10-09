@@ -80,7 +80,7 @@ public class InstitutionImp implements InstitutionRepository {
      * @return Institution
      * */
     @Override
-    public Institution editInstitution(Institution institution) {
+    public boolean editInstitution(Institution institution) {
         try(Connection connection = sql2o.open()){
             connection.
                     createQuery("UPDATE \"Institution\" SET name =:name, coordinator_name =:coordinator_name, email =:email, password =:password WHERE id_institution =:id_institution")
@@ -88,10 +88,10 @@ public class InstitutionImp implements InstitutionRepository {
                     .addParameter("coordinator_name", institution.getCoordinator_name())
                     .addParameter("email", institution.getEmail())
                     .addParameter("password", institution.getPassword());
-            return institution;
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 

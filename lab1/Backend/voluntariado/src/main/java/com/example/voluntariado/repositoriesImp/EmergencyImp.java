@@ -75,10 +75,10 @@ public class EmergencyImp implements EmergencyRepository {
     /**
      * This method edits an emergency and updates it on the database.
      * @param emergency
-     * @return Emergency
+     * @return boolean
      * */
     @Override
-    public Emergency editEmergency(Emergency emergency) {
+    public boolean editEmergency(Emergency emergency) {
         try(Connection connection = sql2o.open()){
             connection
                     .createQuery("UPDATE \"Emergency\" SET name =:name, description =:description, state =:state, id_institution =:id_institution WHERE id_emergency =:id_emergency")
@@ -87,10 +87,10 @@ public class EmergencyImp implements EmergencyRepository {
                     .addParameter("state", emergency.getState())
                     .addParameter("id_institution", emergency.getId_institution())
                     .executeUpdate().getKey();
-            return emergency;
+            return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 
