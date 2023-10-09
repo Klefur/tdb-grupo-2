@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Service
+@CrossOrigin
+@RestController
 public class VoluntaryService {
     private final VoluntaryRepository voluntaryRepository;
+
     VoluntaryService(VoluntaryRepository voluntaryRepository){
         this.voluntaryRepository = voluntaryRepository;
     }
@@ -33,19 +35,18 @@ public class VoluntaryService {
     @PostMapping("/voluntaries")
     @ResponseBody
     public Voluntary createVoluntary(@RequestBody Voluntary voluntary){
-        Voluntary result = voluntaryRepository.createVoluntary(voluntary);
-        return result;
+        return voluntaryRepository.createVoluntary(voluntary);
     }
 
     @PutMapping("/voluntaries/{rut}")
     @ResponseBody
     public String editVoluntary(@PathVariable("rut") String rut, @RequestBody Voluntary voluntary){
         voluntary.setRut(rut);
-        voluntary result = voluntaryRepository.editVoluntary(voluntary);
+        boolean result = voluntaryRepository.editVoluntary(voluntary);
         if (result){
-            return "Voluntario editado";
+            return "Edited voluntary";
         }else{
-            return "Voluntario no encontrado";
+            return "Voluntary not found";
         }
     }
 
