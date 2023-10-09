@@ -1,8 +1,8 @@
 <template>
-    <header class=" bg-sky-600 font-semibold text-2xl flex items-center p-1 px-10 h-16 text-white">
-        <div class="flex flex-row">
+    <header class=" bg-sky-600 font-semibold text-2xl flex items-center justify-center p-1 h-16 text-white">
+        <div class="flex flex-row w-[80%]">
             <button>
-                <router-link to="/"><p>Control 2 TBD</p></router-link>
+                <router-link to="/"><p>SAT - Sistema de Administración de Tareas</p></router-link>
             </button>
         </div>
     </header>
