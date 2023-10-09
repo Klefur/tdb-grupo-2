@@ -13,5 +13,5 @@ public class Task {
     private String name;
     private String description;
     private Integer state;
-    private Integer id_institution;
+    private Integer id_emergency;
 }
