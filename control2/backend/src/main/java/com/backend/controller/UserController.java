@@ -19,7 +19,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@RequestBody User user) {
-        System.out.println(user.getUsername() + " " + user.getPassword());
         return uRep.create(user);
     }
 

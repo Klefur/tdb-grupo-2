@@ -42,11 +42,12 @@ public class TaskRepository implements TaskRepositoryI{
     }
 
     @Override
-    public List<Task> findAllByUser(Long id_user, String token) {
+    public List<Task> findAllByUser(String token) {
         if (JWT.validateToken(token)){
+            Long uId = JWT.decodeJWT(token).getId();
             try(Connection conn = sql2o.open()){
                 return conn.createQuery("SELECT * FROM task WHERE id_user = :uId")
-                        .addParameter("uId", id_user)
+                        .addParameter("uId", uId)
                         .executeAndFetch(Task.class);
             }catch(Exception e){
                 System.out.println(e.getMessage());
@@ -57,7 +58,7 @@ public class TaskRepository implements TaskRepositoryI{
     }
 
     @Override
-    public Boolean updateTask(Long id, Task task, String token) {
+    public String updateTask(Long id, Task task, String token) {
         if (JWT.validateToken(token)) {
             try(Connection conn = sql2o.open()){
                 String sql = "UPDATE tasks SET";
@@ -80,7 +81,7 @@ public class TaskRepository implements TaskRepositoryI{
 
                 if (!hasUpdates) {
                     // No hay actualizaciones para realizar si no se proporciona ningún valor.
-                    return false;
+                    return "No se actualizo";
                 }
                 conn.createQuery(sql)
                         .addParameter("title", task.getTitle())
@@ -88,13 +89,13 @@ public class TaskRepository implements TaskRepositoryI{
                         .addParameter("id", task.getId())
                         .executeUpdate();
 
-                return true;
+                return "Actualizado";
             }catch(Exception e){
                 System.out.println(e.getMessage());
-                return null;
+                return "Error";
             }
         }
-        return null;
+        return "Id erroneo";
     }
 
     @Override
