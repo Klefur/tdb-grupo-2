@@ -2,15 +2,14 @@ package com.backend.repository;
 
 
 import com.backend.model.User;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 
-@Service
+@Repository
 public class JwtMiddleware {
 
     private final SecretKey secretKey;
@@ -33,7 +32,6 @@ public class JwtMiddleware {
 
     public Boolean validateToken(String token) {
         try {
-            System.out.println(token);
             Jws<Claims> jws = Jwts.parser()
                     .verifyWith(secretKey)
                     .build()
