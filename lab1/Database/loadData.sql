@@ -2,7 +2,7 @@
 -- 1. Tabla Voluntary: 10 registros
 ------------------------------------------
 
-INSERT INTO "Voluntary" (rut, fullname, birthday, state, email, password) VALUES
+INSERT INTO Voluntary (rut, fullname, birthday, state, email, password) VALUES
 ('98765432-1', 'María González', '1985-03-15', 1, 'mariagonzalez@gmail.com', 'p@ssw0rd'),
 ('76543210-8', 'Carlos Rodríguez', '1992-07-20', 1, 'carlosrodriguez@gmail.com', 'securepass'),
 ('54321098-7', 'Ana López', '1988-11-10', 1, 'analopez@gmail.com', 'mysecret123'),
@@ -18,7 +18,7 @@ INSERT INTO "Voluntary" (rut, fullname, birthday, state, email, password) VALUES
 -- 2. Tabla Ability: 10 registros
 ------------------------------------------
 
-INSERT INTO "Ability" (names, items, description) VALUES
+INSERT INTO Ability (names, items, description) VALUES
 ('Extinción de incendios', 'Manguera, extintor', 'Habilidades para combatir incendios forestales'),
 ('Rescate de personas', 'Cuerdas, arnés', 'Habilidades para el rescate de personas atrapadas en terremotos'),
 ('Primeros auxilios', 'Botiquín, vendajes', 'Habilidades para brindar primeros auxilios en situaciones de emergencia'),
@@ -34,7 +34,7 @@ INSERT INTO "Ability" (names, items, description) VALUES
 -- 3. Tabla Voluntary_Ability: 10 registros
 ------------------------------------------
 
-INSERT INTO "Voluntary_Ability" (id_voluntary, id_ability) VALUES
+INSERT INTO Voluntary_Ability (id_voluntary, id_ability) VALUES
 (1, 1),
 (2, 2),
 (3, 3),
@@ -50,7 +50,7 @@ INSERT INTO "Voluntary_Ability" (id_voluntary, id_ability) VALUES
 -- 4. Tabla Institution: 5 registros
 ------------------------------------------
 
-INSERT INTO "Institution" (name, coordinator_name, email, password) VALUES
+INSERT INTO Institution (name, coordinator_name, email, password) VALUES
 ('Cruz Roja Chile', 'Ana Martínez', 'cruzroja@gmail.com', 'cruzroja123'),
 ('Bomberos de Santiago', 'Juan Pérez', 'bomberos@gmail.com', 'bomberos456'),
 ('Defensa Civil', 'María González', 'defensacivil@gmail.com', 'defensacivil789'),
@@ -61,7 +61,7 @@ INSERT INTO "Institution" (name, coordinator_name, email, password) VALUES
 -- 5. Tabla Emergency: 5 registros
 ------------------------------------------
 
-INSERT INTO "Emergency" (name, description, state, id_institution) VALUES
+INSERT INTO Emergency (name, description, state, id_institution) VALUES
 ('Incendio Forestal en Valparaíso', 'Incendio forestal en la zona de Valparaíso', 1, 1),
 ('Terremoto en Santiago', 'Terremoto de magnitud 7.5 en Santiago', 1, 2),
 ('Inundaciones en Concepción', 'Inundaciones debido a fuertes lluvias en Concepción', 1, 5),
@@ -71,7 +71,7 @@ INSERT INTO "Emergency" (name, description, state, id_institution) VALUES
 ------------------------------------------
 -- 6. Tabla Emergency_Voluntary: 5 registros
 ------------------------------------------
-INSERT INTO "Emergency_Ability" (id_emergency, id_ability) VALUES
+INSERT INTO Emergency_Ability (id_emergency, id_ability) VALUES
 (1, 2),
 (2, 1),
 (3, 3),
@@ -82,7 +82,7 @@ INSERT INTO "Emergency_Ability" (id_emergency, id_ability) VALUES
 -- 7. Tabla Task: 10 registros
 ------------------------------------------
 
-INSERT INTO "Task" (name, description, state, id_institution) VALUES
+INSERT INTO Task (name, description, state, id_emergency) VALUES
 ('Evacuación de personas', 'Coordinar la evacuación de residentes en áreas afectadas por el incendio.', 1, 1),
 ('Rescate de heridos', 'Realizar el rescate de personas atrapadas en edificios colapsados después del terremoto.', 1, 2),
 ('Asistencia médica de primeros auxilios', 'Brindar atención médica de primeros auxilios a personas heridas.', 1, 3),
@@ -98,7 +98,7 @@ INSERT INTO "Task" (name, description, state, id_institution) VALUES
 -- 8. Tabla Task_Ability: 10 registros
 ------------------------------------------
 
-INSERT INTO "Task_Ability" (id_task, id_ability) VALUES
+INSERT INTO Task_Ability (id_task, id_ability) VALUES
 (1, 4),
 (2, 2),
 (3, 3),
@@ -114,7 +114,7 @@ INSERT INTO "Task_Ability" (id_task, id_ability) VALUES
 -- 9. Tabla Ranking: 10 registros
 ------------------------------------------
 
-INSERT INTO "Ranking" (id_task, id_voluntary) VALUES
+INSERT INTO Ranking (id_task, id_voluntary) VALUES
 (1, 1),
 (2, 2),
 (3, 3),

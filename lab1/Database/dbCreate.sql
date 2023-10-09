@@ -2,17 +2,17 @@
 -- Crear base de datos VoluntariadoDB --
 ----------------------------------------
 
-DROP DATABASE IF EXISTS VoluntariadoDB;
+-- DROP DATABASE IF EXISTS VoluntariadoDB;
 
-CREATE DATABASE VoluntariadoDB
-    WITH
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'Spanish_Spain.1252'
-    LC_CTYPE = 'Spanish_Spain.1252'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
-    IS_TEMPLATE = false;
+-- CREATE DATABASE VoluntariadoDB
+--    WITH
+--    OWNER = postgres
+--    ENCODING = 'UTF8'
+--    LC_COLLATE = 'Spanish_Spain.1252'
+--    LC_CTYPE = 'Spanish_Spain.1252'
+--    TABLESPACE = pg_default
+--    CONNECTION LIMIT = -1;
+--    IS_TEMPLATE = false;
 
 ----------------------------------------
 -- Tabla de Voluntario --
@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS Task(
     "name" VARCHAR(50) NOT NULL,
     "description" VARCHAR(100) NOT NULL,
     "state" int NOT NULL,
-    "id_institution" int,
-    FOREIGN KEY ("id_institution") REFERENCES Institution ("id_institution") ON DELETE CASCADE
+    "id_emergency" int,
+    FOREIGN KEY ("id_emergency") REFERENCES Emergency ("id_emergency") ON DELETE CASCADE
 );
 
 ----------------------------------------
@@ -130,9 +130,9 @@ CREATE TABLE IF NOT EXISTS Ranking(
 ----------------------------------------
 CREATE TABLE IF NOT EXISTS Login_Action(
     "id_login_action" SERIAL NOT NULL PRIMARY KEY,
-    "user_name" VARCHAR(50) NOT NULL,
-    "action_type" VARCHAR(10) NOT NULL,
-    "date_action" TIMESTAMP WITH TIME ZONE,
+    "id_action" INT,
+    "state" INT NOT NULL,
+    "date_action" TIMESTAMP WITH TIME ZONE
 );
 
 ----------------------------------------
@@ -145,72 +145,77 @@ CREATE TABLE IF NOT EXISTS Login_Action(
 --    respectiva información de usuario,
 --    tiempo de llamada, etc.
 ----------------------------------------
-CREATE FUNCTION log_backend_queries()
+
+
+---------------- EMERGENCY ----------------
+DROP TRIGGER IF EXISTS trg_emergency_login_action ON Emergency;
+
+-- Función genérica para inserción, actualización y eliminación
+CREATE OR REPLACE FUNCTION log_emergency_login_action()
 RETURNS TRIGGER AS 
 $$
-DECLARE user_name TEXT;
 BEGIN
-    SELECT current_user INTO user_name;
-    INSERT INTO Login_Action(user_name, id_action, date_action)
-    VALUES (user_name, TG_OP, CURRENT_TIMESTAMP);
+    INSERT INTO Login_Action (id_action, state, date_action) VALUES
+    (COALESCE(NEW.id_emergency, OLD.id_emergency),
+     COALESCE(NEW.state, OLD.state),
+     CURRENT_TIMESTAMP);
     RETURN NEW;
 END;
 $$
 LANGUAGE 'plpgsql';
 
-CREATE TRIGGER trg_log_emergency
-AFTER INSERT OR UPDATE OR DELETE
-on public."Emergency"
+-- Trigger para inserción, actualización y eliminación
+CREATE TRIGGER trg_emergency_login_action
+AFTER INSERT OR UPDATE OR DELETE ON Emergency
 FOR EACH ROW
-EXECUTE PROCEDURE log_backend_queries();
+EXECUTE PROCEDURE log_emergency_login_action();
 
-CREATE TRIGGER trg_log_voluntary
-AFTER INSERT OR UPDATE OR DELETE
-on public."Voluntary"
-FOR EACH ROW
-EXECUTE PROCEDURE log_backend_queries();
+---------------- VOLUNTARY ----------------
+DROP TRIGGER IF EXISTS trg_voluntary_login_action ON Voluntary;
 
-CREATE TRIGGER trg_log_institution
-AFTER INSERT OR UPDATE OR DELETE
-on public."Institution"
-FOR EACH ROW
-EXECUTE PROCEDURE log_backend_queries();
+-- Función genérica para inserción, actualización y eliminación
+CREATE OR REPLACE FUNCTION log_voluntary_login_action()
+RETURNS TRIGGER AS
+$$
+BEGIN
+    INSERT INTO Login_Action (id_action, state, date_action) VALUES
+    (COALESCE(NEW.id_voluntary, OLD.id_voluntary),
+     COALESCE(NEW.state, OLD.state),
+     CURRENT_TIMESTAMP);
+    RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
 
-CREATE TRIGGER trg_log_task
-AFTER INSERT OR UPDATE OR DELETE
-on public."Task"
+-- Trigger para inserción, actualización y eliminación
+CREATE TRIGGER trg_voluntary_login_action
+AFTER INSERT OR UPDATE OR DELETE ON Voluntary
 FOR EACH ROW
-EXECUTE PROCEDURE log_backend_queries();
+EXECUTE PROCEDURE log_voluntary_login_action();
 
-CREATE TRIGGER trg_log_voluntary_ability
-AFTER INSERT OR UPDATE OR DELETE
-on public."Voluntary_Ability"
-FOR EACH ROW
-EXECUTE PROCEDURE log_backend_queries();
+--------------- TASK ------------------
+DROP TRIGGER IF EXISTS trg_task_login_action ON Task;
 
-CREATE TRIGGER trg_log_emergency_ability
-AFTER INSERT OR UPDATE OR DELETE
-on public."Emergency_Ability"
-FOR EACH ROW
-EXECUTE PROCEDURE log_backend_queries();
+-- Función genérica para inserción, actualización y eliminación
+CREATE OR REPLACE FUNCTION log_task_login_action()
+RETURNS TRIGGER AS
+$$
+BEGIN
+    INSERT INTO Login_Action (id_action, state, date_action) VALUES
+    (COALESCE(NEW.id_task, OLD.id_task),
+     COALESCE(NEW.state, OLD.state),
+     CURRENT_TIMESTAMP);
+    RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
 
-CREATE TRIGGER trg_log_task_ability
-AFTER INSERT OR UPDATE OR DELETE
-on public."Task_Ability"
+-- Trigger para inserción, actualización y eliminación
+CREATE TRIGGER trg_task_login_action
+AFTER INSERT OR UPDATE OR DELETE ON Task
 FOR EACH ROW
-EXECUTE PROCEDURE log_backend_queries();
+EXECUTE PROCEDURE log_task_login_action();
 
-CREATE TRIGGER trg_log_ranking
-AFTER INSERT OR UPDATE OR DELETE
-on public."Ranking"
-FOR EACH ROW
-EXECUTE PROCEDURE log_backend_queries();
-
-CREATE TRIGGER trg_log_login_action
-AFTER INSERT OR UPDATE OR DELETE
-on public."Login_Action"
-FOR EACH ROW
-EXECUTE PROCEDURE log_backend_queries();
 
 ----------------------------------------
 -- 2. Crear procedimiento almacenado que
@@ -220,70 +225,83 @@ EXECUTE PROCEDURE log_backend_queries();
 --    eliminación ejecutan con las
 --    respectivas consultas.
 ----------------------------------------
-CREATE TEMP TABLE temp_query_report AS
-SELECT 
-    current_user AS user_name,
-    current_query AS query,
-    CASE 
-        WHEN current_query LIKE 'INSERT%' THEN 'INSERT'
-        WHEN current_query LIKE 'UPDATE%' THEN 'UPDATE'
-        WHEN current_query LIKE 'DELETE%' THEN 'DELETE'
-    END AS action
-FROM pg_stat_statements
-WHERE current_query IS NOT NULL;
 
-CREATE FUNCTION generate_report_user_queries()
-RETURNS TABLE (user_name TEXT, action_type TEXT, query TEXT, query_count INT) AS
+CREATE TABLE IF NOT EXISTS user_queries (
+    user_name_a TEXT,
+    action_type_a TEXT,
+    query TEXT,
+    date_action TIMESTAMP DEFAULT NOW()
+);
+
+-- Crear función para registrar consultas de usuario
+CREATE OR REPLACE FUNCTION log_user_query(user_name_a TEXT, query TEXT) 
+RETURNS VOID AS 
 $$
+BEGIN
+    INSERT INTO user_queries (user_name_a, action_type_a, query)
+    VALUES (user_name_a,
+            CASE 
+                WHEN query LIKE 'INSERT%' THEN 'INSERT'
+                WHEN query LIKE 'UPDATE%' THEN 'UPDATE'
+                WHEN query LIKE 'DELETE%' THEN 'DELETE'
+                ELSE 'OTHER'
+            END,
+            query);
+END;
+$$
+LANGUAGE plpgsql;
+
+
+-- Crear función para generar el informe de consultas de usuario
+CREATE OR REPLACE FUNCTION generate_report_user_queries()
+RETURNS TABLE (user_name_a TEXT, action_type_a TEXT, query TEXT, query_count INT) AS $$
 BEGIN
     RETURN QUERY
     SELECT 
-        user_name,
-        action_type,
+        user_name_a,
+        action_type_a,
         query,
-        date_action
         COUNT(*) AS query_count
-    FROM temp_query_report
-    GROUP BY user_name, action_type, query
+    FROM user_queries
+    WHERE query IS NOT NULL
+    GROUP BY user_name_a, action_type_a, query
     ORDER BY query_count DESC;
-
 END;
 $$
-LANGUAGE 'plpgsql';
+LANGUAGE plpgsql;
 
-SELECT * FROM generate_report_user_queries();
 
 ----------------------------------------
 -- 3. Activar o desactivar emergencia.
 ----------------------------------------
-CREATE FUNCTION toggleEmergencyState(id_emergency INT, new_state INT)
+CREATE OR REPLACE FUNCTION toggleEmergencyState(id_emergency INT, new_state INT)
 RETURNS VOID AS
 $$
 BEGIN
     UPDATE Emergency
     SET state = new_state
-    WHERE id_emergency = id_emergency
+    WHERE id_emergency = id_emergency;
 END;
 $$
-LANGUAGE 'plpgsql';
+LANGUAGE plpgsql;
 
 ----------------------------------------
 -- 4. Contar el total de tareas activas en
 --    una emergencia.
 ----------------------------------------
-CREATE FUNCTION countActiveTasksByEmergencyId(id_emergency INT)
+CREATE OR REPLACE FUNCTION countActiveTasksByEmergencyId(id_emergency INT)
 RETURNS INT AS
 $$
+DECLARE 
+	active_tasks INT;
 BEGIN
-    DECLARE active_tasks INT;
-
     SELECT COUNT(*) INTO active_tasks
     FROM Task
     WHERE id_emergency = id_emergency AND state = 1;
     RETURN active_tasks;
 END;
 $$
-LANGUAGE 'plpgsql';
+LANGUAGE plpgsql;
 
 ----------------------------------------
 -- 5. Generar función que calcule el ranking
