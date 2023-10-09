@@ -19,7 +19,17 @@ public class TaskController {
     }
 
     @GetMapping("/home")
-    public List<Task> allTask(@RequestParam Long id, @RequestParam String token) {
-        return taskRep.findAllByUser(id, token);
+    public List<Task> allTask(@RequestParam String token) {
+        return taskRep.findAllByUser(token);
+    }
+
+    @PutMapping("/update-task/{id}")
+    public String updateTask(@PathVariable Long id,@RequestBody Task task, @RequestParam String token) {
+        return taskRep.updateTask(id, task, token);
+    }
+
+    @DeleteMapping("/detele-task/{id}")
+    public Boolean deleteTask(@PathVariable Long id, @RequestParam String token) {
+        return taskRep.deleteTask(id, token);
     }
 }

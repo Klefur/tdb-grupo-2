@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS Voluntary (
     "rut" VARCHAR(10) NOT NULL,
     "fullname" VARCHAR(50) NOT NULL,
     "birthday" DATE NOT NULL,
-    "state" BOOLEAN NOT NULL,
+    "state" int NOT NULL,
     "email" VARCHAR(50) NOT NULL,
     "password" VARCHAR(50) NOT NULL
 );
@@ -71,7 +71,6 @@ CREATE TABLE IF NOT EXISTS Emergency(
     "id_emergency" SERIAL NOT NULL PRIMARY KEY,
     "name" VARCHAR(50) NOT NULL,
     "description" VARCHAR(100) NOT NULL,
-    "date" DATE NOT NULL,
     "state" int NOT NULL,
     "id_institution" int,
     FOREIGN KEY ("id_institution") REFERENCES Institution ("id_institution") ON DELETE CASCADE
@@ -97,7 +96,6 @@ CREATE TABLE IF NOT EXISTS Task(
     "id_task" SERIAL NOT NULL PRIMARY KEY,
     "name" VARCHAR(50) NOT NULL,
     "description" VARCHAR(100) NOT NULL,
-    "date" DATE NOT NULL,
     "state" int NOT NULL,
     "id_institution" int,
     FOREIGN KEY ("id_institution") REFERENCES Institution ("id_institution") ON DELETE CASCADE
@@ -254,3 +252,41 @@ $$
 LANGUAGE 'plpgsql';
 
 SELECT * FROM generate_report_user_queries();
+
+----------------------------------------
+-- 3. Activar o desactivar emergencia.
+----------------------------------------
+CREATE FUNCTION toggleEmergencyState(id_emergency INT, new_state INT)
+RETURNS VOID AS
+$$
+BEGIN
+    UPDATE Emergency
+    SET state = new_state
+    WHERE id_emergency = id_emergency
+END;
+$$
+LANGUAGE 'plpgsql';
+
+----------------------------------------
+-- 4. Contar el total de tareas activas en
+--    una emergencia.
+----------------------------------------
+CREATE FUNCTION countActiveTasksByEmergencyId(id_emergency INT)
+RETURNS INT AS
+$$
+BEGIN
+    DECLARE active_tasks INT;
+
+    SELECT COUNT(*) INTO active_tasks
+    FROM Task
+    WHERE id_emergency = id_emergency AND state = 1;
+    RETURN active_tasks;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+----------------------------------------
+-- 5. Generar función que calcule el ranking
+--    de los voluntarios según con los
+--    requisitos que cumple por tarea.
+----------------------------------------
