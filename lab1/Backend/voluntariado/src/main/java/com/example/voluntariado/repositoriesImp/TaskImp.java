@@ -67,12 +67,12 @@ public class TaskImp implements TaskRepository {
     @Override
     public boolean editTask(Task task) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("UPDATE \"Task\" SET name = :name, description = :description, state = :state, id_institution = :id_institution WHERE id_task = :id_task")
+            conn.createQuery("UPDATE \"Task\" SET name = :name, description = :description, state = :state, id_emergency = :id_emergency WHERE id_task = :id_task")
                     .addParameter("id_task", task.getId_task())
                     .addParameter("name", task.getName())
                     .addParameter("description", task.getDescription())
                     .addParameter("state", task.getState())
-                    .addParameter("id_institution", task.getId_institution())
+                    .addParameter("id_emergency", task.getId_emergency())
                     .executeUpdate();
             return true;
         }catch(Exception e){

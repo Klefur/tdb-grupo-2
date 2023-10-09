@@ -125,4 +125,17 @@ public class RankingImp implements RankingRepository {
             return false;
         }
     }
+
+    @Override
+    public List<Ranking> getTopRankingByTaskId(Integer id) {
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery("SELECT * FROM \"Ranking\" WHERE id_ranking = :id")
+                    .addParameter("id_ranking", id)
+                    .executeAndFetch(Ranking.class);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

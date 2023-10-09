@@ -54,4 +54,11 @@ public class RankingService {
             return "Ranking not found";
         }
     }
+
+    @GetMapping("/rankings/task/{id_task}")
+    public List<Ranking> getTopRankingByTaskId(@PathVariable("id_task") Integer id_task) {
+        return rankingRepository.getTopRankingByTaskId(id_task);
+    }
+
+
 }

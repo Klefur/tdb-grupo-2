@@ -14,4 +14,5 @@ public interface RankingRepository {
     public boolean editRanking(Ranking ranking);
     public boolean deleteRankingById(Integer id);
     public boolean deleteAllRankings();
+    public List<Ranking> getTopRankingByTaskId(Integer id);
 }

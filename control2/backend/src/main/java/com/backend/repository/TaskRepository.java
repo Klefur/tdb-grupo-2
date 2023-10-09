@@ -23,14 +23,17 @@ public class TaskRepository implements TaskRepositoryI{
             try(Connection conn = sql2o.open()){
                 User user = JWT.decodeJWT(token);
                 Integer insertedId = (Integer) conn.createQuery(
-                                "INSERT INTO task (title, description, id_user) values (:title, :desc, :uId)",
+                                "INSERT INTO task (title, description, expire_date, id_user) " +
+                                        "values (:title, :desc,  :exp_date, :uId)",
                                 true
                         )
                         .addParameter("title", task.getTitle())
                         .addParameter("desc", task.getDescription())
                         .addParameter("uId", user.getId())
+                        .addParameter("exp_date", task.getExpire_date())
                         .executeUpdate().getKey();
                 task.setId_user(user.getId());
+                task.setCompleted(false);
                 task.setId(insertedId.longValue());
                 return task;
             }catch(Exception e){
@@ -77,6 +80,22 @@ public class TaskRepository implements TaskRepositoryI{
                     hasUpdates = true;
                 }
 
+                if (task.getExpire_date() != null) {
+                    if (hasUpdates) {
+                        sql += ",";
+                    }
+                    sql += " expire_date = :exp_date";
+                    hasUpdates = true;
+                }
+
+                if (task.getCompleted() != null) {
+                    if (hasUpdates) {
+                        sql += ",";
+                    }
+                    sql += " completed = :completed";
+                    hasUpdates = true;
+                }
+
                 sql += " WHERE id = :id";
 
                 if (!hasUpdates) {
@@ -86,6 +105,8 @@ public class TaskRepository implements TaskRepositoryI{
                 conn.createQuery(sql)
                         .addParameter("title", task.getTitle())
                         .addParameter("description", task.getDescription())
+                        .addParameter("exp_date", task.getExpire_date())
+                        .addParameter("completed", task.getCompleted())
                         .addParameter("id", task.getId())
                         .executeUpdate();
 
