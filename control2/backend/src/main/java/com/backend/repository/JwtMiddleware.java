@@ -21,10 +21,10 @@ public class JwtMiddleware {
     }
 
     public String generateToken(User user) {
-        System.out.println(secretKey);
         Date fecha_expiracion = new Date(System.currentTimeMillis() + 14400000);
         return Jwts.builder()
-                .claim("user", user)
+                .claim("id", user.getId())
+                .claim("username", user.getUsername())
                     .issuedAt(new Date(System.currentTimeMillis()))
                     .expiration(fecha_expiracion)
                 .signWith(secretKey)
@@ -60,9 +60,12 @@ public class JwtMiddleware {
                 .parseSignedClaims(token)
                 .getPayload();
 
+        Long id = claims.get("id", Long.class);
+        String username = claims.get("username", String.class);
 
-        User user = new ObjectMapper().convertValue(claims.get("user"), User.class);
-        System.out.println(user.getId());
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
 
         return user;
     }
