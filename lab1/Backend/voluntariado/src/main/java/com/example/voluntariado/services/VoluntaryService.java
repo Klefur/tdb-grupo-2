@@ -22,7 +22,7 @@ public class VoluntaryService {
     }
 
     @GetMapping("/voluntaries/{rut}")
-    public List<Voluntary> getVoluntaryById(@PathVariable("rut") String rut) {
+    public List<Voluntary> getVoluntaryByRut(@PathVariable("rut") String rut) {
         return voluntaryRepository.getVoluntaryByRut(rut);
     }
 
@@ -46,6 +46,17 @@ public class VoluntaryService {
         if (result){
             return "Edited voluntary";
         }else{
+            return "Voluntary not found";
+        }
+    }
+
+    @DeleteMapping("/voluntaries/{id_voluntary}")
+    public String deleteVoluntaryAbility(@PathVariable("id_voluntary") int id_voluntary){
+        boolean result = voluntaryRepository.deleteVoluntaryById(id_voluntary);
+        if(result){
+            return "Edited Voluntary  ";
+        }
+        else{
             return "Voluntary not found";
         }
     }

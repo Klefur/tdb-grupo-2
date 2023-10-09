@@ -9,7 +9,7 @@ import java.util.List;
  * */
 public interface Voluntary_AbilityRepository {
     public List<Voluntary_Ability> getAllVoluntariesAbilities();
-    public List<Voluntary_Ability> getVoluntaryById(Integer id);
+    public List<Voluntary_Ability> getVoluntaryAbilityById(Integer id);
     public Voluntary_Ability createVoluntaryAbility(Voluntary_Ability voluntaryAbility);
     public boolean editVoluntaryAbility(Voluntary_Ability voluntaryAbility);
     public boolean deleteVoluntaryAbilityById(Integer id);
