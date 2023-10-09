@@ -13,5 +13,10 @@ public class Task {
     private String name;
     private String description;
     private Integer state;
+<<<<<<< Updated upstream
     private Integer id_emergency;
+=======
+    private Integer id_institution;
+    //    private Integer id_emergency;
+>>>>>>> Stashed changes
 }
