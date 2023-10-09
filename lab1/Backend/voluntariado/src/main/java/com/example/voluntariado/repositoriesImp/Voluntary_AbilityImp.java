@@ -42,7 +42,7 @@ public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     }
 
     @Override
-    public Voluntary_Ability createVoluntary(Voluntary_Ability voluntaryAbility) {
+    public Voluntary_Ability createVoluntaryAbility(Voluntary_Ability voluntaryAbility) {
         try(Connection conn = sql2o.open()){
             int insertedId = (int) conn.createQuery("INSERT INTO \"Voluntary_Ability\" (id_voluntary, id_ability) VALUES (:id_voluntary, :id_ability)", true)
                     .addParameter("id_voluntary", voluntaryAbility.getId_voluntary())

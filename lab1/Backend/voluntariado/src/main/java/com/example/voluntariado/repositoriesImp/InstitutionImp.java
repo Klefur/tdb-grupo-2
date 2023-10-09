@@ -17,6 +17,10 @@ public class InstitutionImp implements InstitutionRepository {
     @Autowired
     private Sql2o sql2o;
 
+    /**
+     * This method gets all the institutions on the database.
+     * @return List<Institution>
+     * */
     @Override
     public List<Institution> getAllInstitutions() {
         try(Connection connection = sql2o.open()){
@@ -29,6 +33,11 @@ public class InstitutionImp implements InstitutionRepository {
         }
     }
 
+    /**
+     * This method gets an institution given an id.
+     * @param id
+     * @return List<Institution>
+     * */
     @Override
     public List<Institution> getInstitutionById(Integer id) {
         try(Connection connection = sql2o.open()){
@@ -42,6 +51,11 @@ public class InstitutionImp implements InstitutionRepository {
         }
     }
 
+    /**
+     * This method creates an institution and puts it on the database.
+     * @param institution
+     * @return Institution
+     * */
     @Override
     public Institution createInstitution(Institution institution) {
         try(Connection connection = sql2o.open()){
@@ -60,6 +74,11 @@ public class InstitutionImp implements InstitutionRepository {
         }
     }
 
+    /**
+     * This method edits the institution and updates it on the database.
+     * @param institution
+     * @return Institution
+     * */
     @Override
     public Institution editInstitution(Institution institution) {
         try(Connection connection = sql2o.open()){
@@ -76,6 +95,11 @@ public class InstitutionImp implements InstitutionRepository {
         }
     }
 
+    /**
+     * This method deletes an institution on the database given an id.
+     * @param id
+     * @return boolean
+     * */
     @Override
     public boolean deleteInstitutionById(Integer id) {
         int deletedInstitution;
@@ -88,6 +112,10 @@ public class InstitutionImp implements InstitutionRepository {
         return deletedInstitution == 1;
     }
 
+    /**
+     * This method deletes all the institutions on the database.
+     * @return boolean
+     * */
     @Override
     public boolean deleteAllInstitutions() {
         try(Connection connection = sql2o.open()){
