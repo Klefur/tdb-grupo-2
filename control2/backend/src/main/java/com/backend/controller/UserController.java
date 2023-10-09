@@ -26,9 +26,4 @@ public class UserController {
     public String login(@RequestBody User user) {
         return uRep.login(user.getUsername(), user.getPassword());
     }
-
-    @PostMapping("/validateToken")
-    public Boolean validate(@RequestBody String token) {
-        return uRep.validate(token);
-    }
 }

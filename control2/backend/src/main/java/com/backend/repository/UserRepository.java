@@ -12,7 +12,8 @@ import java.util.List;
 public class UserRepository implements UserRepositoryI{
     @Autowired
     private Sql2o sql2o;
-    private final JwtMiddleware JWT = new JwtMiddleware();
+    @Autowired
+    private JwtMiddleware JWT;
 
     @Override
     public String create(User user) {
@@ -32,7 +33,6 @@ public class UserRepository implements UserRepositoryI{
         }
     }
 
-    @Override
     public List<User> findAll() {
         try(Connection conn = sql2o.open()){
             return conn.createQuery("SELECT * FROM \"user\"")

@@ -2,45 +2,68 @@ package com.backend.repository;
 
 
 import com.backend.model.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 
+@Service
 public class JwtMiddleware {
-    SecretKey key = Jwts.SIG.HS256.key().build();
+
+    private final SecretKey secretKey;
+
+    @Autowired
+    public JwtMiddleware(SecretKey secretKey) {
+        this.secretKey = secretKey;
+    }
 
     public String generateToken(User user) {
+        System.out.println(secretKey);
         Date fecha_expiracion = new Date(System.currentTimeMillis() + 14400000);
-        System.out.println(fecha_expiracion);
         return Jwts.builder()
-                .subject("Login Token")
-                    .claim("user", user)
+                .claim("user", user)
                     .issuedAt(new Date(System.currentTimeMillis()))
                     .expiration(fecha_expiracion)
-                .signWith(key)
+                .signWith(secretKey)
                 .compact();
     }
 
     public Boolean validateToken(String token) {
         try {
+            System.out.println(token);
             Jws<Claims> jws = Jwts.parser()
-                    .verifyWith(key)
+                    .verifyWith(secretKey)
                     .build()
                     .parseSignedClaims(token);
-
             return !jws.getPayload().getExpiration().before(new Date());
         } catch (ExpiredJwtException e) {
             // El token ha expirado
-            return true;
+            return false;
         } catch (MalformedJwtException e) {
             // El token es inválido o ha ocurrido un error de firma
             e.printStackTrace();
-            return true; // Considera tokens malformados como expirados
+            return false; // Considera tokens malformados como expirados
         } catch (Exception e) {
             // Otras excepciones
             e.printStackTrace();
-            return true; // Considera otras excepciones como expirados
+            return false; // Considera otras excepciones como expirados
         }
+    }
+
+    public User decodeJWT(String token) {
+        Claims claims = Jwts.parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+
+        User user = new ObjectMapper().convertValue(claims.get("user"), User.class);
+        System.out.println(user.getId());
+
+        return user;
     }
 }
