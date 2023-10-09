@@ -254,3 +254,41 @@ $$
 LANGUAGE 'plpgsql';
 
 SELECT * FROM generate_report_user_queries();
+
+----------------------------------------
+-- 3. Activar o desactivar emergencia.
+----------------------------------------
+CREATE FUNCTION toggleEmergencyState(id_emergency INT, new_state INT)
+RETURNS VOID AS
+$$
+BEGIN
+    UPDATE Emergency
+    SET state = new_state
+    WHERE id_emergency = id_emergency
+END;
+$$
+LANGUAGE 'plpgsql';
+
+----------------------------------------
+-- 4. Contar el total de tareas activas en
+--    una emergencia.
+----------------------------------------
+CREATE FUNCTION countActiveTasksByEmergencyId(id_emergency INT)
+RETURNS INT AS
+$$
+BEGIN
+    DECLARE active_tasks INT;
+
+    SELECT COUNT(*) INTO active_tasks
+    FROM Task
+    WHERE id_emergency = id_emergency AND state = 1;
+    RETURN active_tasks;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+----------------------------------------
+-- 5. Generar función que calcule el ranking
+--    de los voluntarios según con los
+--    requisitos que cumple por tarea.
+----------------------------------------
