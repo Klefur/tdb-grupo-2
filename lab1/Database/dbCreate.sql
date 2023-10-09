@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS Emergency(
     "name" VARCHAR(50) NOT NULL,
     "description" VARCHAR(100) NOT NULL,
     "date" DATE NOT NULL,
-    "state" BOOLEAN NOT NULL,
+    "state" int NOT NULL,
     "id_institution" int,
     FOREIGN KEY ("id_institution") REFERENCES Institution ("id_institution") ON DELETE CASCADE
 );
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS Task(
     "name" VARCHAR(50) NOT NULL,
     "description" VARCHAR(100) NOT NULL,
     "date" DATE NOT NULL,
-    "state" BOOLEAN NOT NULL,
+    "state" int NOT NULL,
     "id_institution" int,
     FOREIGN KEY ("id_institution") REFERENCES Institution ("id_institution") ON DELETE CASCADE
 );
