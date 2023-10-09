@@ -43,4 +43,15 @@ public class AbilityService {
             return "Ability not found";
         }
     }
+
+    @DeleteMapping("/abilities/{id_ability}")
+    public String deleteAbility(@PathVariable("id_ability") int id_ability){
+        boolean result = abilityRepository.deleteAbilityById(id_ability);
+        if(result){
+            return "Deleted Ability  ";
+        }
+        else{
+            return "Ability not found";
+        }
+    }
 }
