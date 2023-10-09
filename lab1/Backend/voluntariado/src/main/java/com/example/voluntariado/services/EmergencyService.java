@@ -22,7 +22,7 @@ public class EmergencyService {
     }
 
     @GetMapping("/emergencies/{id_emergency}")
-    public List<Emergency> getEmergencyById(@RequestParam("id_emergency") Integer id_emergency){
+    public List<Emergency> getEmergencyById(@PathVariable("id_emergency") Integer id_emergency){
         return emergencyRepository.getEmergencyById(id_emergency);
     }
 
@@ -40,6 +40,17 @@ public class EmergencyService {
         if(result){
             return "Edited emergency";
         }else{
+            return "Emergency not found";
+        }
+    }
+
+    @DeleteMapping("/emergencies/{id_emergency}")
+    public String deleteEmergency(@PathVariable("id_emergency") int id_emergency){
+        boolean result =emergencyRepository.deleteEmergencyById(id_emergency);
+        if(result){
+            return "Edited Emergency  ";
+        }
+        else{
             return "Emergency not found";
         }
     }

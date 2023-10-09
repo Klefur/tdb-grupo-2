@@ -30,7 +30,7 @@ public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     }
 
     @Override
-    public List<Voluntary_Ability> getVoluntaryById(Integer id) {
+    public List<Voluntary_Ability> getVoluntaryAbilityById(Integer id) {
         try(Connection conn = sql2o.open()){
             return conn.createQuery("SELECT * FROM \"Voluntary_Ability\" WHERE id_voluntary_ability = :id")
                     .addParameter("id_voluntary_ability", id)
