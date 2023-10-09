@@ -30,10 +30,20 @@ public class VoluntaryImp implements VoluntaryRepository {
     }
 
     @Override
-    public List<Voluntary> getVoluntaryById(Integer id) {
+    public int countVoluntary() {
+        int total = 0;
         try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Voluntary\" WHERE id_voluntary = :id")
-                    .addParameter("id_voluntary", id)
+            total = conn.createQuery("SELECT COUNT(*) FROM \"Voluntary\"").executeScalar(Integer.class);
+        }
+        return total;
+    }
+
+
+    @Override
+    public List<Voluntary> getVoluntaryByRut(String rut) {
+        try(Connection conn = sql2o.open()){
+            return conn.createQuery("SELECT * FROM \"Voluntary\" WHERE rut = :rut")
+                    .addParameter("rut", rut)
                     .executeAndFetch(Voluntary.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
