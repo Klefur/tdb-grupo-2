@@ -37,7 +37,7 @@ const loginFunc = async () => {
 		"password" : password.value
 	}
 
-    await axios.post(url + '/users/login', data)
+    await axios.post(url + '/login', data)
     .then(response => {
         console.log('Respuesta del servidor:', response.data)
 		const resp = response.data.payload.user[0]

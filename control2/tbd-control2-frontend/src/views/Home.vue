@@ -10,7 +10,7 @@
   </template>
   
   <script>
-  import TaskCard from './TaskCard.vue';
+  import TaskCard from '../components/TaskCard';
   
   export default {
     components: {

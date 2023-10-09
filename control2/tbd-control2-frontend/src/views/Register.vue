@@ -58,8 +58,9 @@ const registerFunc = async () => {
 
     await axios.post(url + '/register', data)
     .then(response => {
+		localStorage.setItem('token', response.data)
         console.log('Respuesta del servidor:', response.data)
-		router.push('/register')
+		router.push('/home')
     })
     .catch(error => {
         console.error('Error en la solicitud:', error)
