@@ -43,7 +43,7 @@ public class DatabaseContext {
         ObjectMapper objectMapper = new ObjectMapper();
 
         // Configure the date format for deserialization globally
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         objectMapper.setDateFormat(dateFormat);
 
         // If needed, you can configure other ObjectMapper settings here

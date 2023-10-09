@@ -62,68 +62,71 @@ public class TaskRepository implements TaskRepositoryI{
 
     @Override
     public String updateTask(Long id, Task task, String token) {
-        if (JWT.validateToken(token)) {
-            try(Connection conn = sql2o.open()){
-                String sql = "UPDATE tasks SET";
-                boolean hasUpdates = false;
-
-                if (task.getTitle() != null) {
-                    sql += " title = :title";
-                    hasUpdates = true;
-                }
-
-                if (task.getDescription() != null) {
-                    if (hasUpdates) {
-                        sql += ",";
-                    }
-                    sql += " description = :description";
-                    hasUpdates = true;
-                }
-
-                if (task.getExpire_date() != null) {
-                    if (hasUpdates) {
-                        sql += ",";
-                    }
-                    sql += " expire_date = :exp_date";
-                    hasUpdates = true;
-                }
-
-                if (task.getCompleted() != null) {
-                    if (hasUpdates) {
-                        sql += ",";
-                    }
-                    sql += " completed = :completed";
-                    hasUpdates = true;
-                }
-
-                sql += " WHERE id = :id";
-
-                if (!hasUpdates) {
-                    // No hay actualizaciones para realizar si no se proporciona ningún valor.
-                    return "No se actualizo";
-                }
-                conn.createQuery(sql)
-                        .addParameter("title", task.getTitle())
-                        .addParameter("description", task.getDescription())
-                        .addParameter("exp_date", task.getExpire_date())
-                        .addParameter("completed", task.getCompleted())
-                        .addParameter("id", task.getId())
-                        .executeUpdate();
-
-                return "Actualizado";
-            }catch(Exception e){
-                System.out.println(e.getMessage());
-                return "Error";
-            }
+        if (!JWT.validateToken(token)) {
+            return "Id erroneo";
         }
-        return "Id erroneo";
+
+        try (Connection conn = sql2o.open()) {
+            String sql = "UPDATE task SET ";
+            List<String> updates = new ArrayList<>();
+
+            if (task.getTitle() != null) {
+                updates.add("title = :title");
+            }
+
+            if (task.getDescription() != null) {
+                updates.add("description = :description");
+            }
+
+            if (task.getExpire_date() != null) {
+                updates.add("expire_date = :exp_date");
+            }
+
+            if (task.getCompleted() != null) {
+                updates.add("completed = :completed");
+            }
+
+            if (updates.isEmpty()) {
+                return "No se actualizó";
+            }
+
+            sql += String.join(", ", updates);
+            sql += " WHERE id = :id";
+
+            org.sql2o.Query query = conn.createQuery(sql)
+                    .addParameter("id", id);
+
+            if (task.getTitle() != null) {
+                query.addParameter("title", task.getTitle());
+            }
+
+            if (task.getDescription() != null) {
+                query.addParameter("description", task.getDescription());
+            }
+
+            if (task.getExpire_date() != null) {
+                query.addParameter("exp_date", task.getExpire_date());
+            }
+
+            if (task.getCompleted() != null) {
+                query.addParameter("completed", task.getCompleted());
+            }
+
+            System.out.println(sql);
+            query.executeUpdate();
+
+            return "Actualizado";
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return "Error";
+        }
     }
 
     @Override
     public Boolean deleteTask(Long id, String token) {
         if (JWT.validateToken(token)) {
             try(Connection conn = sql2o.open()){
-                conn.createQuery("DELETE * FROM task WHERE id = :idTask")
+                conn.createQuery("DELETE FROM task WHERE id = :idTask")
                         .addParameter("idTask", id)
                         .executeUpdate();
                 return true;

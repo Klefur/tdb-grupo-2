@@ -28,7 +28,7 @@ public class TaskController {
         return taskRep.updateTask(id, task, token);
     }
 
-    @DeleteMapping("/detele-task/{id}")
+    @DeleteMapping("/delete-task/{id}")
     public Boolean deleteTask(@PathVariable Long id, @RequestParam String token) {
         return taskRep.deleteTask(id, token);
     }
