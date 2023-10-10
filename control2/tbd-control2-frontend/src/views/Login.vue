@@ -7,7 +7,7 @@
       <Input Label="Usuario" forLabel="username" type="text" placeholder="Nombre de usuario" />
       <Input Label="Contrasena" forLabel="password" type="password" placeholder="Contraseña" />
       <div class="flex flex-col gap-5 justify-between items-center mb-4">
-        <Boton label="Iniciar Sesión" href="/" @click="loginFunc()" class="bg-orange-400 hover:bg-orange-500"/>
+        <Boton :type="submit" label="Iniciar Sesión" href="/" @click="loginFunc()" class="bg-orange-400 hover:bg-orange-500"/>
         <a class="text-blue-500 hover:underline"><router-link to="/register"><p>¿No tienes una cuenta?</p></router-link></a>
       </div>
     </form>
