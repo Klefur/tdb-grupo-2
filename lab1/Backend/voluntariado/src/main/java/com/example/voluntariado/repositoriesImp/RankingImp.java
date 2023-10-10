@@ -127,15 +127,22 @@ public class RankingImp implements RankingRepository {
     }
 
     @Override
-    public List<Ranking> getTopRankingByTaskId(Integer id) {
+    public List<Ranking> getTopRankingByTaskId(Integer id_task) {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Ranking\" WHERE id_ranking = :id")
-                    .addParameter("id_ranking", id)
+                    .createQuery(
+                            "SELECT va.id_voluntary, " + " ta.id_task, " + "  COUNT(va.id_ability) AS matched_abilities_count " +
+                                    "FROM Task_Ability ta " +
+                                    "JOIN Voluntary_Ability va ON ta.id_ability = va.id_ability " +
+                                    "WHERE ta.id_task = :id_task " +
+                                    "GROUP BY va.id_voluntary, ta.id_task " +
+                                    "ORDER BY matched_abilities_count DESC, va.id_voluntary")
+                    .addParameter("id_task", id_task)
                     .executeAndFetch(Ranking.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
     }
+
 }
