@@ -93,10 +93,12 @@ let taskEdit = {
 }
 
 onMounted(async () => {
+
 	try {
 		const response = await axios.get(url + '/home?token=' + store.token)
 		tasks.value = response.data
         allTasks.value = response.data
+        showAdvise(tasks.value)
         console.log(tasks.value)
 
 	} catch (error) {
@@ -104,6 +106,22 @@ onMounted(async () => {
 	}
     filterTasks();
 })
+
+const showAdvise = (tasks) => {
+    // Mostrar el titulo de todas las tareas que no estén completadas y que tengan fecha de expiración = hoy
+    let atrasados = ""
+    const hoy = new Date().toISOString().slice(0, 10)
+
+    tasks.forEach(task => {
+        if (task.completed === false && task.expire_date <= hoy) {
+            atrasados += " " + task.title + "\n"
+        }
+    });
+    if (atrasados !== "") {
+        alert("Tareas atrasadas: \n" + atrasados)
+    }
+
+}
 
 watch(search, () => {
     filterTasks();
