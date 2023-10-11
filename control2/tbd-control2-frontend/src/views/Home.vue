@@ -17,7 +17,7 @@
         <div class="bg-white flex flex-row w-full justify-between p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
       <p class="">{{ task.title }}</p>
       <p class="">{{ task.description }}</p>
-      <p class=" text-gray-500">2023-08-23</p>
+      <p class=" text-gray-500">{{ task.expire_date }}</p>
       <div class="flex flex-row gap-3 justify-between items-center">
         <button @click="openEditModal(task, index)" class="text-blue-500 hover:underline">Editar</button>
         <button @click="openDeleteModal(task.id, index)" class="text-red-500 hover:underline">Eliminar</button>
@@ -80,7 +80,6 @@ let task = ref()
 const search = ref("")
 const allTasks = ref([])
 let tasks = ref([])
-const isTaskListFiltered = ref(false)
 let showAddModal = ref(false)
 let showEditModal = ref(false)
 let showDeleteModal = ref(false)
@@ -133,6 +132,7 @@ const createNewTask = async () => {
     try {
         const response = await axios.post(url + '/new-task?token=' + store.token, taskEdit);
         tasks.value.push(response.data); // Asumo que el servidor devuelve la tarea creada
+        allTasks.value.push(response.data); // Asumo que el servidor devuelve la tarea creada
         console.log('Tarea creada con éxito:', response.data);
 
         closeNewTaskModal(); // Cerrar el modal
@@ -161,8 +161,10 @@ const saveEdit = async () => {
         await axios.put(url + "/update-task/" + taskEdit.id + "?token=" + store.token, taskEdit);
         console.log('Tarea actualizada con éxito en el servidor.');
 
-        // Actualiza la tarea en la lista local
-        tasks.value[editingTaskIndex.value] = { ...taskEdit };
+        // Actualiza la tarea en la lista local y la lista backup
+        const response = await axios.get(url + '/home?token=' + store.token)
+		tasks.value = response.data
+        allTasks.value = response.data
 
     } catch (error) {
         console.error('Error al actualizar la tarea:', error);
@@ -179,7 +181,6 @@ const saveEdit = async () => {
     };
 }
 
-
 const deleteTask = async () => {
     try {
         // Elimina la tarea de la base de datos
@@ -187,6 +188,7 @@ const deleteTask = async () => {
         console.log('Tarea eliminada con éxito del servidor.');
 
         // Elimina la tarea de la lista local
+        tasks.value.splice(editingTaskIndex, 1);
         tasks.value.splice(editingTaskIndex, 1);
         closeDeleteModal();
         editingTaskIndex = null;
