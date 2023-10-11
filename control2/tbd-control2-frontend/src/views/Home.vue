@@ -17,7 +17,7 @@
         <div class="bg-white flex flex-row w-full justify-between p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
       <p class="">{{ task.title }}</p>
       <p class="">{{ task.description }}</p>
-      <p class=" text-gray-500">2023-08-23</p>
+      <p class=" text-gray-500">{{ task.expire_date }}</p>
       <div class="flex flex-row gap-3 justify-between items-center">
         <button @click="openEditModal(task, index)" class="text-blue-500 hover:underline">Editar</button>
         <button @click="openDeleteModal(task.id, index)" class="text-red-500 hover:underline">Eliminar</button>
@@ -94,10 +94,12 @@ let taskEdit = {
 }
 
 onMounted(async () => {
+
 	try {
 		const response = await axios.get(url + '/home?token=' + store.token)
 		tasks.value = response.data
         allTasks.value = response.data
+        showAdvise(tasks.value)
         console.log(tasks.value)
 
 	} catch (error) {
@@ -105,6 +107,22 @@ onMounted(async () => {
 	}
     filterTasks();
 })
+
+const showAdvise = (tasks) => {
+    // Mostrar el titulo de todas las tareas que no estén completadas y que tengan fecha de expiración = hoy
+    let atrasados = ""
+    const hoy = new Date().toISOString().slice(0, 10)
+
+    tasks.forEach(task => {
+        if (task.completed === false && task.expire_date <= hoy) {
+            atrasados += " " + task.title + "\n"
+        }
+    });
+    if (atrasados !== "") {
+        alert("Tareas atrasadas: \n" + atrasados)
+    }
+
+}
 
 watch(search, () => {
     filterTasks();
