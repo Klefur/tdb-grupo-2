@@ -21,7 +21,7 @@
       <div class="flex flex-row gap-3 justify-between items-center">
         <button @click="openEditModal(task, index)" class="text-blue-500 hover:underline">Editar</button>
         <button @click="openDeleteModal(task.id, index)" class="text-red-500 hover:underline">Eliminar</button>
-        <input type="checkbox" v-model="task.completed" @change="taskComplete(task)">
+        <input type="checkbox" v-model="task.completed" @change="taskComplete(task, index)">
       </div>
     </div>
       </li>
@@ -76,7 +76,7 @@ import Boton from "../components/Boton.vue"
 const url = 'http://localhost:8086'
 
 let noTasks = true
-let task = ref()
+let task = ref(null)
 const search = ref("")
 const allTasks = ref([])
 let tasks = ref([])
@@ -120,7 +120,6 @@ const showAdvise = (tasks) => {
     if (atrasados !== "") {
         alert("Tareas atrasadas: \n" + atrasados)
     }
-
 }
 
 watch(search, () => {
@@ -139,11 +138,13 @@ const closeNewTaskModal = () => {
 const openDeleteModal = (taskId, index) => {
     showDeleteModal.value = true;
     task.id = taskId;
-    editingTaskIndex = index
+    editingTaskIndex = index;
 }
 
 const closeDeleteModal = () => {
     showDeleteModal.value = false;
+    task.id = null;
+    editingTaskIndex = null;
 }
 
 const createNewTask = async () => {
@@ -171,6 +172,7 @@ const openEditModal = (taskToEdit, index) => {
 
 const closeEditModal = async () => {
     showEditModal.value = false;
+    editingTaskIndex.value = null;
 }
 
 const saveEdit = async () => {
@@ -207,8 +209,12 @@ const deleteTask = async () => {
 
         // Elimina la tarea de la lista local
         tasks.value.splice(editingTaskIndex, 1);
-        tasks.value.splice(editingTaskIndex, 1);
-        closeDeleteModal();
+        allTasks.value.splice(editingTaskIndex, 1);
+
+    } catch (error) {
+        console.error('Error al eliminar la tarea:', error);
+    }
+    closeDeleteModal();
         editingTaskIndex = null;
         taskEdit = {
         id: null,
@@ -216,21 +222,19 @@ const deleteTask = async () => {
         description: null,
         expire_date: null
     };
-
-    } catch (error) {
-        console.error('Error al eliminar la tarea:', error);
-    }
 }
 
-const taskComplete = async (taskComplete) => {
+const taskComplete = async (taskComplete, index) => {
     task.completed = !task.completed;
     // Guarda los cambios en el servidor
     try {
         await axios.put(url + "/update-task/" + taskComplete.id + "?token=" + store.token, taskComplete);
         console.log('Tarea finalizada con éxito en el servidor.');
 
-        // Actualiza la tarea en la lista local
-        tasks.value[editingTaskIndex.value] = { ...taskEdit };
+        // Actualiza la tarea en la lista local y la lista backup
+        const response = await axios.get(url + '/home?token=' + store.token)
+		tasks.value = response.data
+        allTasks.value = response.data
 
     } catch (error) {
         console.error('Error al actualizar la tarea:', error);
