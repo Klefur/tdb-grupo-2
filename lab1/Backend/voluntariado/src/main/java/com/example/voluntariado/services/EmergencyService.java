@@ -17,8 +17,8 @@ public class EmergencyService {
     }
 
     @GetMapping("/emergencies")
-    public List<Emergency> getAllEmergencies(){
-        return emergencyRepository.getAllEmergencies();
+    public List<Emergency> getAllEmergencies(@RequestParam String token){
+        return emergencyRepository.getAllEmergencies(token);
     }
 
     @GetMapping("/emergencies/{id_emergency}")
@@ -34,9 +34,9 @@ public class EmergencyService {
 
     @PutMapping("/emergencies/{id_emergency}")
     @ResponseBody
-    public String editEmergency(@PathVariable("id_emergency") Integer id_emergency, @RequestBody Emergency emergency){
+    public String editEmergency(@PathVariable("id_emergency") Integer id_emergency, @RequestBody Emergency emergency, @RequestParam String token){
         emergency.setId_emergency(id_emergency);
-        boolean result = emergencyRepository.editEmergency(emergency);
+        boolean result = emergencyRepository.editEmergency(emergency, token);
         if(result){
             return "Edited emergency";
         }else{

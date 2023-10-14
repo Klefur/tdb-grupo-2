@@ -26,7 +26,9 @@ public class EmergencyImp implements EmergencyRepository {
      * @return List<Emergency>
      * */
     @Override
-    public List<Emergency> getAllEmergencies() {
+    public List<Emergency> getAllEmergencies(String token) {
+        if(JWT.validateToken(token)){
+            Long userId = JWT.decodeJWT(token).getId();
             try(Connection connection = sql2o.open()){
                 return connection
                         .createQuery("SELECT * FROM \"emergency\"")
@@ -35,7 +37,8 @@ public class EmergencyImp implements EmergencyRepository {
                 System.out.println(e.getMessage());
                 return null;
             }
-
+        }
+        return null;
     }
 
     /**
@@ -83,7 +86,11 @@ public class EmergencyImp implements EmergencyRepository {
      * @return boolean
      * */
     @Override
-    public boolean editEmergency(Emergency emergency) {
+    public boolean editEmergency(Emergency emergency, String token) {
+        if(!JWT.validateToken(token)){
+            return false;
+        }
+
         try(Connection connection = sql2o.open()){
             connection
                     .createQuery("UPDATE \"emergency\" SET name =:name, description =:description, state =:state, id_institution =:id_institution WHERE id_emergency =:id_emergency")

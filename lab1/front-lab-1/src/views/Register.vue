@@ -64,7 +64,7 @@ let password2 = ref("");
 const validateRegister = () => {
   console.log("vl");
   if (username.value === "") {
-    errorMsg.value = "Correo no puede estar vacío";
+    errorMsg.value = "Nombre de usuario no puede estar vacío";
     isValidRegister.value = false;
     return;
   }

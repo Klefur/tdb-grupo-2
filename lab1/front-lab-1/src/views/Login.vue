@@ -30,6 +30,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
+import { store } from "../store";
 import axios from "axios";
 import { ref } from "vue";
 import Input from "../components/Input.vue";
@@ -47,12 +48,13 @@ const loginFunc = async () => {
     password: password.value,
   };
   console.log(data);
+
   await axios
     .post(url + "/login", data)
     .then((response) => {
-      localStorage.setItem("jwt", response.value);
+      store.token = response.data;
       console.log(response);
-      console.log(response.value);
+      console.log(response.data);
       router.push("/home");
     })
     .catch((error) => {

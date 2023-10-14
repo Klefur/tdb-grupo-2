@@ -37,6 +37,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from 'axios';
+import { store } from "../store";
 const error = ref(null);
 const emergenciesList = ref([]);
 const totalActiveTasks = ref(0);
@@ -68,6 +69,14 @@ async function GetDatos() {
     console.error('Error en la petición: ', error.value);
   }
 }
-onMounted(GetDatos);
+onMounted(async () => {
+  try{
+    const response = await axios.get(`${url}/home?token=${store.token}`);
+    console.log(response);
+  }catch(err){
+    console.error('Error en la petición: ', err.message);
+  }
+},
+GetDatos());
 
 </script>

@@ -8,10 +8,10 @@ import java.util.List;
  * This interface class represents the emergency repository.
  * */
 public interface EmergencyRepository {
-    public List<Emergency> getAllEmergencies();
+    public List<Emergency> getAllEmergencies(String token);
     public List<Emergency> getEmergencyById(Integer id);
     public Emergency createEmergency(Emergency emergency);
-    public boolean editEmergency(Emergency emergency);
+    public boolean editEmergency(Emergency emergency, String token);
     public boolean deleteEmergencyById(Integer id);
     public boolean deleteAllEmergencies();
 }
