@@ -30,15 +30,21 @@ public class TaskImp implements TaskRepository {
     }
 
     @Override
-    public int countTasksByEmergencyId(Integer id) {
-        // Implementa tu lógica aquí
-        return 0;
+    public int countActiveTasksByEmergencyId(Integer id){
+        int activeTasks = 0;
+        try(Connection connection = sql2o.open()){
+            activeTasks = connection
+                    .createQuery("SELECT COUNT(*) FROM \"Task\" WHERE id_emergency = :id AND state == 1")
+                    .executeScalar(Integer.class);
+        }
+        return activeTasks;
     }
 
     @Override
     public List<Task> getTaskById(Integer id) {
-        try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Task\" WHERE id_task = :id")
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery("SELECT * FROM \"Task\" WHERE id_task = :id")
                     .addParameter("id_task", id)
                     .executeAndFetch(Task.class);
         } catch (Exception e) {

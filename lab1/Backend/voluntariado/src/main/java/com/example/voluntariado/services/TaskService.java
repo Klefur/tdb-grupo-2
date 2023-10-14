@@ -21,6 +21,11 @@ public class TaskService {
         return taskRepository.getAllTasks();
     }
 
+    @GetMapping("/tasks/{id_emergency}")
+    public int countActiveTasksByEmergencyId(@PathVariable("id_emergency") Integer id_emergency){
+        return taskRepository.countActiveTasksByEmergencyId(id_emergency);
+    }
+
     @GetMapping("/tasks/{id_task}")
     public List<Task> getTaskById(@PathVariable("id_task") Integer id_task){
         return taskRepository.getTaskById(id_task);
