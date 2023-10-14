@@ -1,10 +1,8 @@
 package com.example.voluntariado.models;
 
-
 /**
  * This class represents an ability.
  */
-
 public class Ability {
         private Integer id_ability;
         private String names;
@@ -12,7 +10,7 @@ public class Ability {
         private String description;
 
         /**
-         * Obtiene el id de una Habilidad
+         * Gets the ID of an Ability.
          * @return Integer
          */
         public Integer getId_ability() {
@@ -20,7 +18,7 @@ public class Ability {
         }
 
         /**
-         * setea el id de una habilidad
+         * Sets the ID of an ability.
          * @param id_ability
          */
         public void setId_ability(Integer id_ability) {
@@ -28,7 +26,7 @@ public class Ability {
         }
 
         /**
-         * Obtiene el nombre de una Habilidad
+         * Gets the name of an Ability.
          * @return String
          */
         public String getNames() {
@@ -36,7 +34,7 @@ public class Ability {
         }
 
         /**
-         * setea el nombre de una habilidad
+         * Sets the name of an ability.
          * @param names
          */
         public void setNames(String names) {
@@ -44,7 +42,7 @@ public class Ability {
         }
 
         /**
-         * Obtiene los items de una Habilidad
+         * Gets the items associated with an Ability.
          * @return String
          */
         public String getItems() {
@@ -52,7 +50,7 @@ public class Ability {
         }
 
         /**
-         * setea los items de una habilidad
+         * Sets the items associated with an ability.
          * @param items
          */
         public void setItems(String items) {
@@ -60,7 +58,7 @@ public class Ability {
         }
 
         /**
-         * Obtiene la descripcion de una Habilidad
+         * Gets the description of an Ability.
          * @return String
          */
         public String getDescription() {
@@ -68,7 +66,7 @@ public class Ability {
         }
 
         /**
-         * setea la descripcion de una habilidad
+         * Sets the description of an ability.
          * @param description
          */
         public void setDescription(String description) {
@@ -76,7 +74,7 @@ public class Ability {
         }
 
         /**
-         * Obtiene la informacion de una Habilidad
+         * Gets the information of an Ability.
          * @return String
          */
 }
