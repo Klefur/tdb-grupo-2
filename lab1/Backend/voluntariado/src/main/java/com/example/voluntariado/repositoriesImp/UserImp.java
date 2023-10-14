@@ -1,6 +1,6 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.voluntariado.models.User;
+import com.example.voluntariado.models.UserV;
 import com.example.voluntariado.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,25 +18,26 @@ public class UserImp implements UserRepository {
     private JwtMiddlewareImp JWT;
 
     @Override
-    public List<User> getAllUsers(){
+    public List<UserV> getAllUsers(){
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"User\"")
-                    .executeAndFetch(User.class);
+                    .createQuery("SELECT * FROM \"userv\"")
+                    .executeAndFetch(UserV.class);
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
         }
     }
-    public String createUser(User user){
+    public String createUser(UserV userV){
         try(Connection connection = sql2o.open()){
             Integer insertedId = (Integer) connection
-                    .createQuery("INSERT INTO \"User\" (username, password) values (:username, :password)", true)
-                    .addParameter("username", user.getUsername())
-                    .addParameter("password", user.getPassword())
-                    .executeUpdate().getKey();
-            user.setId(insertedId.longValue());
-            return JWT.generateToken(user);
+                    .createQuery("INSERT INTO \"userv\" (username, password) values (:username, :password)", true)
+                    .addParameter("username", userV.getUsername())
+                    .addParameter("password", userV.getPassword())
+                    .executeUpdate()
+                    .getKey();
+            userV.setId(insertedId.longValue());
+            return JWT.generateToken(userV);
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
@@ -44,12 +45,12 @@ public class UserImp implements UserRepository {
     }
 
     @Override
-    public User findByUsername(String username){
+    public UserV findByUsername(String username){
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"User\" WHERE username =:username")
+                    .createQuery("SELECT * FROM \"userv\" WHERE username =:username")
                     .addParameter("username", username)
-                    .executeAndFetch(User.class).get(0);
+                    .executeAndFetch(UserV.class).get(0);
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
@@ -59,9 +60,9 @@ public class UserImp implements UserRepository {
     @Override
     public String login(String username, String password){
         try{
-            User user = findByUsername(username);
-            if(user.getPassword().compareTo(password) == 0){
-                return JWT.generateToken(user);
+            UserV userV = findByUsername(username);
+            if(userV.getPassword().compareTo(password) == 0){
+                return JWT.generateToken(userV);
             }
             return "Contraseña incorrecta";
         }catch(Exception e){

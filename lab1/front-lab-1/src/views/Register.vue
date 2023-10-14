@@ -4,11 +4,11 @@
         <h2 class="text-2xl font-semibold mb-4">Registro de usuario</h2>
         <fieldset>
           <Input
-            Label="Email"
+            Label="Username"
             @input="validateRegister"
             type="text"
-            placeholder="Correo Electrónico"
-            v-model="email"
+            placeholder="Nombre de usuario"
+            v-model="username"
           />
           <Input
             Label="Password"
@@ -53,17 +53,17 @@ import Boton from "../components/Boton.vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 
-const url = "http://localhost:8086";
+const url = "http://localhost:3000";
 const router = useRouter();
 let isValidRegister = ref(false);
 let errorMsg = ref("");
-let email = ref("");
+let username = ref("");
 let password = ref("");
 let password2 = ref("");
 
 const validateRegister = () => {
   console.log("vl");
-  if (email.value === "") {
+  if (username.value === "") {
     errorMsg.value = "Correo no puede estar vacío";
     isValidRegister.value = false;
     return;
@@ -79,7 +79,7 @@ const validateRegister = () => {
 
 const registerFunc = async () => {
   const data = {
-    email: email.value,
+    username: username.value,
     password: password.value,
   };
   console.log(data);

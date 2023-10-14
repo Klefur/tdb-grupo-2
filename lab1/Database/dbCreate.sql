@@ -15,6 +15,15 @@
 --    IS_TEMPLATE = false;
 
 ----------------------------------------
+-- Tabla de User --
+----------------------------------------
+CREATE TABLE IF NOT EXISTS UserV(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL
+);
+
+----------------------------------------
 -- Tabla de Voluntario --
 ----------------------------------------
 

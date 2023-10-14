@@ -9,7 +9,7 @@ import java.util.List;
  * */
 public interface TaskRepository {
     public List<Task> getAllTasks();
-    public int countActiveTasksByEmergencyId(Integer id);
+    public Integer countActiveTasksByEmergencyId(Integer id);
     public List<Task> getTaskById(Integer id);
     public Task createTask(Task task);
     public boolean editTask(Task task);

@@ -1,6 +1,6 @@
 package com.example.voluntariado.services;
 
-import com.example.voluntariado.models.User;
+import com.example.voluntariado.models.UserV;
 import com.example.voluntariado.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080")
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/users")
-    public List<User> getAllUsers(){
+    public List<UserV> getAllUsers(){
         return userRepository.getAllUsers();
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody User user){
-        return userRepository.createUser(user);
+    public String register(@RequestBody UserV userV){
+        return userRepository.createUser(userV);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user){
-        return userRepository.login(user.getUsername(), user.getPassword());
+    public String login(@RequestBody UserV userV){
+        return userRepository.login(userV.getUsername(), userV.getPassword());
     }
 }

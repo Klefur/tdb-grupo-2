@@ -21,7 +21,7 @@ public class TaskImp implements TaskRepository {
     @Override
     public List<Task> getAllTasks() {
         try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Task\"")
+            return conn.createQuery("SELECT * FROM \"task\"")
                     .executeAndFetch(Task.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -30,11 +30,12 @@ public class TaskImp implements TaskRepository {
     }
 
     @Override
-    public int countActiveTasksByEmergencyId(Integer id){
+    public Integer countActiveTasksByEmergencyId(Integer id){
         int activeTasks = 0;
         try(Connection connection = sql2o.open()){
             activeTasks = connection
-                    .createQuery("SELECT COUNT(*) FROM \"Task\" WHERE id_emergency = :id AND state == 1")
+                    .createQuery("SELECT COUNT(*) FROM \"task\" WHERE id_emergency = :id AND state = '1'")
+                    .addParameter("id", id)
                     .executeScalar(Integer.class);
         }
         return activeTasks;
@@ -44,7 +45,7 @@ public class TaskImp implements TaskRepository {
     public List<Task> getTaskById(Integer id) {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Task\" WHERE id_task = :id")
+                    .createQuery("SELECT * FROM \"task\" WHERE id_task = :id")
                     .addParameter("id_task", id)
                     .executeAndFetch(Task.class);
         } catch (Exception e) {
@@ -56,7 +57,7 @@ public class TaskImp implements TaskRepository {
     @Override
     public Task createTask(Task task) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("INSERT INTO \"Task\" (name, description, state, id_institution)"+
+            conn.createQuery("INSERT INTO \"task\" (name, description, state, id_institution)"+
                             "values (:taskName, :taskDescription, :taskState, :taskInstitution)")
                     .addParameter("taskName", task.getName())
                     .addParameter("taskDescription", task.getDescription())
@@ -73,7 +74,7 @@ public class TaskImp implements TaskRepository {
     @Override
     public boolean editTask(Task task) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("UPDATE \"Task\" SET name = :name, description = :description, state = :state, id_emergency = :id_emergency WHERE id_task = :id_task")
+            conn.createQuery("UPDATE \"task\" SET name = :name, description = :description, state = :state, id_emergency = :id_emergency WHERE id_task = :id_task")
                     .addParameter("id_task", task.getId_task())
                     .addParameter("name", task.getName())
                     .addParameter("description", task.getDescription())
@@ -91,7 +92,7 @@ public class TaskImp implements TaskRepository {
     public boolean deleteTaskById(Integer id) {
         int deletedTask;
         try(Connection conn = sql2o.open()){
-            deletedTask = conn.createQuery("DELETE FROM \"Task\" WHERE id_task = :id")
+            deletedTask = conn.createQuery("DELETE FROM \"task\" WHERE id_task = :id")
                     .addParameter("id_task", id)
                     .executeUpdate().getResult();
         }
@@ -101,7 +102,7 @@ public class TaskImp implements TaskRepository {
     @Override
     public boolean deleteAllTasks() {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("TRUNCATE \"Task\" CASCADE")
+            conn.createQuery("TRUNCATE \"task\" CASCADE")
                     .executeUpdate().getResult();
             return true;
         }catch(Exception e){

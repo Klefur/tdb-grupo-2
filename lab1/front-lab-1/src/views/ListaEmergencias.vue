@@ -1,7 +1,7 @@
 <template>   
   <div class="m-auto flex gap-10 p-10 min-w-[35%] items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-80">
-      <h2>Total de Emergencias activas: {{ tareasActivasTotal }}</h2>
+      <h2>Total de Emergencias activas: {{ totalActiveTasks }}</h2>
       <div class="flex flex-col items-center">
         <h1>Lista de Emergencias:</h1>
 
@@ -9,15 +9,20 @@
           class="flex flex-col w-fit gap-2"
         >
           <div
-            v-for="(item, index) in listaEmergencias"
+            v-for="emergency in emergenciesList"
             class="flex flex-row bg-slate-400 shadow-lg w-72 justify-between rounded-lg overflow-hidden"
-            :key="index"
+            :key="emergency.id_emergency"
           >
-            <p class="m-2">
-              {{ item }}
-            </p>
+            <div class="m-2">
+              <p>ID Emergencia: {{emergency.id_emergency}}</p>
+              <p>Nombre: {{emergency.name}}</p>
+              <p>Descripción: {{emergency.description}}</p>
+              <p>Estado: {{emergency.state}}</p>
+              <p>ID Institución: {{emergency.id_institution}}</p>
+              <p>Tareas activas: {{emergency.totalActiveTasks}}</p>
+            </div>
             <button
-              @click="FuncionalidadBoton(index)"
+              @click="FuncionalidadBoton(id_emergency)"
               class="bg-green-400 p-2"
             >
               activar
@@ -30,17 +35,39 @@
 </template>
 
 <script setup>
-function FuncionalidadBoton(x) {
-  console.log(x);
+import { ref, onMounted } from "vue";
+import axios from 'axios';
+const error = ref(null);
+const emergenciesList = ref([]);
+const totalActiveTasks = ref(0);
+const url = 'http://localhost:3000';
+
+function FuncionalidadBoton(id) {
+  console.log(id);
 }
-function GetDatos() {
-  const datos = {
-    lista: ["aaaaaaaaa", 2, 3, 4, 5],
-    total: 2,
-  };
-  return datos;
+
+async function GetDatos() {
+  try {
+    const listResponse = await axios.get(`${url}/emergencies`);
+    const emergenciesData = listResponse.data;
+
+    for(let emergency of emergenciesData) {
+      const tasksResponse = await axios.get(`${url}/countTasks/${emergency.id_emergency}`);
+      emergency.totalActiveTasks = tasksResponse.data;
+      //Calcular total de tareas activas, pero no es atributo de emergency
+      const tasksData = tasksResponse.data;
+      totalActiveTasks.value += tasksData;
+
+      emergenciesList.value.push(emergency);
+    }
+
+    
+
+  } catch (err) {
+    error.value = err.message;
+    console.error('Error en la petición: ', error.value);
+  }
 }
-const apiResponse = GetDatos();
-const listaEmergencias = apiResponse.lista;
-const tareasActivasTotal = apiResponse.total;
+onMounted(GetDatos);
+
 </script>

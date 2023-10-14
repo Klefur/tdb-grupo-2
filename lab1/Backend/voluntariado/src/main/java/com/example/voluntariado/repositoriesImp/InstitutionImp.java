@@ -25,7 +25,7 @@ public class InstitutionImp implements InstitutionRepository {
     public List<Institution> getAllInstitutions() {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Institution\"")
+                    .createQuery("SELECT * FROM \"institution\"")
                     .executeAndFetch(Institution.class);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -42,7 +42,7 @@ public class InstitutionImp implements InstitutionRepository {
     public List<Institution> getInstitutionById(Integer id) {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Institution\" WHERE id_institution =:id")
+                    .createQuery("SELECT * FROM \"institution\" WHERE id_institution =:id")
                     .addParameter("id_institution", id)
                     .executeAndFetch(Institution.class);
         }catch(Exception e){
@@ -60,7 +60,7 @@ public class InstitutionImp implements InstitutionRepository {
     public Institution createInstitution(Institution institution) {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("INSERT INTO \"Institution\" (name, coordinator_name, email, password)"
+                    .createQuery("INSERT INTO \"institution\" (name, coordinator_name, email, password)"
                     + "VALUES (:name, :coordinator_name, :email, :password)")
                     .addParameter("name", institution.getName())
                     .addParameter("coordinator_name", institution.getCoordinator_name())
@@ -83,7 +83,7 @@ public class InstitutionImp implements InstitutionRepository {
     public boolean editInstitution(Institution institution) {
         try(Connection connection = sql2o.open()){
             connection.
-                    createQuery("UPDATE \"Institution\" SET name =:name, coordinator_name =:coordinator_name, email =:email, password =:password WHERE id_institution =:id_institution")
+                    createQuery("UPDATE \"institution\" SET name =:name, coordinator_name =:coordinator_name, email =:email, password =:password WHERE id_institution =:id_institution")
                     .addParameter("name", institution.getName())
                     .addParameter("coordinator_name", institution.getCoordinator_name())
                     .addParameter("email", institution.getEmail())
@@ -105,7 +105,7 @@ public class InstitutionImp implements InstitutionRepository {
         int deletedInstitution;
         try(Connection connection = sql2o.open()){
             deletedInstitution = connection
-                    .createQuery("DELETE FROM \"Institution\" WHERE id_institution =:id")
+                    .createQuery("DELETE FROM \"institution\" WHERE id_institution =:id")
                     .addParameter("id_institution", id)
                     .executeUpdate().getResult();
         }
@@ -120,7 +120,7 @@ public class InstitutionImp implements InstitutionRepository {
     public boolean deleteAllInstitutions() {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("TRUNCATE \"Institution\" CASCADE")
+                    .createQuery("TRUNCATE \"institution\" CASCADE")
                     .executeUpdate();
             return true;
         }catch(Exception e){

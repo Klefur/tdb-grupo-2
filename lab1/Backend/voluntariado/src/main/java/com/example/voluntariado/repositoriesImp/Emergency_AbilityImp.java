@@ -25,7 +25,7 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
     public List<Emergency_Ability> getAllEmergenciesAbilities() {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Emergency_Ability\"")
+                    .createQuery("SELECT * FROM \"emergency_ability\"")
                     .executeAndFetch(Emergency_Ability.class);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -42,7 +42,7 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
     public List<Emergency_Ability> getEmergencyAbilityById(Integer id) {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Emergency_Ability\" WHERE id_emergency_ability =:id")
+                    .createQuery("SELECT * FROM \"emergency_ability\" WHERE id_emergency_ability =:id")
                     .addParameter("id_emergency_ability", id)
                     .executeAndFetch(Emergency_Ability.class);
         }catch(Exception e){
@@ -60,7 +60,7 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
     public Emergency_Ability createEmergencyAbility(Emergency_Ability emergencyAbility) {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("INSERT INTO \"Emergency_Ability\" (id_emergency, id_ability) "
+                    .createQuery("INSERT INTO \"emergency_ability\" (id_emergency, id_ability) "
                     + "VALUES (:id_emergency, :id_ability)")
                     .addParameter("id_emergency", emergencyAbility.getId_emergency())
                     .addParameter("id_ability", emergencyAbility.getId_ability())
@@ -81,7 +81,7 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
     public boolean editEmergencyAbility(Emergency_Ability emergencyAbility) {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("UPDATE \"Emergency_Ability\" SET id_emergency =:id_emergency, id_ability =:id_ability WHERE id_emergency_ability =: id_emergency_ability")
+                    .createQuery("UPDATE \"emergency_ability\" SET id_emergency =:id_emergency, id_ability =:id_ability WHERE id_emergency_ability =: id_emergency_ability")
                     .addParameter("id_emergency", emergencyAbility.getId_emergency())
                     .addParameter("id_ability", emergencyAbility.getId_ability())
                     .executeUpdate().getKey();
@@ -102,7 +102,7 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
         int deletedEmergencyAbility;
         try(Connection connection = sql2o.open()){
             deletedEmergencyAbility = connection
-                    .createQuery("DELETE FROM \"Emergency_Ability\" WHERE id_emergency_ability =:id")
+                    .createQuery("DELETE FROM \"emergency_ability\" WHERE id_emergency_ability =:id")
                     .addParameter("id_emergency_ability", id)
                     .executeUpdate().getResult();
         }
@@ -117,7 +117,7 @@ public class Emergency_AbilityImp implements Emergency_AbilityRepository {
     public boolean deleteAllEmergenciesAbilities() {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("TRUNCATE \"Emergency_Ability\" CASCADE")
+                    .createQuery("TRUNCATE \"emergency_ability\" CASCADE")
                     .executeUpdate();
             return true;
         }catch(Exception e){

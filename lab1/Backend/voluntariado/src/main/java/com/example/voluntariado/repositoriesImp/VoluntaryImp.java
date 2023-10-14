@@ -21,7 +21,7 @@ public class VoluntaryImp implements VoluntaryRepository {
     @Override
     public List<Voluntary> getAllVoluntaries() {
         try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Voluntary\"")
+            return conn.createQuery("SELECT * FROM \"voluntary\"")
                     .executeAndFetch(Voluntary.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -33,7 +33,7 @@ public class VoluntaryImp implements VoluntaryRepository {
     public int countVoluntary() {
         int total = 0;
         try(Connection conn = sql2o.open()){
-            total = conn.createQuery("SELECT COUNT(*) FROM \"Voluntary\"").executeScalar(Integer.class);
+            total = conn.createQuery("SELECT COUNT(*) FROM \"voluntary\"").executeScalar(Integer.class);
         }
         return total;
     }
@@ -42,7 +42,7 @@ public class VoluntaryImp implements VoluntaryRepository {
     @Override
     public List<Voluntary> getVoluntaryByRut(String rut) {
         try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Voluntary\" WHERE rut = :rut")
+            return conn.createQuery("SELECT * FROM \"voluntary\" WHERE rut = :rut")
                     .addParameter("rut", rut)
                     .executeAndFetch(Voluntary.class);
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class VoluntaryImp implements VoluntaryRepository {
     @Override
     public Voluntary createVoluntary(Voluntary voluntary){
         try(Connection conn = sql2o.open()){
-            conn.createQuery("INSERT INTO \"Voluntary\" (rut,fullname,birthday,state,email,password)"+
+            conn.createQuery("INSERT INTO \"voluntary\" (rut,fullname,birthday,state,email,password)"+
                             "values (:voluntaryRut,:voluntaryFullname,:voluntaryBirthday,:voluntaryState,:voluntaryEmail,:voluntaryPassword)")
                     .addParameter("voluntaryRut", voluntary.getRut())
                     .addParameter("voluntaryFullname", voluntary.getFullname())
@@ -74,7 +74,7 @@ public class VoluntaryImp implements VoluntaryRepository {
     @Override
     public boolean editVoluntary(Voluntary voluntary) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("UPDATE \"Voluntary\" SET fullname = :fullname, birthday = :birthday , state = :state, email=:email, password=:password WHERE rut = :rut")
+            conn.createQuery("UPDATE \"voluntary\" SET fullname = :fullname, birthday = :birthday , state = :state, email=:email, password=:password WHERE rut = :rut")
                     .addParameter("rut", voluntary.getRut())
                     .addParameter("fullname", voluntary.getFullname())
                     .addParameter("birthday", voluntary.getBirthday())
@@ -93,7 +93,7 @@ public class VoluntaryImp implements VoluntaryRepository {
     public boolean deleteVoluntaryById(Integer id) {
         int deletedVoluntary;
         try(Connection conn = sql2o.open()){
-            deletedVoluntary = conn.createQuery("DELETE FROM \"Voluntary\" WHERE id_voluntary = :id")
+            deletedVoluntary = conn.createQuery("DELETE FROM \"voluntary\" WHERE id_voluntary = :id")
                     .addParameter("id_voluntary", id)
                     .executeUpdate().getResult();
         }
@@ -103,7 +103,7 @@ public class VoluntaryImp implements VoluntaryRepository {
     @Override
     public boolean deleteAllVoluntaries() {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("TRUNCATE \"Voluntary\" CASCADE")
+            conn.createQuery("TRUNCATE \"voluntary\" CASCADE")
                     .executeUpdate().getResult();
             return true;
         }catch(Exception e){

@@ -4,10 +4,10 @@
         <h2 class="text-2xl font-semibold mb-4">Iniciar Sesión</h2>
         <fieldset>
           <Input
-            Label="Email"
+            Label="Username"
             type="text"
-            placeholder="Correo Electronico"
-            v-model="email"
+            placeholder="Nombre de usuario"
+            v-model="username"
           />
           <Input
             Label="Password"
@@ -36,14 +36,14 @@ import Input from "../components/Input.vue";
 import Boton from "../components/Boton.vue";
 
 const router = useRouter();
-const url = "https://pindarosql.pindarousach.workers.dev";
+const url = "http://localhost:3000";
 
-const email = ref("");
+const username = ref("");
 const password = ref("");
 
 const loginFunc = async () => {
   const data = {
-    email: email.value,
+    username: username.value,
     password: password.value,
   };
   console.log(data);

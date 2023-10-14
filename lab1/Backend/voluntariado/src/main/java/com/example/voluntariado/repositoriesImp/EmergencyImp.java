@@ -4,6 +4,7 @@ import com.example.voluntariado.models.Emergency;
 import com.example.voluntariado.repositories.EmergencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
@@ -17,20 +18,24 @@ public class EmergencyImp implements EmergencyRepository {
 
     @Autowired
     private Sql2o sql2o;
+
+    @Autowired
+    private JwtMiddlewareImp JWT;
     /**
      * This method gets all the existing emergencies on the database.
      * @return List<Emergency>
      * */
     @Override
     public List<Emergency> getAllEmergencies() {
-        try(Connection connection = sql2o.open()){
-            return connection
-                    .createQuery("SELECT * FROM \"Emergency\"")
-                    .executeAndFetch(Emergency.class);
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
+            try(Connection connection = sql2o.open()){
+                return connection
+                        .createQuery("SELECT * FROM \"emergency\"")
+                        .executeAndFetch(Emergency.class);
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                return null;
+            }
+
     }
 
     /**
@@ -42,7 +47,7 @@ public class EmergencyImp implements EmergencyRepository {
     public List<Emergency> getEmergencyById(Integer id) {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Emergency\" WHERE id_emergency =:id")
+                    .createQuery("SELECT * FROM \"emergency\" WHERE id_emergency =:id")
                     .executeAndFetch(Emergency.class);
         }catch(Exception e){
             return null;
@@ -58,7 +63,7 @@ public class EmergencyImp implements EmergencyRepository {
     public Emergency createEmergency(Emergency emergency) {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("INSERT INTO \"Emergency\" (name, description, state, id_institution)"
+                    .createQuery("INSERT INTO \"emergency\" (name, description, state, id_institution)"
                     + "VALUES (:name, :description, :state, :id_institution)")
                     .addParameter("name", emergency.getName())
                     .addParameter("description", emergency.getDescription())
@@ -81,7 +86,7 @@ public class EmergencyImp implements EmergencyRepository {
     public boolean editEmergency(Emergency emergency) {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("UPDATE \"Emergency\" SET name =:name, description =:description, state =:state, id_institution =:id_institution WHERE id_emergency =:id_emergency")
+                    .createQuery("UPDATE \"emergency\" SET name =:name, description =:description, state =:state, id_institution =:id_institution WHERE id_emergency =:id_emergency")
                     .addParameter("name", emergency.getName())
                     .addParameter("description", emergency.getDescription())
                     .addParameter("state", emergency.getState())
@@ -104,7 +109,7 @@ public class EmergencyImp implements EmergencyRepository {
         int deletedEmergency;
         try(Connection connection = sql2o.open()){
             deletedEmergency = connection
-                    .createQuery("DELETE FROM \"Emergency\" WHERE id_emergency =:id")
+                    .createQuery("DELETE FROM \"emergency\" WHERE id_emergency =:id")
                     .addParameter("id_emergency", id)
                     .executeUpdate().getResult();
         }
@@ -119,7 +124,7 @@ public class EmergencyImp implements EmergencyRepository {
     public boolean deleteAllEmergencies() {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("TRUNCATE \"Emergency\" CASCADE")
+                    .createQuery("TRUNCATE \"emergency\" CASCADE")
                     .executeUpdate();
             return true;
         }catch(Exception e){

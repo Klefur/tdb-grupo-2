@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class TaskService {
     private final TaskRepository taskRepository;
@@ -21,8 +21,8 @@ public class TaskService {
         return taskRepository.getAllTasks();
     }
 
-    @GetMapping("/tasks/{id_emergency}")
-    public int countActiveTasksByEmergencyId(@PathVariable("id_emergency") Integer id_emergency){
+    @GetMapping("/countTasks/{id_emergency}")
+    public Integer countActiveTasksByEmergencyId(@PathVariable("id_emergency") Integer id_emergency){
         return taskRepository.countActiveTasksByEmergencyId(id_emergency);
     }
 

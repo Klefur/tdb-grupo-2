@@ -1,6 +1,6 @@
 package com.example.voluntariado.repositoriesImp;
 
-import com.example.voluntariado.models.User;
+import com.example.voluntariado.models.UserV;
 import com.example.voluntariado.repositories.JwtMiddlewareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,12 +18,12 @@ public class JwtMiddlewareImp implements JwtMiddlewareRepository {
     }
 
     @Override
-    public String generateToken(User user){
+    public String generateToken(UserV userV){
         Date expiration_date = new Date(System.currentTimeMillis() + 14400000);
         return Jwts
                 .builder()
-                .claim("id", user.getId())
-                .claim("username", user.getUsername())
+                .claim("id", userV.getId())
+                .claim("username", userV.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(expiration_date)
                 .signWith(secretKey)
@@ -52,7 +52,7 @@ public class JwtMiddlewareImp implements JwtMiddlewareRepository {
     }
 
     @Override
-    public User decodeJWT(String token){
+    public UserV decodeJWT(String token){
         Claims claims = Jwts
                 .parser()
                 .verifyWith(secretKey)
@@ -62,9 +62,9 @@ public class JwtMiddlewareImp implements JwtMiddlewareRepository {
         Long id = claims.get("id", Long.class);
         String username = claims.get("username", String.class);
 
-        User user = new User();
-        user.setId(id);
-        user.setUsername(username);
-        return user;
+        UserV userV = new UserV();
+        userV.setId(id);
+        userV.setUsername(username);
+        return userV;
     }
 }

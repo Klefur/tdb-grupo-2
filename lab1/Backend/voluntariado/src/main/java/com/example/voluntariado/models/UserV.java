@@ -1,6 +1,6 @@
 package com.example.voluntariado.models;
 
-public class User {
+public class UserV {
     private Long id;
     private String username;
     private String password;

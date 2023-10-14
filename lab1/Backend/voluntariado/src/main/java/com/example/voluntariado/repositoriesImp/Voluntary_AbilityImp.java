@@ -32,7 +32,7 @@ public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     @Override
     public List<Voluntary_Ability> getVoluntaryAbilityById(Integer id) {
         try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Voluntary_Ability\" WHERE id_voluntary_ability = :id")
+            return conn.createQuery("SELECT * FROM \"voluntary_ability\" WHERE id_voluntary_ability = :id")
                     .addParameter("id_voluntary_ability", id)
                     .executeAndFetch(Voluntary_Ability.class);
         } catch (Exception e) {
@@ -44,7 +44,7 @@ public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     @Override
     public Voluntary_Ability createVoluntaryAbility(Voluntary_Ability voluntaryAbility) {
         try(Connection conn = sql2o.open()){
-            int insertedId = (int) conn.createQuery("INSERT INTO \"Voluntary_Ability\" (id_voluntary, id_ability) VALUES (:id_voluntary, :id_ability)", true)
+            int insertedId = (int) conn.createQuery("INSERT INTO \"voluntary_ability\" (id_voluntary, id_ability) VALUES (:id_voluntary, :id_ability)", true)
                     .addParameter("id_voluntary", voluntaryAbility.getId_voluntary())
                     .addParameter("id_ability", voluntaryAbility.getId_ability())
                     .executeUpdate()
@@ -61,7 +61,7 @@ public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     @Override
     public boolean editVoluntaryAbility(Voluntary_Ability voluntaryAbility) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("UPDATE \"Voluntary_Ability\" SET id_voluntary = :id_voluntary, id_ability = :id_ability WHERE id_voluntary_ability = :id")
+            conn.createQuery("UPDATE \"voluntary_ability\" SET id_voluntary = :id_voluntary, id_ability = :id_ability WHERE id_voluntary_ability = :id")
                     .addParameter("id_voluntary", voluntaryAbility.getId_voluntary())
                     .addParameter("id_ability", voluntaryAbility.getId_ability())
                     .addParameter("id", voluntaryAbility.getId_voluntary_ability())
@@ -76,7 +76,7 @@ public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     @Override
     public boolean deleteVoluntaryAbilityById(Integer id) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("DELETE FROM \"Voluntary_Ability\" WHERE id_voluntary_ability = :id")
+            conn.createQuery("DELETE FROM \"voluntary_ability\" WHERE id_voluntary_ability = :id")
                     .addParameter("id_voluntary_ability", id)
                     .executeUpdate();
             return true;
@@ -89,7 +89,7 @@ public class Voluntary_AbilityImp implements Voluntary_AbilityRepository {
     @Override
     public boolean deleteAllVoluntariesAbilities() {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("TRUNCATE \"Voluntary_Ability\" CASCADE")
+            conn.createQuery("TRUNCATE \"voluntary_ability\" CASCADE")
                     .executeUpdate().getResult();
             return true;
         }catch(Exception e){

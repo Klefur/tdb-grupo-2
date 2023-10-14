@@ -26,7 +26,7 @@ public class AbilityImp implements AbilityRepository {
     public List<Ability> getAllAbilities() {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Ability\"")
+                    .createQuery("SELECT * FROM \"ability\"")
                     .executeAndFetch(Ability.class);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -43,7 +43,7 @@ public class AbilityImp implements AbilityRepository {
     public List<Ability> getAbilityById(Integer id) {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Ability\" WHERE id_ability =:id")
+                    .createQuery("SELECT * FROM \"ability\" WHERE id_ability =:id")
                     .addParameter("id_ability", id)
                     .executeAndFetch(Ability.class);
         }catch(Exception e){
@@ -61,7 +61,7 @@ public class AbilityImp implements AbilityRepository {
     public Ability createAbility(Ability ability) {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("INSERT INTO \"Ability\" (names, description, items) "
+                    .createQuery("INSERT INTO \"ability\" (names, description, items) "
                             + "VALUES (:names, :description, :items)")
                     .addParameter("names", ability.getNames())
                     .addParameter("description", ability.getDescription())
@@ -83,7 +83,7 @@ public class AbilityImp implements AbilityRepository {
     public boolean editAbility(Ability ability) {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("UPDATE \"Ability\" SET names =:names, description =:description, items =:items WHERE id_ability =:id_ability")
+                    .createQuery("UPDATE \"ability\" SET names =:names, description =:description, items =:items WHERE id_ability =:id_ability")
                     .addParameter("names", ability.getNames())
                     .addParameter("description", ability.getDescription())
                     .addParameter("items", ability.getItems())
@@ -105,7 +105,7 @@ public class AbilityImp implements AbilityRepository {
         int deletedAbility;
         try(Connection connection = sql2o.open()){
             deletedAbility = connection
-                    .createQuery("DELETE FROM \"Ability\" WHERE id_ability =:id")
+                    .createQuery("DELETE FROM \"ability\" WHERE id_ability =:id")
                     .addParameter("id", id)
                     .executeUpdate().getResult();
         }
@@ -120,7 +120,7 @@ public class AbilityImp implements AbilityRepository {
     public boolean deleteAllAbilities() {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("TRUNCATE \"Ability\" CASCADE")
+                    .createQuery("TRUNCATE \"ability\" CASCADE")
                     .executeUpdate();
             return true;
         }catch(Exception e){

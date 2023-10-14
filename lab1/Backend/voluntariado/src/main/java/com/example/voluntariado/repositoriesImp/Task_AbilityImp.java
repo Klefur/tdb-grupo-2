@@ -25,7 +25,7 @@ public class Task_AbilityImp implements Task_AbilityRepository {
     public List<Task_Ability> getAllTasksAbilities() {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"Task_Ability\"")
+                    .createQuery("SELECT * FROM \"task_ability\"")
                     .executeAndFetch(Task_Ability.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -41,7 +41,7 @@ public class Task_AbilityImp implements Task_AbilityRepository {
     @Override
     public List<Task_Ability> getTaskAbilityById(Integer id) {
         try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM \"Task_Ability\" WHERE id_task_ability = :id")
+            return conn.createQuery("SELECT * FROM \"task_ability\" WHERE id_task_ability = :id")
                     .addParameter("id_task_ability", id)
                     .executeAndFetch(Task_Ability.class);
         } catch (Exception e) {
@@ -58,7 +58,7 @@ public class Task_AbilityImp implements Task_AbilityRepository {
     @Override
     public Task_Ability createTaskAbility(Task_Ability taskAbility) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("INSERT INTO \"Task_Ability\" (id_task, id_ability)"+
+            conn.createQuery("INSERT INTO \"task_ability\" (id_task, id_ability)"+
                             "values (:taskID, :abilityID)")
                     .addParameter("taskID", taskAbility.getId_task())
                     .addParameter("abilityID", taskAbility.getId_ability())
@@ -76,7 +76,7 @@ public class Task_AbilityImp implements Task_AbilityRepository {
     @Override
     public boolean editTaskAbility(Task_Ability taskAbility) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("UPDATE \"Task_Ability\" SET id_task = :taskID, id_ability = :abilityID WHERE id_task_ability = :id_task_ability")
+            conn.createQuery("UPDATE \"task_ability\" SET id_task = :taskID, id_ability = :abilityID WHERE id_task_ability = :id_task_ability")
                     .addParameter("id_task_ability", taskAbility.getId_task_ability())
                     .addParameter("taskID", taskAbility.getId_task())
                     .addParameter("abilityID", taskAbility.getId_ability())
@@ -92,7 +92,7 @@ public class Task_AbilityImp implements Task_AbilityRepository {
     public boolean deleteTaskAbilityById(Integer id) {
         int deletedTaskAbility;
         try(Connection conn = sql2o.open()){
-            deletedTaskAbility = conn.createQuery("DELETE FROM \"Task_Ability\" WHERE id_task_ability = :id")
+            deletedTaskAbility = conn.createQuery("DELETE FROM \"task_ability\" WHERE id_task_ability = :id")
                     .addParameter("id_task_ability", id)
                     .executeUpdate().getResult();
         }
@@ -102,7 +102,7 @@ public class Task_AbilityImp implements Task_AbilityRepository {
     @Override
     public boolean deleteAllTasksAbilities() {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("TRUNCATE \"Task_Ability\" CASCADE")
+            conn.createQuery("TRUNCATE \"task_ability\" CASCADE")
                     .executeUpdate().getResult();
             return true;
         }catch(Exception e){
