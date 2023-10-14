@@ -49,11 +49,11 @@ function FuncionalidadBoton(id) {
 
 async function GetDatos() {
   try {
-    const listResponse = await axios.get(`${url}/emergencies`);
+    const listResponse = await axios.get(`${url}/emergencies?token=${store.token}`);
     const emergenciesData = listResponse.data;
 
     for(let emergency of emergenciesData) {
-      const tasksResponse = await axios.get(`${url}/countTasks/${emergency.id_emergency}`);
+      const tasksResponse = await axios.get(`${url}/countTasks/${emergency.id_emergency}?token=${store.token}`);
       emergency.totalActiveTasks = tasksResponse.data;
       //Calcular total de tareas activas, pero no es atributo de emergency
       const tasksData = tasksResponse.data;
@@ -71,12 +71,12 @@ async function GetDatos() {
 }
 onMounted(async () => {
   try{
-    const response = await axios.get(`${url}/home?token=${store.token}`);
+    const response = await axios.get(`${url}/emergencies?token=${store.token}`);
     console.log(response);
   }catch(err){
     console.error('Error en la petición: ', err.message);
   }
-},
-GetDatos());
+  GetDatos();
+});
 
 </script>

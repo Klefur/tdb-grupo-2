@@ -55,7 +55,7 @@ const loginFunc = async () => {
       store.token = response.data;
       console.log(response);
       console.log(response.data);
-      router.push("/home");
+      router.push("/emergencias");
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);

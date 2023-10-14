@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080/")
 @RestController
 public class EmergencyService {
     private final EmergencyRepository emergencyRepository;

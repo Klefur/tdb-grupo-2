@@ -89,7 +89,7 @@ const registerFunc = async () => {
     .then((response) => {
       localStorage.setItem("token", response.data);
       console.log("Respuesta del servidor:", response.data);
-      router.push("/home");
+      router.push("/login");
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
