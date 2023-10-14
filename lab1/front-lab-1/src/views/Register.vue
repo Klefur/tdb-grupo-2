@@ -1,48 +1,43 @@
 <template>
   <form class="flex m-auto gap-10 p-10 min-w-[35%] items-center justify-center">
-      <div class="bg-white p-8 rounded-lg shadow-md w-80">
-        <h2 class="text-2xl font-semibold mb-4">Registro de usuario</h2>
-        <fieldset>
-          <Input
-            Label="Username"
-            @input="validateRegister"
-            type="text"
-            placeholder="Nombre de usuario"
-            v-model="username"
-          />
-          <Input
-            Label="Password"
-            @input="validateRegister"
-            type="password"
-            placeholder="Contraseña"
-            v-model="password"
-          />
-          <Input
-            Label="Password2"
-            @input="validateRegister"
-            type="password"
-            placeholder="Repita la Contraseña"
-            v-model="password2"
-          />
+    <div class="bg-white p-8 rounded-lg shadow-md w-80">
+      <h2 class="text-2xl font-semibold mb-4">Registro de usuario</h2>
+      <fieldset>
+        <Input
+          Label="Username"
+          @input="validateRegister"
+          type="text"
+          placeholder="Nombre de usuario"
+          v-model="username" />
+        <Input
+          Label="Password"
+          @input="validateRegister"
+          type="password"
+          placeholder="Contraseña"
+          v-model="password" />
+        <Input
+          Label="Password2"
+          @input="validateRegister"
+          type="password"
+          placeholder="Repita la Contraseña"
+          v-model="password2" />
 
-          <p
-            v-if="!isValidRegister"
-            class="text-red-600 mb-2 text-center text-sm"
-          >
-            {{ errorMsg }}
-          </p>
-          <Boton
-            label="Registrarse"
-            @click="registerFunc()"
-            :disabled="!isValidRegister"
-            :class="
-              isValidRegister
-                ? 'bg-orange-400 hover:bg-orange-500'
-                : 'bg-neutral-300 hover:cursor-default'
-            "
-          />
-        </fieldset>
-      </div>
+        <p
+          v-if="!isValidRegister"
+          class="text-red-600 mb-2 text-center text-sm">
+          {{ errorMsg }}
+        </p>
+        <Boton
+          label="Registrarse"
+          @click="registerFunc()"
+          :disabled="!isValidRegister"
+          :class="
+            isValidRegister
+              ? 'bg-orange-400 hover:bg-orange-500'
+              : 'bg-neutral-300 hover:cursor-default'
+          " />
+      </fieldset>
+    </div>
   </form>
 </template>
 

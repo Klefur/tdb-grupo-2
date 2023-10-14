@@ -1,7 +1,6 @@
 <template>
   <header
-    class="bg-sky-600 font-semibold text-2xl flex items-center p-1 px-10 h-16 text-white"
-  >
+    class="bg-sky-600 font-semibold text-2xl flex items-center p-1 px-10 h-16 text-white">
     <div class="flex flex-row gap-5">
       <router-link to="/" class="mr-5"><p>Lab 1 TBD</p></router-link>
       <router-link to="/">Login</router-link>|

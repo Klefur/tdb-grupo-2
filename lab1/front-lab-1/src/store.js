@@ -1,5 +1,5 @@
-import { reactive, ref  } from "vue";
+import { reactive, ref } from "vue";
 
 export const store = reactive({
-    token: null
+  token: null,
 });

@@ -5,8 +5,7 @@
     :value="modelValue"
     class="w-full p-2 border rounded-md mb-4"
     @input="$emit('update:modelValue', $event.target.value)"
-    required
-  />
+    required />
 </template>
 
 <script setup>
