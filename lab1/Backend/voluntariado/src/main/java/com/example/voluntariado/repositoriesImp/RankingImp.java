@@ -24,7 +24,7 @@ public class RankingImp implements RankingRepository {
     public List<Ranking> getAllRankings() {
         try(Connection connection = sql2o.open()){
             return connection
-                    .createQuery("SELECT * FROM \"ranking\"")
+                    .createQuery("SELECT * FROM \"ranking\" ORDER BY ranking.matched_abilities_count DESC")
                     .executeAndFetch(Ranking.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -127,11 +127,12 @@ public class RankingImp implements RankingRepository {
     }
 
     @Override
-    public List<Ranking> getTopRankingByTaskId(Integer id_task) {
+    public void getTopRankingByTaskId(Integer id_task) {
         try(Connection connection = sql2o.open()){
-            return connection
+            connection
                     .createQuery(
-                            "SELECT va.id_voluntary, " + " ta.id_task, " + "  COUNT(va.id_ability) AS matched_abilities_count " +
+                            "INSERT INTO Ranking (id_voluntary, id_task, matched_abilities_count) " +
+                                    "SELECT va.id_voluntary, " + " ta.id_task, " + "  COUNT(va.id_ability) AS matched_abilities_count " +
                                     "FROM Task_Ability ta " +
                                     "JOIN Voluntary_Ability va ON ta.id_ability = va.id_ability " +
                                     "WHERE ta.id_task = :id_task " +
@@ -141,7 +142,6 @@ public class RankingImp implements RankingRepository {
                     .executeAndFetch(Ranking.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return null;
         }
     }
 

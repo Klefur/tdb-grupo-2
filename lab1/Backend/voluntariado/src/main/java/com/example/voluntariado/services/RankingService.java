@@ -57,8 +57,8 @@ public class RankingService {
 
     @GetMapping("/rankings/task/{id_task}")
     public List<Ranking> getTopRankingByTaskId(@PathVariable("id_task") Integer id_task) {
-        return rankingRepository.getTopRankingByTaskId(id_task);
+        rankingRepository.getTopRankingByTaskId(id_task);
+        return rankingRepository.getAllRankings();
     }
-
 
 }

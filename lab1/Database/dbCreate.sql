@@ -130,6 +130,7 @@ CREATE TABLE IF NOT EXISTS Ranking(
     "id_ranking" SERIAL NOT NULL PRIMARY KEY,
     "id_task" int,
     "id_voluntary" int,
+    "matched_abilities_count" int,
     FOREIGN KEY ("id_task") REFERENCES Task ("id_task") ON DELETE CASCADE,
     FOREIGN KEY ("id_voluntary") REFERENCES Voluntary ("id_voluntary") ON DELETE CASCADE
 );

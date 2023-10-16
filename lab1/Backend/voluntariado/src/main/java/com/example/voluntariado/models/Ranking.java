@@ -7,6 +7,7 @@ public class Ranking {
         private Integer id_ranking;
         private Integer id_task;
         private Integer id_voluntary;
+        private Integer matched_abilities_count;
 
         // Getters and Setters
 
@@ -56,5 +57,13 @@ public class Ranking {
          */
         public void setId_voluntary(Integer id_voluntary) {
                 this.id_voluntary = id_voluntary;
+        }
+
+        public Integer getMatched_abilities_count(){
+                return matched_abilities_count;
+        }
+
+        public void setMatched_abilities_count(Integer matched_abilities_count){
+                this.matched_abilities_count = matched_abilities_count;
         }
 }

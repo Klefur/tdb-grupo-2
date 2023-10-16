@@ -1,5 +1,6 @@
 package com.example.voluntariado.repositories;
 
+import com.example.voluntariado.models.Ranking;
 import com.example.voluntariado.models.Task_Ability;
 
 import java.util.List;
