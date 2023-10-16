@@ -1,10 +1,6 @@
 <template>
   <div class="m-auto flex gap-10 p-10 min-w-[35%] items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md min-w-[20rem]">
-      <h2>
-        Total de Emergencias activas:
-        {{ totalActiveTasks }}
-      </h2>
       <div class="flex flex-col items-center">
         <h1>Lista de Emergencias:</h1>
         <div class="flex flex-col w-fit gap-2">
@@ -18,16 +14,16 @@
               <p>Descripción: {{ emergency.description }}</p>
               <p>Estado: {{ emergency.state }}</p>
               <p>ID Institución: {{ emergency.id_institution }}</p>
-              <p>Tareas activas: {{ emergency.totalActiveTasks }}</p>
+              <p>Tareas activas: {{ emergency.activeTasks }}</p>
             </div>
             <button
-              @click="FuncionalidadBoton(id_emergency)"
+              @click="FuncionalidadBoton(emergency.id_emergency)"
               class="p-2 h-fit rounded-xl shadow-md"
               :class="{
-                'bg-green-400': emercency.state === 0,
-                'bg-red-400': emercency.state === 1,
+                'bg-green-400': emergency.state === 0,
+                'bg-red-400': emergency.state === 1,
               }">
-              {{ emercency.state === 0 ? "activar" : "desactivar" }}
+              {{ emergency.state === 0 ? "activar" : "desactivar" }}
             </button>
           </div>
         </div>
@@ -42,7 +38,6 @@ import axios from "axios";
 import { store } from "../store";
 const error = ref(null);
 const emergenciesList = ref([]);
-const totalActiveTasks = ref(0);
 const url = "http://localhost:3000";
 
 const FuncionalidadBoton = async (id) => {
@@ -74,10 +69,7 @@ async function GetDatos() {
       const tasksResponse = await axios.get(
         `${url}/countTasks/${emergency.id_emergency}?token=${store.token}`
       );
-      emergency.totalActiveTasks = tasksResponse.data;
-      //Calcular total de tareas activas, pero no es atributo de emergency
-      const tasksData = tasksResponse.data;
-      totalActiveTasks.value += tasksData;
+      emergency.activeTasks = tasksResponse.data;
 
       emergenciesList.value.push(emergency);
     }

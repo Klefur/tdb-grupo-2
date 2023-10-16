@@ -18,6 +18,9 @@ public class TaskImp implements TaskRepository {
     @Autowired
     private Sql2o sql2o;
 
+    @Autowired
+    private JwtMiddlewareImp JWT;
+
     @Override
     public List<Task> getAllTasks() {
         try(Connection conn = sql2o.open()){
@@ -39,6 +42,25 @@ public class TaskImp implements TaskRepository {
                     .executeScalar(Integer.class);
         }
         return activeTasks;
+    }
+
+    @Override
+    public Integer countAllActiveTasks(String token){
+        if(JWT.validateToken(token)){
+            Long userId = JWT.decodeJWT(token).getId();
+            int allActiveTasks = 0;
+            try(Connection connection = sql2o.open()){
+                allActiveTasks = connection
+                        .createQuery("SELECT COUNT(*) FROM \"task\" WHERE task.state = '1'")
+                        .addParameter("id", userId)
+                        .executeScalar(Integer.class);
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                return 0;
+            }
+            return allActiveTasks;
+        }
+        return 0;
     }
 
     @Override
