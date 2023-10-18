@@ -32,6 +32,16 @@ public class EmergencyService {
         return emergencyRepository.createEmergency(emergency);
     }
 
+    @PutMapping("/{id_emergency}/toggle")
+    public String toggleEmergencyState(@PathVariable("id_emergency") Integer id_emergency,
+                                       @RequestParam("new_state") Integer new_state){
+        if(emergencyRepository.toggleEmergencyState(id_emergency, new_state)){
+            return "Actualizado";
+        }else{
+            return "No actualizado";
+        }
+    }
+
     @PutMapping("/emergencies/{id_emergency}")
     @ResponseBody
     public String editEmergency(@PathVariable("id_emergency") Integer id_emergency, @RequestBody Emergency emergency, @RequestParam String token){

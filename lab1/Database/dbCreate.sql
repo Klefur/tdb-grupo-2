@@ -264,7 +264,10 @@ LANGUAGE plpgsql;
 
 -- Crear función para generar el informe de consultas de usuario
 CREATE OR REPLACE FUNCTION generate_report_user_queries()
-RETURNS TABLE (user_name_a TEXT, action_type_a TEXT, query TEXT, query_count INT) AS $$
+RETURNS TABLE (user_name_a TEXT, action_type_a TEXT, 
+               query TEXT, query_count INT) 
+AS 
+$$
 BEGIN
     RETURN QUERY
     SELECT 

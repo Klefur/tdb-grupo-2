@@ -28,7 +28,6 @@ public class EmergencyImp implements EmergencyRepository {
     @Override
     public List<Emergency> getAllEmergencies(String token) {
         if(JWT.validateToken(token)){
-            Long userId = JWT.decodeJWT(token).getId();
             try(Connection connection = sql2o.open()){
                 return connection
                         .createQuery("SELECT * FROM \"emergency\"")
@@ -77,6 +76,27 @@ public class EmergencyImp implements EmergencyRepository {
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
+        }
+    }
+
+    /**
+     * This methods calls the stored function toggleEmergencyState
+     * @param id_emergency
+     * @param new_state
+     * @return boolean
+     * */
+    @Override
+    public boolean toggleEmergencyState(Integer id_emergency, Integer new_state){
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("SELECT toggleEmergencyState(:id_emergency, :new_state)")
+                    .addParameter("id_emergency", id_emergency)
+                    .addParameter("new_state", new_state)
+                    .executeUpdate();
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
         }
     }
 

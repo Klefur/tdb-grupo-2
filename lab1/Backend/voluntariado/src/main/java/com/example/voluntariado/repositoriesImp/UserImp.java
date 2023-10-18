@@ -31,7 +31,8 @@ public class UserImp implements UserRepository {
     public String createUser(UserV userV){
         try(Connection connection = sql2o.open()){
             Integer insertedId = (Integer) connection
-                    .createQuery("INSERT INTO \"userv\" (username, password) values (:username, :password)", true)
+                    .createQuery("INSERT INTO \"userv\" (username, password) values (:username, :password)",
+                            true)
                     .addParameter("username", userV.getUsername())
                     .addParameter("password", userV.getPassword())
                     .executeUpdate()

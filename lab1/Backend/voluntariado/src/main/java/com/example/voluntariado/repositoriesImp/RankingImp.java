@@ -132,7 +132,8 @@ public class RankingImp implements RankingRepository {
             connection
                     .createQuery(
                             "INSERT INTO Ranking (id_voluntary, id_task, matched_abilities_count) " +
-                                    "SELECT va.id_voluntary, " + " ta.id_task, " + "  COUNT(va.id_ability) AS matched_abilities_count " +
+                                    "SELECT va.id_voluntary, " + " ta.id_task, " +
+                                    "  COUNT(va.id_ability) AS matched_abilities_count " +
                                     "FROM Task_Ability ta " +
                                     "JOIN Voluntary_Ability va ON ta.id_ability = va.id_ability " +
                                     "WHERE ta.id_task = :id_task " +
