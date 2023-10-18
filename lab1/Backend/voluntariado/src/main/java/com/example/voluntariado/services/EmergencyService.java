@@ -36,9 +36,9 @@ public class EmergencyService {
     public String toggleEmergencyState(@PathVariable("id_emergency") Integer id_emergency,
                                        @RequestParam("new_state") Integer new_state){
         if(emergencyRepository.toggleEmergencyState(id_emergency, new_state)){
-            return "Actualizado";
+            return "Updated";
         }else{
-            return "No actualizado";
+            return "Not updated";
         }
     }
 
@@ -56,12 +56,21 @@ public class EmergencyService {
 
     @DeleteMapping("/emergencies/{id_emergency}")
     public String deleteEmergency(@PathVariable("id_emergency") int id_emergency){
-        boolean result =emergencyRepository.deleteEmergencyById(id_emergency);
+        boolean result = emergencyRepository.deleteEmergencyById(id_emergency);
         if(result){
-            return "Edited Emergency  ";
-        }
-        else{
+            return "Deleted Emergency";
+        }else{
             return "Emergency not found";
+        }
+    }
+
+    @DeleteMapping("/emergencies")
+    public String deleteAllEmergencies(){
+        boolean result = emergencyRepository.deleteAllEmergencies();
+        if(result){
+            return "Deleted emergencies";
+        }else{
+            return "Not deleted";
         }
     }
 }

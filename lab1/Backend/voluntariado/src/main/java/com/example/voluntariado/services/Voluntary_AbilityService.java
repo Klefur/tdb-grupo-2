@@ -49,10 +49,19 @@ public class Voluntary_AbilityService {
     public String deleteVoluntaryAbility(@PathVariable("id_voluntary_ability") int id_voluntary_ability){
         boolean result = voluntary_AbilityRepository.deleteVoluntaryAbilityById(id_voluntary_ability);
         if(result){
-            return "Edited Voluntary_Ability";
-        }
-        else{
+            return "Deleted Voluntary_Ability";
+        }else{
             return "Voluntary_Ability not found";
+        }
+    }
+
+    @DeleteMapping("/voluntary-abilities")
+    public String deleteAllVoluntariesAbilities(){
+        boolean result = voluntary_AbilityRepository.deleteAllVoluntariesAbilities();
+        if(result){
+            return "Deleted Voluntaries_Abilities";
+        }else{
+            return "Not deleted";
         }
     }
 

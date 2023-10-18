@@ -64,4 +64,14 @@ public class TaskService {
             return "Task not found";
         }
     }
+
+    @DeleteMapping("/tasks")
+    public String deleteAllTasks(){
+        boolean result = taskRepository.deleteAllTasks();
+        if(result){
+            return "Deleted tasks";
+        }else{
+            return "Not deleted";
+        }
+    }
 }

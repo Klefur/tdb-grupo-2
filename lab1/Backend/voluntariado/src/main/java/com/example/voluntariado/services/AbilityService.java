@@ -48,10 +48,20 @@ public class AbilityService {
     public String deleteAbility(@PathVariable("id_ability") int id_ability){
         boolean result = abilityRepository.deleteAbilityById(id_ability);
         if(result){
-            return "Deleted Ability  ";
+            return "Deleted ability";
         }
         else{
             return "Ability not found";
+        }
+    }
+
+    @DeleteMapping("/abilities")
+    public String deleteAllAbilities(){
+        boolean result = abilityRepository.deleteAllAbilities();
+        if(result){
+            return "Deleted abilities";
+        }else{
+            return "Not deleted";
         }
     }
 }

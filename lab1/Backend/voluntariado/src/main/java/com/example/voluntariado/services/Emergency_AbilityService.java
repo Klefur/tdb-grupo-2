@@ -48,10 +48,20 @@ public class Emergency_AbilityService {
     public String deleteEmergencyAbility(@PathVariable("id_emergency_ability") int id_emergency_ability){
         boolean result = emergencyAbilityRepository.deleteEmergencyAbilityById(id_emergency_ability);
         if(result){
-            return "Edited Emergency_ability  ";
+            return "Deleted Emergency_ability";
         }
         else{
             return "Emergency_ability not found";
+        }
+    }
+
+    @DeleteMapping("/emergencies_abilities")
+    public String deleteAllEmergenciesAbilities(){
+        boolean result = emergencyAbilityRepository.deleteAllEmergenciesAbilities();
+        if(result){
+            return "Deleted emergencies_abilities";
+        }else{
+            return "Not deleted";
         }
     }
 

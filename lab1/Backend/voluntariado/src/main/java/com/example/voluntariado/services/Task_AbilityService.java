@@ -54,4 +54,14 @@ public class Task_AbilityService {
             return "Task Ability not found";
         }
     }
+
+    @DeleteMapping("/tasks_abilities")
+    public String deleteAllTasksAbilities(){
+        boolean result = taskAbilityRepository.deleteAllTasksAbilities();
+        if(result){
+            return "Deleted Tasks_Abilities";
+        }else{
+            return "Not deleted";
+        }
+    }
 }

@@ -54,4 +54,14 @@ public class InstitutionService {
             return "Institution not found";
         }
     }
+
+    @DeleteMapping("/institutions")
+    public String deleteAllInstitutions(){
+        boolean result = institutionRepository.deleteAllInstitutions();
+        if(result){
+            return "Deleted institutions";
+        }else{
+            return "Not deleted";
+        }
+    }
 }
