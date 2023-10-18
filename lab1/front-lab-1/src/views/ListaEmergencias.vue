@@ -5,7 +5,7 @@
         <h1>Lista de Emergencias:</h1>
         <div class="flex flex-col w-fit gap-2">
           <div
-            v-for="emergency in emergenciesList"
+            v-for="(emergency, index) in emergenciesList"
             class="flex flex-row bg-slate-100 shadow-lg justify-between rounded-lg overflow-hidden"
             :key="emergency.id_emergency">
             <div class="m-2">
@@ -17,7 +17,7 @@
               <p>Tareas activas: {{ emergency.activeTasks }}</p>
             </div>
             <button
-              @click="FuncionalidadBoton(emergency.id_emergency)"
+              @click="FuncionalidadBoton(index)"
               class="p-2 h-fit rounded-xl shadow-md"
               :class="{
                 'bg-green-400': emergency.state === 0,
@@ -40,22 +40,8 @@ const error = ref(null);
 const emergenciesList = ref([]);
 const url = "http://localhost:3000";
 
-const FuncionalidadBoton = async (id) => {
-  const data = {};
-  console.log(data);
-
-  await axios
-    .post(url + "/uhhh", data)
-    .then((response) => {
-      store.token = response.data;
-      console.log(response);
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error("Error en la solicitud:", error);
-    });
-  // suponiendo que el axios de arriba no actualiza la lista
-  GetDatos();
+const FuncionalidadBoton = async (index) => {
+  emergenciesList[index].state = !emergenciesList[index].state
 };
 
 async function GetDatos() {
