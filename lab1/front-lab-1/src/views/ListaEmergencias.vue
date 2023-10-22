@@ -20,10 +20,10 @@
               @click="FuncionalidadBoton(index)"
               class="p-2 h-fit rounded-xl shadow-md"
               :class="{
-                'bg-green-400': emergency.state === 0,
-                'bg-red-400': emergency.state === 1,
+                'bg-green-400': emergency.state === '0',
+                'bg-red-400': emergency.state === '1',
               }">
-              {{ emergency.state === 0 ? "activar" : "desactivar" }}
+              {{ emergency.state === '0' ? "Activar" : "Desactivar" }}
             </button>
           </div>
         </div>
@@ -41,7 +41,24 @@ const emergenciesList = ref([]);
 const url = "http://localhost:3000";
 
 const FuncionalidadBoton = async (index) => {
-  emergenciesList[index].state = !emergenciesList[index].state
+  const currentEmergency = emergenciesList.value[index];
+  
+  if(!currentEmergency){
+    console.error("No se encontró la emergencia con el índice: ", index);
+    return;
+  }
+
+  if(currentEmergency.state === '0'){
+    await axios.put(
+      `${url}/${currentEmergency.id_emergency}/toggle/1`
+    );
+  } else {
+    await axios.put(
+      `${url}/${currentEmergency.id_emergency}/toggle/0`
+    );
+  }
+
+  currentEmergency.state = currentEmergency.state === '0' ? '1' : '0';
 };
 
 async function GetDatos() {
@@ -74,4 +91,6 @@ onMounted(async () => {
   }
   GetDatos();
 });
+
+
 </script>

@@ -61,7 +61,7 @@ public class RankingService {
         return rankingRepository.getAllRankings();
     }
 
-    @GetMapping("/rankings")
+    @DeleteMapping("/rankings")
     public String deleteAllRankings(){
         boolean result = rankingRepository.deleteAllRankings();
         if(result){

@@ -287,13 +287,13 @@ LANGUAGE plpgsql;
 ----------------------------------------
 -- 3. Activar o desactivar emergencia.
 ----------------------------------------
-CREATE OR REPLACE FUNCTION toggleEmergencyState(id_emergency INT, new_state INT)
+CREATE OR REPLACE FUNCTION toggleEmergencyState(p_id_emergency INT, p_new_state INT)
 RETURNS VOID AS
 $$
 BEGIN
     UPDATE Emergency
-    SET state = new_state
-    WHERE id_emergency = id_emergency;
+    SET state = p_new_state
+    WHERE id_emergency = p_id_emergency;
 END;
 $$
 LANGUAGE plpgsql;

@@ -92,7 +92,7 @@ public class EmergencyImp implements EmergencyRepository {
                     .createQuery("SELECT toggleEmergencyState(:id_emergency, :new_state)")
                     .addParameter("id_emergency", id_emergency)
                     .addParameter("new_state", new_state)
-                    .executeUpdate();
+                    .executeScalar();
             return true;
         }catch(Exception e){
             System.out.println(e.getMessage());
