@@ -1,28 +1,28 @@
-Laboratorio 1 - Taller de Base de Datos/Bases de datos Avanzadas
-Este laboratorio fue desarrollado por el grupo n°2.
-Integrantes de grupo 2
+# Laboratorio 1 - Taller de Base de Datos/Bases de datos Avanzadas
+## Este laboratorio fue desarrollado por el grupo n°2.
+### Integrantes de grupo 2
 * Diego Valdés
 * Lucas Mesías
 * Joaquín Saldivia
 * Nicolás Aguilera
 * Valentina Campos
 
-Herramientas de desarrollo
+# Herramientas de desarrollo
 
-Base de datos
+## Base de datos
 * Postgres SQL versión 14
 * PgAdmin versión 4
 * Visual Studio Code
 
-Backend
+## Backend
 * IntelliJ IDEA Ultimate
 * JDK versión 17
 * Postman
 
-Frontend
+## Frontend
 * VUE versión 3
 
-Guía de Instalación y Ejecución
+# Guía de Instalación y Ejecución
 Esta guía te ayudará a configurar tu entorno de desarrollo para trabajar con IntelliJ IDEA, PostgreSQL, pgAdmin y ejecutar un proyecto de Vue.js en la carpeta de frontend.
 
 ## 1. Clonar el repositorio
