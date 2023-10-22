@@ -1,33 +1,31 @@
 <template>
   <div class="m-auto flex gap-10 p-10 min-w-[35%] items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md min-w-[20rem]">
-      <div class="flex flex-col items-center">
-        <h1>Lista de Emergencias:</h1>
-        <div class="flex flex-col w-fit gap-2">
-          <div
-            v-for="(emergency, index) in emergenciesList"
-            class="flex flex-row bg-slate-100 shadow-lg justify-between rounded-lg overflow-hidden"
-            :key="emergency.id_emergency">
-            <div class="m-2">
-              <p>ID Emergencia: {{ emergency.id_emergency }}</p>
-              <p>Nombre: {{ emergency.name }}</p>
-              <p>Descripción: {{ emergency.description }}</p>
-              <p>Estado: {{ emergency.state }}</p>
-              <p>ID Institución: {{ emergency.id_institution }}</p>
-              <p>Tareas activas: {{ emergency.activeTasks }}</p>
-            </div>
-            <button
-              @click="FuncionalidadBoton(index)"
-              class="p-2 h-fit rounded-xl shadow-md"
-              :class="{
-                'bg-green-400': emergency.state === '0',
-                'bg-red-400': emergency.state === '1',
-              }">
-              {{ emergency.state === '0' ? "Activar" : "Desactivar" }}
-            </button>
+      <h1 class="text-center mb-5 font-bold text-xl">Lista de Emergencias:</h1>
+      <div v-if="emergenciesList.length">
+        <div 
+          v-for="(emergency, index) in emergenciesList" 
+          :key="emergency.id_emergency"
+          class="flex justify-between items-center bg-slate-100 shadow-lg p-4 rounded-lg mb-3"
+        >
+          <div class="flex flex-col items-start justify-center m-2">
+            <p><strong>ID Emergencia:</strong> {{ emergency.id_emergency }}</p>
+            <p><strong>Nombre:</strong> {{ emergency.name }}</p>
+            <p class="break-words w-[calc(100%-rem)]"><strong>Descripción:</strong> {{ emergency.description }}</p>
+            <p><strong>Estado:</strong> {{ emergency.state }}</p>
+            <p><strong>ID Institución:</strong> {{ emergency.id_institution }}</p>
+            <p><strong>Tareas activas:</strong> {{ emergency.activeTasks }}</p>
           </div>
+          <button
+            @click="FuncionalidadBoton(index)"
+            class="p-2 rounded-xl shadow-md"
+            :class="buttonColor(emergency.state)"
+          >
+            {{ buttonText(emergency.state) }}
+          </button>
         </div>
       </div>
+      <p v-else class="text-center text-gray-500">No hay emergencias registradas.</p>
     </div>
   </div>
 </template>
@@ -39,6 +37,15 @@ import { store } from "../store";
 const error = ref(null);
 const emergenciesList = ref([]);
 const url = "http://localhost:3000";
+
+const buttonText = (state) => {
+  return state === '0' ? 'Activar' : 'Desactivar';
+}
+
+const buttonColor = (state) => {
+  return state === '0' ? 'bg-green-400' : 'bg-red-400';
+}
+
 
 const FuncionalidadBoton = async (index) => {
   const currentEmergency = emergenciesList.value[index];
