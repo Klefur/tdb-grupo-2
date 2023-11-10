@@ -15,5 +15,4 @@ public interface EmergencyRepository {
     public boolean editEmergency(Emergency emergency, String token);
     public boolean deleteEmergencyById(Integer id);
     public boolean deleteAllEmergencies();
-    public List<Emergency> getAllEmergenciesByRegion(Integer id);
 }

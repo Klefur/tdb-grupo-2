@@ -1,5 +1,6 @@
 package com.example.voluntariado.repositoriesImp;
 
+import com.example.voluntariado.models.Emergency;
 import com.example.voluntariado.models.Voluntary;
 import com.example.voluntariado.repositories.VoluntaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,7 +116,16 @@ public class VoluntaryImp implements VoluntaryRepository {
     }
 
     @Override
-    public List<Voluntary> findVoluntariesByLocationNear(Double distance){
-        return null;
+    public List<Voluntary> findVoluntariesByLocationNear(Integer id_emergency, Double distance){
+        String sql = "SELECT *, (6371 * acos(cos(radians:emergency.latitude)) * cos(radians(emergency.latitude)) * cos(radians(emergency.longitude) - radians(emergency.longitude)) + sin(radians(emergency.latitude)) * sin(radians(emergency.latitude)))) AS distance "+
+                "FROM voluntary, emergency" +
+                "WHERE voluntary.state = 1 AND emergency.id_emergency =:id_emergency " +
+                "HAVING distance < :distance "+
+                "ORDER BY distance";
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery(sql)
+                    .executeAndFetch(Voluntary.class);
+        }
     }
 }

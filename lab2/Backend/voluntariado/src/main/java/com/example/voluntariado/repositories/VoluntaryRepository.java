@@ -19,5 +19,5 @@ public interface VoluntaryRepository {
     public boolean deleteVoluntaryById(Integer id);
     public boolean deleteAllVoluntaries();
 
-    public List<Voluntary> findVoluntariesByLocationNear(Double distance);
+    public List<Voluntary> findVoluntariesByLocationNear(Integer id_emergency, Double distance);
 }
