@@ -159,4 +159,15 @@ public class EmergencyImp implements EmergencyRepository {
             return false;
         }
     }
+
+    @Override
+    public List<Emergency> getAllEmergenciesByRegion(){
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery(
+                            "SELECT emergency.id_emergency, emergency.name, emergency.state, emergency.id_institution, "+
+                            "ST_X(ST_Transform(emergency))"
+                            )
+        }
+    }
 }

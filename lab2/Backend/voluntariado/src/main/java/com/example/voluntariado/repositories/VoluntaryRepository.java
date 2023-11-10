@@ -2,7 +2,9 @@ package com.example.voluntariado.repositories;
 
 
 import com.example.voluntariado.models.Voluntary;
+import org.springframework.data.geo.Distance;
 
+import java.awt.*;
 import java.util.List;
 
 /*
@@ -16,4 +18,6 @@ public interface VoluntaryRepository {
     public boolean editVoluntary(Voluntary voluntary);
     public boolean deleteVoluntaryById(Integer id);
     public boolean deleteAllVoluntaries();
+
+    public List<Voluntary> findVoluntariesByLocationNear(Double distance);
 }

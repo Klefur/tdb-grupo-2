@@ -1,5 +1,7 @@
 package com.example.voluntariado.models;
 
+import java.awt.*;
+
 /**
  * This class represents an emergency.
  */
@@ -9,6 +11,8 @@ public class Emergency {
         private String description;
         private String state;
         private Integer id_institution;
+        private Double latitude;
+        private Double longitude;
 
         // Getters
         /**
@@ -51,6 +55,14 @@ public class Emergency {
                 return id_institution;
         }
 
+        public Double getLatitude(){
+                return latitude;
+        }
+
+        public Double getLongitude(){
+                return longitude;
+        }
+
         // Setters
         /**
          * Sets the ID of an Emergency.
@@ -90,5 +102,13 @@ public class Emergency {
          */
         public void setId_institution(Integer id_institution) {
                 this.id_institution = id_institution;
+        }
+
+        public void setLatitude(Double latitude){
+                this.latitude = latitude;
+        }
+
+        public void setLongitude(Double longitude){
+                this.longitude = longitude;
         }
 }

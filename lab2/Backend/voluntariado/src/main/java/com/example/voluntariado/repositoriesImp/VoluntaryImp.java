@@ -3,10 +3,12 @@ package com.example.voluntariado.repositoriesImp;
 import com.example.voluntariado.models.Voluntary;
 import com.example.voluntariado.repositories.VoluntaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Distance;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.awt.*;
 import java.util.List;
 
 /*
@@ -110,5 +112,10 @@ public class VoluntaryImp implements VoluntaryRepository {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public List<Voluntary> findVoluntariesByLocationNear(Double distance){
+        return null;
     }
 }
