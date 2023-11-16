@@ -4,7 +4,6 @@ import com.example.voluntariado.models.Emergency;
 import com.example.voluntariado.repositories.EmergencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 

@@ -39,6 +39,8 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { store } from "../store";
+import Map from '../components/Map.vue';
+
 const error = ref(null);
 const emergenciesList = ref([]);
 const url = "http://localhost:3000";
@@ -103,8 +105,6 @@ onMounted(async () => {
   }
   GetDatos();
 });
-
-import Map from '../components/Map.vue';
 
 const points = ref([]);
 points.value = [

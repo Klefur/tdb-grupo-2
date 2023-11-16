@@ -4,7 +4,6 @@ import com.example.voluntariado.models.Emergency;
 import com.example.voluntariado.models.Voluntary;
 import com.example.voluntariado.repositories.VoluntaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.geo.Distance;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;

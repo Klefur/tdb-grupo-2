@@ -34,7 +34,9 @@ CREATE TABLE IF NOT EXISTS Voluntary (
     "birthday" DATE NOT NULL,
     "state" int NOT NULL,
     "email" VARCHAR(50) NOT NULL,
-    "password" VARCHAR(50) NOT NULL
+    "password" VARCHAR(50) NOT NULL,
+	"latitude" FLOAT,
+	"longitude" FLOAT
 );
 
 ----------------------------------------
@@ -82,6 +84,8 @@ CREATE TABLE IF NOT EXISTS Emergency(
     "description" VARCHAR(100) NOT NULL,
     "state" int NOT NULL,
     "id_institution" int,
+	"latitude" FLOAT,
+	"longitude" FLOAT,
     FOREIGN KEY ("id_institution") REFERENCES Institution ("id_institution") ON DELETE CASCADE
 );
 
@@ -321,3 +325,11 @@ LANGUAGE plpgsql;
 --    de los voluntarios según con los
 --    requisitos que cumple por tarea.
 ----------------------------------------
+
+CREATE EXTENSION postgis;
+
+ALTER TABLE emergency ADD COLUMN geometry geometry(Point, 4326);
+ALTER TABLE voluntary ADD COLUMN geometry geometry(Point, 4326);
+
+UPDATE emergency SET geometry = ST_SetSRID(ST_MakePoint(latitude, longitude), 4326);
+UPDATE voluntary SET geometry = ST_SetSRID(ST_MakePoint(latitude, longitude), 4326);

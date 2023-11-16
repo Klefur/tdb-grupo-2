@@ -76,7 +76,7 @@ public class RegionImp implements RegionRepository {
     }
 
     @Override
-    public boolean deleteRegion(int gid){
+    public boolean deleteRegion(Integer gid){
         try(Connection connection = sql2o.open()){
             connection
                     .createQuery("DELETE FROM \"region\" WHERE gid = :gid")

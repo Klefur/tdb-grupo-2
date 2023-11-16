@@ -2,7 +2,6 @@ package com.example.voluntariado.repositories;
 
 
 import com.example.voluntariado.models.Voluntary;
-import org.springframework.data.geo.Distance;
 
 import java.awt.*;
 import java.util.List;
