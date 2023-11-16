@@ -16,6 +16,8 @@ public class Voluntary {
     private Double latitude;
     private Double longitude;
 
+    private Point geom;
+
     // Getters and Setters
 
     /**
@@ -144,5 +146,13 @@ public class Voluntary {
 
     public void setLongitude(Double longitude){
         this.longitude = longitude;
+    }
+
+    public Point getGeom(){
+        return geom;
+    }
+
+    public void setGeom(Point geom){
+        this.geom = geom;
     }
 }

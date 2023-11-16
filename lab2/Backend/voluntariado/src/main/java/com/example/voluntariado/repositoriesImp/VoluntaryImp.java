@@ -114,17 +114,22 @@ public class VoluntaryImp implements VoluntaryRepository {
         }
     }
 
-    @Override
     public List<Voluntary> findVoluntariesByLocationNear(Integer id_emergency, Double distance){
-        String sql = "SELECT *, (6371 * acos(cos(radians:emergency.latitude)) * cos(radians(emergency.latitude)) * cos(radians(emergency.longitude) - radians(emergency.longitude)) + sin(radians(emergency.latitude)) * sin(radians(emergency.latitude)))) AS distance "+
-                "FROM voluntary, emergency" +
-                "WHERE voluntary.state = 1 AND emergency.id_emergency =:id_emergency " +
-                "HAVING distance < :distance "+
-                "ORDER BY distance";
+        String sql = "SELECT voluntary.* " +
+                "FROM voluntary, emergency " +
+                "WHERE voluntary.state = 1 AND emergency.id_emergency = :id_emergency " +
+                "AND ST_Distance(voluntary.geom, emergency.geom) < :distance " +
+                "ORDER BY ST_Distance(voluntary.geom, emergency.geom)";
+
         try(Connection connection = sql2o.open()){
             return connection
                     .createQuery(sql)
+                    .addParameter("id_emergency", id_emergency)
+                    .addParameter("distance", distance)
                     .executeAndFetch(Voluntary.class);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 }

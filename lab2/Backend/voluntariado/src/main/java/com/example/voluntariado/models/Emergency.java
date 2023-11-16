@@ -14,6 +14,8 @@ public class Emergency {
         private Double latitude;
         private Double longitude;
 
+        private Point geom;
+
         // Getters
         /**
          * Gets the ID of an Emergency.
@@ -63,6 +65,10 @@ public class Emergency {
                 return longitude;
         }
 
+        public Point getGeom(){
+                return geom;
+        }
+
         // Setters
         /**
          * Sets the ID of an Emergency.
@@ -110,5 +116,9 @@ public class Emergency {
 
         public void setLongitude(Double longitude){
                 this.longitude = longitude;
+        }
+
+        public void setGeom(Point geom){
+                this.geom = geom;
         }
 }

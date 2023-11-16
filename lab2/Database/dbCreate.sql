@@ -328,8 +328,5 @@ LANGUAGE plpgsql;
 
 CREATE EXTENSION postgis;
 
-ALTER TABLE emergency ADD COLUMN geometry geometry(Point, 4326);
-ALTER TABLE voluntary ADD COLUMN geometry geometry(Point, 4326);
-
-UPDATE emergency SET geometry = ST_SetSRID(ST_MakePoint(latitude, longitude), 4326);
-UPDATE voluntary SET geometry = ST_SetSRID(ST_MakePoint(latitude, longitude), 4326);
+ALTER TABLE emergency ADD COLUMN geom geometry(Point, 4326);
+ALTER TABLE voluntary ADD COLUMN geom geometry(Point, 4326);
