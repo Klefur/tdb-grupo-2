@@ -26,6 +26,7 @@ public class VoluntaryImp implements VoluntaryRepository {
             return conn.createQuery("SELECT * FROM \"voluntary\"")
                     .executeAndFetch(Voluntary.class);
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println(e.getMessage());
             return null;
         }

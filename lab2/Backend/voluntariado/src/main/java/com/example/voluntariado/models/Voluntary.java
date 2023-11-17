@@ -1,7 +1,5 @@
 package com.example.voluntariado.models;
 
-import java.awt.*;
-
 /**
  * This class represents a voluntary.
  */
@@ -15,8 +13,7 @@ public class Voluntary {
     private String password;
     private Double latitude;
     private Double longitude;
-
-    private Point geom;
+    private String geom;
 
     // Getters and Setters
 
@@ -148,11 +145,11 @@ public class Voluntary {
         this.longitude = longitude;
     }
 
-    public Point getGeom(){
+    public String getGeom(){
         return geom;
     }
 
-    public void setGeom(Point geom){
+    public void setGeom(String geom){
         this.geom = geom;
     }
 }
