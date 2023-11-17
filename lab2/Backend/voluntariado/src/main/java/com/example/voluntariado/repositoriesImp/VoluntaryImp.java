@@ -57,14 +57,16 @@ public class VoluntaryImp implements VoluntaryRepository {
     @Override
     public Voluntary createVoluntary(Voluntary voluntary){
         try(Connection conn = sql2o.open()){
-            conn.createQuery("INSERT INTO \"voluntary\" (rut,fullname,birthday,state,email,password)"+
-                            "values (:voluntaryRut,:voluntaryFullname,:voluntaryBirthday,:voluntaryState,:voluntaryEmail,:voluntaryPassword)")
+            conn.createQuery("INSERT INTO \"voluntary\" (rut,fullname,birthday,state,email,password, latitude, longitude)"+
+                            "values (:voluntaryRut,:voluntaryFullname,:voluntaryBirthday,:voluntaryState,:voluntaryEmail,:voluntaryPassword, :latitude, :longitude)")
                     .addParameter("voluntaryRut", voluntary.getRut())
                     .addParameter("voluntaryFullname", voluntary.getFullname())
                     .addParameter("voluntaryBirthday", voluntary.getBirthday())
                     .addParameter("voluntaryState", voluntary.getState())
                     .addParameter("voluntaryEmail", voluntary.getEmail())
                     .addParameter("voluntaryPassword", voluntary.getPassword())
+                    .addParameter("latitude", voluntary.getLatitude())
+                    .addParameter("longitude", voluntary.getLongitude())
 
 
                     .executeUpdate().getKey();

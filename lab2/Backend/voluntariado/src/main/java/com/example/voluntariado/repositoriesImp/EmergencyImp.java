@@ -64,12 +64,14 @@ public class EmergencyImp implements EmergencyRepository {
     public Emergency createEmergency(Emergency emergency) {
         try(Connection connection = sql2o.open()){
             connection
-                    .createQuery("INSERT INTO \"emergency\" (name, description, state, id_institution)"
-                    + "VALUES (:name, :description, :state, :id_institution)")
+                    .createQuery("INSERT INTO \"emergency\" (name, description, state, id_institution, latitude, longitude)"
+                    + "VALUES (:name, :description, :state, :id_institution, :latitude, :longitude)")
                     .addParameter("name", emergency.getName())
                     .addParameter("description", emergency.getDescription())
                     .addParameter("state", emergency.getState())
                     .addParameter("id_institution", emergency.getId_institution())
+                    .addParameter("latitude", emergency.getLatitude())
+                    .addParameter("longitude", emergency.getLongitude())
                     .executeUpdate().getKey();
             return emergency;
         }catch(Exception e){
@@ -117,6 +119,7 @@ public class EmergencyImp implements EmergencyRepository {
                     .addParameter("description", emergency.getDescription())
                     .addParameter("state", emergency.getState())
                     .addParameter("id_institution", emergency.getId_institution())
+                    
                     .executeUpdate().getKey();
             return true;
         }catch(Exception e){

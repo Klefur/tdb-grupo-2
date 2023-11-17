@@ -14,7 +14,7 @@ public class Emergency {
         private Double latitude;
         private Double longitude;
 
-        private Point geom;
+        private String geom;
 
         // Getters
         /**
@@ -65,7 +65,7 @@ public class Emergency {
                 return longitude;
         }
 
-        public Point getGeom(){
+        public String getGeom(){
                 return geom;
         }
 
@@ -118,7 +118,7 @@ public class Emergency {
                 this.longitude = longitude;
         }
 
-        public void setGeom(Point geom){
+        public void setGeom(String geom){
                 this.geom = geom;
         }
 }

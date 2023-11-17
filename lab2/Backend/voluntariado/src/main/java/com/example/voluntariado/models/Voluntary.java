@@ -1,5 +1,7 @@
 package com.example.voluntariado.models;
 
+import java.util.Date;
+
 /**
  * This class represents a voluntary.
  */
@@ -7,7 +9,7 @@ public class Voluntary {
     private Integer id_voluntary;
     private String rut;
     private String fullname;
-    private String birthday;
+    private Date birthday;
     private Integer state;
     private String email;
     private String password;
@@ -69,7 +71,7 @@ public class Voluntary {
      * Gets the birthday of a Voluntary.
      * @return String
      */
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
@@ -77,7 +79,7 @@ public class Voluntary {
      * Sets the birthday of a Voluntary.
      * @param birthday
      */
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
