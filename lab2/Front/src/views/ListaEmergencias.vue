@@ -1,10 +1,10 @@
 <template>
-  <div class="m-auto flex gap-10 p-10 min-w-[35%] items-center justify-center">
+  <div class="m-auto flex flex-col gap-10 p-10 min-w-[35%] items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md min-w-[20rem]">
 
-      <div>
-        <p>Radio</p>
-        <input type="number" v-model.number="radio">
+      <div class="flex flex-row mb-4 justify-between">
+        <p>Seleccionar Radio:</p>
+        <input type="number" min="0" v-model.number="radio" class="w-1/4">
       </div>
 
       <h1 class="text-center mb-5 font-bold text-xl">Lista de Emergencias:</h1>
@@ -30,16 +30,16 @@
             {{ buttonText(emergency.state) }}
           </button>
           <button
-            @click="GetPoints(index)"
+            @click="GetPoints(emergency.id_emergency, index)"
             class="p-2 rounded-xl shadow-md bg-slate-500"
           >
-            Ver noseque
+            Ver mapa
           </button>
         </div>
       </div>
       <p v-else class="text-center text-gray-500">No hay emergencias registradas.</p>
     </div>
-    <div class="w-[500px] h-[500px]">
+    <div v-if="show_map" class="w-[50vh] h-[65vh] rounded-xl overflow-hidden">
       <Map :points="points" />
     </div>
   </div>
@@ -55,7 +55,7 @@ import Map from '../components/Map.vue';
 
 const error = ref(null);
 const emergenciesList = ref([]);
-
+const show_map = ref(false);
 const radio = ref(0);
 
 const url = "http://localhost:3000";
@@ -111,14 +111,19 @@ async function GetDatos() {
   }
 }
 
-const points = reactive({ list: [
-    ]});
+const points = reactive({ list: [], emergency: {
+}
+, radius: 1});
 
-async function GetPoints(id_emergencia) {
+
+async function GetPoints(id_emergencia, index) {
   await axios.get(url + "/voluntaries/location/" + String(id_emergencia) + "/" + String(radio.value))
   .then((response) => {
     console.log(response);
     points.list = response.data;
+    points.emergency = emergenciesList.value[index];
+    points.radius = radio.value;
+    show_map.value = true;
   })
   .catch((error) => {
     console.log(error);
