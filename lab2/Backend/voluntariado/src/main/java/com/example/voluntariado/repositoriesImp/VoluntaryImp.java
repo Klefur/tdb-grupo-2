@@ -117,6 +117,7 @@ public class VoluntaryImp implements VoluntaryRepository {
         }
     }
 
+    @Override
     public List<Voluntary> findVoluntariesByLocationNear(Integer id_emergency, Double distance){
         String sql = "SELECT voluntary.* " +
                 "FROM voluntary, emergency " +
