@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class VoluntaryService {
     private final VoluntaryRepository voluntaryRepository;
@@ -72,7 +72,7 @@ public class VoluntaryService {
     }
 
     @GetMapping("/voluntaries/location/{id_emergency}/{radius}")
-    public List<Voluntary> findVoluntariesByLocationNear(@PathVariable("id_emergency") Integer id_emergency, @PathVariable("radius") Double radius){
+    public List<Voluntary> findVoluntariesByLocationNear(@PathVariable("id_emergency") Integer id_emergency, @PathVariable Double radius){
         return voluntaryRepository.findVoluntariesByLocationNear(id_emergency, radius);
     }
 

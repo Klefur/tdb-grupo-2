@@ -121,8 +121,8 @@ public class VoluntaryImp implements VoluntaryRepository {
         String sql = "SELECT voluntary.* " +
                 "FROM voluntary, emergency " +
                 "WHERE voluntary.state = 1 AND emergency.id_emergency = :id_emergency " +
-                "AND ST_Distance(voluntary.geom, emergency.geom) < :distance " +
-                "ORDER BY ST_Distance(voluntary.geom, emergency.geom)";
+                "AND ST_Distance(voluntary.geom::geography, emergency.geom::geography) < :distance " +
+                "ORDER BY ST_Distance(voluntary.geom::geography, emergency.geom::geography);";
 
         try(Connection connection = sql2o.open()){
             return connection

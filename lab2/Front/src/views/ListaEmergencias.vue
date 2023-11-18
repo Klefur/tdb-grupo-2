@@ -2,9 +2,17 @@
   <div class="m-auto flex flex-col gap-10 p-10 min-w-[35%] items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md min-w-[20rem]">
 
-      <div class="flex flex-row mb-4 justify-between">
-        <p>Seleccionar Radio:</p>
-        <input type="number" min="0" v-model.number="radio" class="w-1/4">
+      <div class="flex flex-row mb-4 justify-center">
+        <label for="radio" class="align-center">Radio de búsqueda: </label>
+        <select v-model.number="radio" class="w-1/4">
+          <option value="" disabled selected>Seleccione un radio en [km]: </option>
+          <option value="10">10 km</option>
+          <option value="50">50 km</option>
+          <option value="100">100 km</option>
+          <option value="200">200 km</option>
+          <option value="500">500 km</option>
+        </select>
+
       </div>
 
       <h1 class="text-center mb-5 font-bold text-xl">Lista de Emergencias:</h1>
@@ -14,7 +22,7 @@
           :key="emergency.id_emergency"
           class="flex justify-between items-center bg-slate-100 shadow-lg p-4 rounded-lg mb-3"
         >
-          <div class="flex flex-col items-start justify-center m-2">
+          <div class="flex flex-col items-start justify-center m-2" style="min-width: 0;">
             <p><strong>ID Emergencia:</strong> {{ emergency.id_emergency }}</p>
             <p><strong>Nombre:</strong> {{ emergency.name }}</p>
             <p class="break-words w-[calc(100%-rem)]"><strong>Descripción:</strong> {{ emergency.description }}</p>
@@ -22,19 +30,24 @@
             <p><strong>ID Institución:</strong> {{ emergency.id_institution }}</p>
             <p><strong>Tareas activas:</strong> {{ emergency.activeTasks }}</p>
           </div>
-          <button
-            @click="FuncionalidadBoton(index)"
-            class="p-2 rounded-xl shadow-md"
-            :class="buttonColor(emergency.state)"
-          >
-            {{ buttonText(emergency.state) }}
-          </button>
-          <button
-            @click="GetPoints(emergency.id_emergency, index)"
-            class="p-2 rounded-xl shadow-md bg-slate-500"
-          >
-            Ver mapa
-          </button>
+
+
+          <div class="flex flex-col space-y-2 justify-center items-end w-40">
+            <button
+              @click="toggleEmergencyStatus(index)"
+              class="p-2 rounded-xl shadow-md w-32 px-1 py-2"
+              :class="buttonColor(emergency.state)"
+              style="min-width: 70px;"
+            >
+              {{ buttonText(emergency.state) }}
+            </button>
+            <button
+              @click="GetPoints(emergency.id_emergency, index)"
+              class="p-2 rounded-xl shadow-md bg-slate-500 w-32 px-1 py-2"
+            >
+              Ver mapa
+            </button>
+          </div>
         </div>
       </div>
       <p v-else class="text-center text-gray-500">No hay emergencias registradas.</p>
@@ -69,7 +82,7 @@ const buttonColor = (state) => {
 }
 
 
-const FuncionalidadBoton = async (index) => {
+const toggleEmergencyStatus = async (index) => {
   const currentEmergency = emergenciesList.value[index];
   
   if(!currentEmergency){
@@ -87,7 +100,7 @@ const FuncionalidadBoton = async (index) => {
     );
   }
 
-  currentEmergency.state = currentEmergency.state === '0' ? '1' : '0';
+  emergenciesList.value[index] = {...currentEmergency, state: currentEmergency.state === '0' ? '1' : '0'};
 };
 
 async function GetDatos() {
@@ -117,13 +130,14 @@ const points = reactive({ list: [], emergency: {
 
 
 async function GetPoints(id_emergencia, index) {
-  await axios.get(url + "/voluntaries/location/" + String(id_emergencia) + "/" + String(radio.value))
+  await axios.get(url + "/voluntaries/location/" + String(id_emergencia) + "/" + String(radio.value*1000))
   .then((response) => {
     console.log(response);
     points.list = response.data;
     points.emergency = emergenciesList.value[index];
-    points.radius = radio.value;
+    points.radius = radio.value*1000;
     show_map.value = true;
+    
   })
   .catch((error) => {
     console.log(error);
