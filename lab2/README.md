@@ -50,9 +50,15 @@ git clone https://github.com/Klefur/tdb-grupo-2.git
 
 2. Instala pgAdmin siguiendo las instrucciones para tu sistema operativo.
 
-## 4. Crear base de datos y cargar información
+## 4. Instalar postgis
 
-### 4.1 Crear base de datos
+1. Ya habiendo descargado PostgreSQL, debes seguir las instrucciones del sitio web oficial de postgis: [Descargar Postgis](https://trac.osgeo.org/postgis/wiki/UsersWikiInstall#:~:text=PostGIS%20Install%20Guide,PostGIS%203%20Series%20Guides).
+
+2. Dependiendo de tu sistema operativo tendrás que agregar los repositorios necesarios para su descarga e instalación correcta.
+
+## 5. Crear base de datos y cargar información
+
+### 5.1 Crear base de datos
 
 1. Asegúrate de estar conectado a PostgreSQL con pgAdmin:
    Abre pgAdmin y conéctate a tu servidor PostgreSQL.
@@ -72,7 +78,7 @@ git clone https://github.com/Klefur/tdb-grupo-2.git
 6. Verifica la creación de la base de datos:
    Después de ejecutar el script, verifica que la base de datos y las tablas se hayan creado correctamente utilizando las funciones de pgAdmin, incluyendo su extensión de postgis.
 
-### 4.2 Cargar la información
+### 5.2 Cargar la información
 
 1. Abre pgAdmin y conéctate a tu servidor PostgreSQL.
 
@@ -84,14 +90,14 @@ git clone https://github.com/Klefur/tdb-grupo-2.git
 
 5. Ejecuta el script SQL haciendo clic en el botón "Execute" o presionando la tecla `F5`.
 
-### 4.3 Verificar la Carga de Datos
+### 5.3 Verificar la Carga de Datos
 
 Después de ejecutar el script, verifica que los datos se hayan cargado correctamente en las tablas correspondientes. Puedes hacerlo consultando las tablas o ejecutando consultas SELECT para verificar que los datos estén presentes.
 
 ¡Listo! Ahora estás preparado para cargar datos en tu base de datos PostgreSQL desde un script SQL.
 
 
-## 5. Ejecución de un Proyecto de Vue.js
+## 6. Ejecución de un Proyecto de Vue.js
 
 Asumiendo que ya tienes un proyecto de Vue.js en tu carpeta de frontend, sigue estos pasos para ejecutarlo:
 
@@ -110,7 +116,7 @@ Asumiendo que ya tienes un proyecto de Vue.js en tu carpeta de frontend, sigue e
    npm run dev
    ```
    
-## 5. Ejecución del Proyecto desde IntelliJ IDEA
+## 7. Ejecución del Proyecto desde IntelliJ IDEA
 
 1. Abre IntelliJ IDEA y abre tu proyecto de Vue.js en la carpeta de frontend.
 
