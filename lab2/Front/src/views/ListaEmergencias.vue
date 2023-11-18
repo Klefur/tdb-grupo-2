@@ -1,6 +1,12 @@
 <template>
   <div class="m-auto flex gap-10 p-10 min-w-[35%] items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md min-w-[20rem]">
+
+      <div>
+        <p>Radio</p>
+        <input type="number" v-model.number="radio">
+      </div>
+
       <h1 class="text-center mb-5 font-bold text-xl">Lista de Emergencias:</h1>
       <div v-if="emergenciesList.length">
         <div 
@@ -23,26 +29,35 @@
           >
             {{ buttonText(emergency.state) }}
           </button>
+          <button
+            @click="GetPoints(index)"
+            class="p-2 rounded-xl shadow-md bg-slate-500"
+          >
+            Ver noseque
+          </button>
         </div>
       </div>
       <p v-else class="text-center text-gray-500">No hay emergencias registradas.</p>
     </div>
+    <div class="w-[500px] h-[500px]">
+      <Map :points="points" />
+    </div>
   </div>
 
-  <div style="height: 500px; width: 500px;">
-    <Map :points="points" />
-  </div>
   
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import axios from "axios";
 import { store } from "../store";
 import Map from '../components/Map.vue';
 
 const error = ref(null);
 const emergenciesList = ref([]);
+
+const radio = ref(0);
+
 const url = "http://localhost:3000";
 
 const buttonText = (state) => {
@@ -96,6 +111,20 @@ async function GetDatos() {
   }
 }
 
+const points = reactive({ list: [
+    ]});
+
+async function GetPoints(id_emergencia) {
+  await axios.get(url + "/voluntaries/location/" + String(id_emergencia) + "/" + String(radio.value))
+  .then((response) => {
+    console.log(response);
+    points.list = response.data;
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+
 onMounted(async () => {
   try {
     const response = await axios.get(`${url}/emergencies?token=${store.token}`);
@@ -105,20 +134,5 @@ onMounted(async () => {
   }
   GetDatos();
 });
-
-const points = ref([]);
-points.value = [
-    { latitud: 40.712776, longitud: -74.005974, descripcion: 'Nueva York, NY, USA' },
-    { latitud: 48.856613, longitud: 2.352222, descripcion: 'París, Francia' },
-    { latitud: 35.689487, longitud: 139.691711, descripcion: 'Tokio, Japón' },
-    { latitud: 55.755825, longitud: 37.617298, descripcion: 'Moscú, Rusia' },
-    { latitud: -33.868820, longitud: 151.209290, descripcion: 'Sídney, Australia' },
-    { latitud: -23.550520, longitud: -46.633308, descripcion: 'São Paulo, Brasil' },
-    { latitud: 51.507351, longitud: -0.127758, descripcion: 'Londres, Reino Unido' },
-    { latitud: -34.603722, longitud: -58.381592, descripcion: 'Buenos Aires, Argentina' },
-    { latitud: 37.774929, longitud: -122.419418, descripcion: 'San Francisco, CA, USA' },
-    { latitud: 35.467560, longitud: -97.516428, descripcion: 'Oklahoma City, OK, USA' }
-    ];
-    console.log(points.value);
 
 </script>

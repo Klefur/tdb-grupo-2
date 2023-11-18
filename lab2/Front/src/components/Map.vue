@@ -1,39 +1,37 @@
 <template>
-    <div ref="mapContainer" style="height: 500px; width: 500px;"></div>
+    <div ref="mapElement" class="w-full h-full"></div>
   </template>
   
 <script setup>
-  import { onMounted, ref, watchEffect } from 'vue';
-  import L from 'leaflet';
-  import 'leaflet/dist/leaflet.css';
+import { onMounted, ref, watch } from 'vue';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
   
-  const props = defineProps({
-    points: Array,
+const props = defineProps({
+  points: Object,
+});
+  
+const mapElement = ref(null);
+let map = null;
+let markersLayer = L.layerGroup();
+
+
+onMounted(() => {
+  map = L.map(mapElement.value).setView([-35.675147, -71.542969], 4);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+  markersLayer.addTo(map);
+});
+
+watch(() => props.points, (newPoints, oldPoints) => {
+  console.log(props.points);
+  markersLayer.clearLayers();
+  newPoints.list.forEach((point) => {
+    L.marker([point.latitude, point.longitude], {title:point.fullname}).addTo(markersLayer).bindPopup(point.fullname);
   });
-  
-  const mapContainer = ref(null);
-  let map;
-
-  onMounted(() => {
-    map = L.map(mapContainer.value).setView([0, 0], 1);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    console.log(props.points);
-
-    props.points.forEach(point => {
-      L.marker([point.latitud, point.longitud]).addTo(map)
-        .bindPopup('Un punto de interés');
-      console.log(point.latitud, point.longitud);
-    });
-  
-    if (props.points.length) {
-      const group = L.featureGroup(props.points.map(point => L.marker([point.latitud, point.longitud])));
-      map.fitBounds(group.getBounds());
-    }
-  });
+}, { deep: true });
 
 </script>
   
+
