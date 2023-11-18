@@ -122,7 +122,7 @@ Asumiendo que ya tienes un proyecto de Vue.js en tu carpeta de frontend, sigue e
 
 2. Asegúrate de que todas las dependencias de tu proyecto estén instaladas. Puedes hacerlo ejecutando `npm install` desde la terminal en la carpeta de tu proyecto.
 
-3. Inicia el servidor de desarrollo de Vue.js ejecutando `npm run serve` desde la terminal en la carpeta de tu proyecto.
+3. Inicia el servidor de desarrollo de Vue.js ejecutando `npm run dev` desde la terminal en la carpeta de tu proyecto.
 
 4. Abre tu navegador web y accede a la URL proporcionada por el servidor de desarrollo (generalmente, [http://localhost:5173/](http://localhost:5173/)) para ver tu proyecto en funcionamiento.
 
