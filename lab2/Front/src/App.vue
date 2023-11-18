@@ -1,4 +1,4 @@
-<template>
+<template class="flex flex-col min-h-max">
   
   <Layout />
 </template>
