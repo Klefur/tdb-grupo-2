@@ -2,37 +2,47 @@
 -- 1. Tabla Voluntary: 31 registros
 ------------------------------------------
 INSERT INTO Voluntary (rut, fullname, birthday, state, email, password, latitude, longitude) VALUES
-('20000001-2', 'Juan Pérez', '1988-04-15', 1, 'juanperez@example.com', 'pass5678', -33.0451, -71.6198),
-('20000002-3', 'Ana Gómez', '1990-06-20', 1, 'anagomez@example.com', 'pass9012', -36.8201, -73.0444),
-('20000003-4', 'Carlos Ruiz', '1985-07-30', 1, 'carlosruiz@example.com', 'pass3456', -53.1638, -70.9171),
-('20000004-5', 'María López', '1992-08-25', 1, 'marialopez@example.com', 'pass7890', -23.6509, -70.3975),
-('20000005-6', 'Diego Morales', '1987-09-10', 1, 'diegomorales@example.com', 'pass2345', -27.3668, -70.3322),
-('20000006-7', 'Lucía Fernández', '1991-10-05', 1, 'luciafernandez@example.com', 'pass6789', -39.8142, -73.2459),
-('20000007-8', 'Roberto Díaz', '1984-11-20', 1, 'robertodiaz@example.com', 'pass1235', -20.2208, -70.1431),
-('20000008-9', 'Carmen Soto', '1993-12-15', 1, 'carmensoto@example.com', 'pass4567', -29.9533, -71.3395),
-('20000009-0', 'Francisco Vargas', '1989-01-10', 1, 'franciscovargas@example.com', 'pass7891', -33.4378, -70.6504),
-('20000010-1', 'Elena Núñez', '1995-02-14', 1, 'elenanunez@example.com', 'pass8901', -41.4689, -72.9411),
-('20000011-2', 'Miguel Ángel Torres', '1986-03-19', 1, 'miguelangel@example.com', 'pass5671', -22.9087, -70.1997),
-('20000012-3', 'Isabel Castillo', '1994-04-23', 1, 'isabelcastillo@example.com', 'pass6782', -33.0153, -71.5500),
-('20000013-4', 'Jorge Martínez', '1983-05-28', 1, 'jorgemartinez@example.com', 'pass7893', -36.6066, -72.1023),
-('20000014-5', 'Daniela Vidal', '1996-06-02', 1, 'danielavidal@example.com', 'pass8904', -53.7850, -70.7500),
-('20000015-6', 'Andrés Guerrero', '1982-07-07', 1, 'andresguerrero@example.com', 'pass9015', -18.4783, -70.3126),
-('20000016-7', 'Verónica Moya', '1997-08-12', 1, 'veronicamoya@example.com', 'pass0126', -33.4569, -70.6483),
-('20000017-8', 'Ricardo Tapia', '1981-09-17', 1, 'ricardotapia@example.com', 'pass1237', -29.9045, -71.2489),
-('20000018-9', 'Sandra Contreras', '1998-10-22', 1, 'sandracontreras@example.com', 'pass2348', -35.4232, -71.6485),
-('20000019-0', 'Luis Navarro', '1979-11-27', 1, 'luisnavarro@example.com', 'pass3459', -38.7359, -72.5904),
-('20000020-1', 'Patricia Muñoz', '1980-12-31', 1, 'patriciamunoz@example.com', 'pass4560', -20.5352, -70.1813),
-('20000021-1', 'Valentina Núñez', '1995-02-14', 1, 'valentinanunez@example.com', 'pass8901', -40.4689, -70.9411),
-('20000022-2', 'Juan Ángel Torres', '1986-03-19', 1, 'juanangel@example.com', 'pass5671', -35.9087, -70.1997),
-('20000023-3', 'Pia Castillo', '1994-04-23', 1, 'piacastillo@example.com', 'pass6782', -30.0153, -70.5500),
-('20000024-4', 'Manuel Tapia', '1983-05-28', 1, 'manueltapia@example.com', 'pass7893', -48.6066, -72.1023),
-('20000025-5', 'Arturo Vidal', '1996-06-02', 1, 'arturovidal@example.com', 'pass8904', -30.7850, -68.7500),
-('20000026-6', 'Alexis Guerrero', '1982-07-07', 1, 'alexisguerrero@example.com', 'pass9015', -50.4783, -70.3126),
-('20000027-7', 'Jorge Gonzalez', '1997-08-12', 1, 'jorgegonzalez@example.com', 'pass0126', -38.4569, -69.6483),
-('20000028-8', 'Freddy Mercury', '1981-09-17', 1, 'freddymercury@example.com', 'pass1237', -49.9045, -71.2489),
-('20000029-9', 'Cecilia Contreras', '1998-10-22', 1, 'ceciliacontreras@example.com', 'pass2348', -47.4232, -70.6485),
-('20000030-0', 'Montserrat Lopez', '1979-11-27', 1, 'montserratlopez@example.com', 'pass3459', -44.7359, -70.5904),
-('20000031-1', 'Patricia Ayala', '1980-12-31', 1, 'patriciaayala@example.com', 'pass4560', -19.5352, -70.1113);
+-- VALDIVIA --
+('20000001-2', 'Juan Pérez', '1988-04-15', 1, 'juanperez@example.com', 'pass5678', -39.8116, -73.2240),
+('20000002-3', 'Ana Gómez', '1990-06-20', 1, 'anagomez@example.com', 'pass9012', -39.8201, -73.2457),
+('20000003-4', 'Carlos Ruiz', '1985-07-30', 1, 'carlosruiz@example.com', 'pass3456', -39.8617, -73.2476),
+-- VIÑA DEL MAR --
+('20000004-5', 'María López', '1992-08-25', 1, 'marialopez@example.com', 'pass7890', -33.1121, -71.7094),
+('20000005-6', 'Diego Morales', '1987-09-10', 1, 'diegomorales@example.com', 'pass2345', -33.0268, -71.5522),
+('20000006-7', 'Lucía Fernández', '1991-10-05', 1, 'luciafernandez@example.com', 'pass6789', -33.0842, -71.6459),
+-- CONCEPCIÓN --
+('20000007-8', 'Roberto Díaz', '1984-11-20', 1, 'robertodiaz@example.com', 'pass1235', -36.2208, -72.0931),
+('20000008-9', 'Carmen Soto', '1993-12-15', 1, 'carmensoto@example.com', 'pass4567', -36.7833, -72.0479),
+('20000009-0', 'Francisco Vargas', '1989-01-10', 1, 'franciscovargas@example.com', 'pass7891', -36.7878, -72.9104),
+-- ATACAMA --
+('20000010-1', 'Elena Núñez', '1995-02-14', 1, 'elenanunez@example.com', 'pass8901', -27.4689, -70.3111),
+('20000011-2', 'Miguel Ángel Torres', '1986-03-19', 1, 'miguelangel@example.com', 'pass5671', -27.9087, -70.1997),
+('20000012-3', 'Isabel Castillo', '1994-04-23', 1, 'isabelcastillo@example.com', 'pass6782', -27.0153, -70.5500),
+-- PUCÓN --
+('20000013-4', 'Jorge Martínez', '1983-05-28', 1, 'jorgemartinez@example.com', 'pass7893', -39.3066, -72.1023),
+('20000014-5', 'Daniela Vidal', '1996-06-02', 1, 'danielavidal@example.com', 'pass8904', -39.9550, -71.9900),
+('20000015-6', 'Andrés Guerrero', '1982-07-07', 1, 'andresguerrero@example.com', 'pass9015', -38.7483, -72.3226),
+-- CHAITÉN --
+('20000016-7', 'Verónica Moya', '1997-08-12', 1, 'veronicamoya@example.com', 'pass0126', -42.9311, -72.7183),
+('20000017-8', 'Ricardo Tapia', '1981-09-17', 1, 'ricardotapia@example.com', 'pass1237', -42.9245, -72.7089),
+('20000018-9', 'Sandra Contreras', '1998-10-22', 1, 'sandracontreras@example.com', 'pass2348', -42.9132, -72.6985),
+-- PUNTA ARENAS --
+('20000019-0', 'Luis Navarro', '1979-11-27', 1, 'luisnavarro@example.com', 'pass3459', -52.9070, -70.9256),
+('20000020-1', 'Patricia Muñoz', '1980-12-31', 1, 'patriciamunoz@example.com', 'pass4560', -53.2795, -70.9518),
+('20000021-1', 'Valentina Núñez', '1995-02-14', 1, 'valentinanunez@example.com', 'pass8901', -53.1470, -70.8959),
+-- VALPARAÍSO --
+('20000022-2', 'Juan Ángel Torres', '1986-03-19', 1, 'juanangel@example.com', 'pass5671', -33.2452, -71.5926),
+('20000023-3', 'Pia Castillo', '1994-04-23', 1, 'piacastillo@example.com', 'pass6782', -33.3824, -71.3900),
+('20000024-4', 'Manuel Tapia', '1983-05-28', 1, 'manueltapia@example.com', 'pass7893', -33.2337, -71.5623),
+-- COQUIMBO --
+('20000025-5', 'Arturo Vidal', '1996-06-02', 1, 'arturovidal@example.com', 'pass8904', -30.4050, -71.5877),
+('20000026-6', 'Alexis Guerrero', '1982-07-07', 1, 'alexisguerrero@example.com', 'pass9015', -29.5437, -71.2180),
+('20000027-7', 'Jorge Gonzalez', '1997-08-12', 1, 'jorgegonzalez@example.com', 'pass0126', -30.1056, -70.4930),
+-- SANTIAGO --
+('20000028-8', 'Freddy Mercury', '1981-09-17', 1, 'freddymercury@example.com', 'pass1237', -33.8190, -70.7328),
+('20000029-9', 'Cecilia Contreras', '1998-10-22', 1, 'ceciliacontreras@example.com', 'pass2348', -33.5405, -70.5823),
+('20000030-0', 'Montserrat Lopez', '1979-11-27', 1, 'montserratlopez@example.com', 'pass3459', -33.5253, -70.7909),
+('20000031-1', 'Patricia Ayala', '1980-12-31', 1, 'patriciaayala@example.com', 'pass4560', -33.4235, -70.5526);
 
 
 ------------------------------------------
@@ -157,34 +167,44 @@ INSERT INTO Ranking (id_task, id_voluntary) VALUES
 ------------------------------------------
 
 INSERT INTO Emergency_Voluntary (id_emergency, id_voluntary) VALUES
+-- VALDIVIA --
 (1, 1),
 (1, 2),
-(2, 3),
+(1, 3),
+-- VIÑA DEL MAR --
 (2, 4),
-(3, 5),
-(3, 6),
-(4, 7),
-(4, 8),
-(5, 9),
-(5, 10),
-(6, 11),
-(6, 12),
-(7, 13),
-(7, 14),
-(8, 15),
-(8, 16),
-(9, 17),
-(9, 18),
-(10, 19),
-(10, 20),
-(1, 21),
-(2, 22),
-(3, 23), 
-(4, 24),
-(5, 25), 
-(6, 26),
-(7, 27),
-(8, 28),
-(9, 29),
+(2, 5),
+(2, 6),
+-- CONCEPCIÓN --
+(3, 7),
+(3, 8),
+(3, 9),
+-- ATACAMA --
+(4, 10),
+(4, 11),
+(4, 12),
+-- PUCÓN --
+(5, 13),
+(5, 14),
+(5, 15),
+-- CHAITÉN --
+(6, 16),
+(6, 17),
+(6, 18),
+-- PUNTA ARENAS --
+(7, 19),
+(7, 20),
+(7, 21),
+-- VALPARAÍSO --
+(8, 22),
+(8, 23),
+(8, 24),
+-- COQUIMBO --
+(9, 25),
+(9, 26),
+(9, 27),
+-- SANTIAGO --
+(10, 28),
+(10, 29),
 (10, 30),
 (10, 31);

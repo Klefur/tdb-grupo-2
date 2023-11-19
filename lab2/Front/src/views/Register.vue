@@ -84,17 +84,11 @@ const registerFunc = async () => {
 		username: username.value,
 		password: password.value,
 	};
-	console.log(data);
+	const response = await axios.post(url + "/register", data);
+	localStorage.setItem("token", response.data);
 
-	await axios
-		.post(url + "/register", data)
-		.then((response) => {
-			localStorage.setItem("token", response.data);
-			console.log("Respuesta del servidor:", response.data);
-			router.push("/login");
-		})
-		.catch((error) => {
-			console.error("Error en la solicitud:", error);
-		});
+	alert("Registro exitoso. Inicie sesión para continuar");
+
+	router.replace({ path: "/" });
 };
 </script>

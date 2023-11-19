@@ -105,8 +105,10 @@ public class Emergency_VoluntaryImp implements Emergency_VoluntaryRepository {
     @Override
     public List<Voluntary> findVoluntariesByLocationNear(Integer id_emergency, Double distance) {
         String sql = "SELECT voluntary.* " +
-                "FROM voluntary, emergency " +
+                "FROM voluntary, emergency, emergency_voluntary " +
                 "WHERE voluntary.state = 1 AND emergency.id_emergency = :id_emergency " +
+                "AND emergency_voluntary.id_emergency = emergency.id_emergency " +
+                "AND emergency_voluntary.id_voluntary = voluntary.id_voluntary " +
                 "AND ST_Distance(voluntary.geom::geography, emergency.geom::geography) < :distance " +
                 "ORDER BY ST_Distance(voluntary.geom::geography, emergency.geom::geography);";
 

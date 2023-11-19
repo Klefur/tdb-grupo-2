@@ -3,20 +3,26 @@
 		class="m-auto flex flex-col gap-10 p-10 min-w-[35%] items-center justify-center"
 	>
 		<div class="bg-white p-8 rounded-lg shadow-md min-w-[20rem]">
-			<div class="flex flex-row mb-4 justify-center">
-				<label for="radio" class="align-center"
-					>Radio de búsqueda:
+			<div class="flex flex-row mb-4 justify-center items-center gap-2">
+				<label for="radio" class="align-center padding-right-20"
+					><b>Radio de búsqueda:  </b>
 				</label>
-				<select v-model.number="radio" class="w-1/4">
-					<option value="" disabled selected>
-						Seleccione un radio en [km]:
-					</option>
+				<input
+					list="radios"
+					v-model.number="radio"
+					placeholder="Ingrese un radio en [km]"
+					class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-35 sm:text-sm border-gray-300 rounded-md"
+					type="number"
+					min="0"
+					max="200"
+				/>
+				<datalist id="radios">
 					<option value="10">10 km</option>
+					<option value="20">20 km</option>
 					<option value="50">50 km</option>
 					<option value="100">100 km</option>
 					<option value="200">200 km</option>
-					<option value="500">500 km</option>
-				</select>
+				</datalist>
 			</div>
 
 			<h1 class="text-center mb-5 font-bold text-xl">
@@ -67,7 +73,7 @@
 							@click="GetPoints(emergency.id_emergency, index)"
 							class="p-2 rounded-xl shadow-md bg-slate-500 w-32 px-1 py-2"
 						>
-							Ver voluntarios en el mapa
+							Ver voluntarios
 						</button>
 					</div>
 				</div>
@@ -202,32 +208,6 @@ onMounted(async () => {
 		console.error("Error en la petición: ", err.message);
 	}
 	GetDatos();
-	emergenciesList.value.push({
-		"id_emergency": 101,
-		"name": "Emergencia Central",
-		"description": "Descripción detallada de la emergencia.",
-		"state": "Activa",
-		"id_institution": 57,
-		"latitude": -33.4489,
-		"longitude": -70.6693
-	});
-	let asd = {
-		"id_voluntary": 22,
-		"rut": "2000020-1",
-		"fullname": "Luis Recabarren",
-		"birthday": "1979-11-27",
-		"state": 1,
-		"email": "luisnavarro@example.com",
-		"password": "pass3459",
-		"latitude": -38.7359,
-		"longitude": -72.5904,
-		"geom": null
-	};
-	points.list.push(asd);
-	points.list.push(asd);
-	points.list.push(asd);
-	points.list.push(asd);
-	points.list.push(asd);
 
 });
 </script>

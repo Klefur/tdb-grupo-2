@@ -55,18 +55,17 @@ const loginFunc = async () => {
 		username: username.value,
 		password: password.value,
 	};
-	console.log(data);
 
 	await axios
 		.post(url + "/login", data)
 		.then((response) => {
 			store.token = response.data;
-			console.log(response);
-			console.log(response.data);
-			router.push("/emergencias");
-		})
-		.catch((error) => {
-			console.error("Error en la solicitud:", error);
+			if(response.data === "BAD"){
+				alert("Debe registrarse primero");
+				router.push("/register");
+			}else{
+				router.push("/emergencias");
+			}
 		});
 };
 </script>
