@@ -1,9 +1,9 @@
-<template class="min-h-screen">
-  <Header></Header>
-  <main class="flex flex-auto py-5 sm:py-10 min-h-[85vh] justify-center align-middle items-center">
+<template>
+  <Header />
+  <main class="flex flex-auto py-5 sm:py-10 justify-center align-middle items-center">
     <router-view></router-view>
   </main>
-  <Footer></Footer>
+  <Footer />
 </template>
 
 <script setup>

@@ -1,10 +1,10 @@
-<template class="flex flex-col min-h-max">
-  
+<template class="flex flex-col">
   <Layout />
 </template>
 
 <script setup>
 import Layout from "./layout/Layout.vue";
+
 </script>
 
 <style>
