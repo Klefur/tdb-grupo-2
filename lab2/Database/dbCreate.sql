@@ -14,6 +14,8 @@
 --    CONNECTION LIMIT = -1;
 --    IS_TEMPLATE = false;
 
+CREATE EXTENSION postgis;
+
 ----------------------------------------
 -- Tabla de User --
 ----------------------------------------
@@ -36,7 +38,8 @@ CREATE TABLE IF NOT EXISTS Voluntary (
     "email" VARCHAR(50) NOT NULL,
     "password" VARCHAR(50) NOT NULL,
 	"latitude" FLOAT,
-	"longitude" FLOAT
+	"longitude" FLOAT,
+    "geom" geometry(Point, 4326);
 );
 
 ----------------------------------------
@@ -86,6 +89,7 @@ CREATE TABLE IF NOT EXISTS Emergency(
     "id_institution" int,
 	"latitude" FLOAT,
 	"longitude" FLOAT,
+    "geom" geometry(Point, 4326),
     FOREIGN KEY ("id_institution") REFERENCES Institution ("id_institution") ON DELETE CASCADE
 );
 
@@ -326,7 +330,29 @@ LANGUAGE plpgsql;
 --    requisitos que cumple por tarea.
 ----------------------------------------
 
-CREATE EXTENSION postgis;
+----------------------------------------
+-- Trigger que actualiza el geom 
+-- de la emergencia y voluntario
+----------------------------------------
 
-ALTER TABLE emergency ADD COLUMN geom geometry(Point, 4326);
-ALTER TABLE voluntary ADD COLUMN geom geometry(Point, 4326);
+CREATE OR REPLACE FUNCTION updateEmergencyGeom() RETURNS trigger AS $$
+BEGIN
+    UPDATE emergency SET geom = ST_SetSRID(ST_MakePoint(longitude, latitude), 4326);
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+  
+CREATE TRIGGER updateGeomE
+  AFTER INSERT ON emergency
+  EXECUTE PROCEDURE updateVoluntaryGeom();
+
+CREATE OR REPLACE FUNCTION updateVoluntaryGeom() RETURNS trigger AS $$
+BEGIN
+    UPDATE voluntary SET geom = ST_SetSRID(ST_MakePoint(longitude, latitude), 4326);
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER updateGeomV
+  AFTER INSERT ON voluntary
+  EXECUTE PROCEDURE updateVoluntaryGeom();

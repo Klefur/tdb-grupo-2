@@ -140,6 +140,3 @@ INSERT INTO Ranking (id_task, id_voluntary) VALUES
 (8, 8),
 (9, 9),
 (10, 10);
-
-UPDATE emergency SET geom = ST_SetSRID(ST_MakePoint(longitude, latitude), 4326);
-UPDATE voluntary SET geom = ST_SetSRID(ST_MakePoint(longitude, latitude), 4326);
