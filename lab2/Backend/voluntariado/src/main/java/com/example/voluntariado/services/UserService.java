@@ -25,6 +25,9 @@ public class UserService {
 
     @PostMapping("/login")
     public String login(@RequestBody UserV userV){
+        if(userRepository.findByUsername(userV.getUsername()) == null){
+            return "BAD";
+        }
         return userRepository.login(userV.getUsername(), userV.getPassword());
     }
 }
