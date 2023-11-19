@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS Voluntary (
     "password" VARCHAR(50) NOT NULL,
 	"latitude" FLOAT,
 	"longitude" FLOAT,
-    "geom" geometry(Point, 4326);
+    "geom" geometry(Point, 4326)
 );
 
 ----------------------------------------
@@ -356,7 +356,7 @@ $$ LANGUAGE plpgsql;
   
 CREATE TRIGGER updateGeomE
   AFTER INSERT ON emergency
-  EXECUTE PROCEDURE updateVoluntaryGeom();
+  EXECUTE PROCEDURE updateEmergencyGeom();
 
 CREATE OR REPLACE FUNCTION updateVoluntaryGeom() RETURNS trigger AS $$
 BEGIN

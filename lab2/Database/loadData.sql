@@ -1,5 +1,5 @@
 ------------------------------------------
--- 1. Tabla Voluntary: 20 registros
+-- 1. Tabla Voluntary: 31 registros
 ------------------------------------------
 INSERT INTO Voluntary (rut, fullname, birthday, state, email, password, latitude, longitude) VALUES
 ('20000001-2', 'Juan Pérez', '1988-04-15', 1, 'juanperez@example.com', 'pass5678', -33.0451, -71.6198),
@@ -12,10 +12,10 @@ INSERT INTO Voluntary (rut, fullname, birthday, state, email, password, latitude
 ('20000008-9', 'Carmen Soto', '1993-12-15', 1, 'carmensoto@example.com', 'pass4567', -29.9533, -71.3395),
 ('20000009-0', 'Francisco Vargas', '1989-01-10', 1, 'franciscovargas@example.com', 'pass7891', -33.4378, -70.6504),
 ('20000010-1', 'Elena Núñez', '1995-02-14', 1, 'elenanunez@example.com', 'pass8901', -41.4689, -72.9411),
-('20000011-2', 'Miguel Ángel Torres', '1986-03-19', 1, 'miguelangel@example.com', 'pass5671', -22.9087, -68.1997),
+('20000011-2', 'Miguel Ángel Torres', '1986-03-19', 1, 'miguelangel@example.com', 'pass5671', -22.9087, -70.1997),
 ('20000012-3', 'Isabel Castillo', '1994-04-23', 1, 'isabelcastillo@example.com', 'pass6782', -33.0153, -71.5500),
 ('20000013-4', 'Jorge Martínez', '1983-05-28', 1, 'jorgemartinez@example.com', 'pass7893', -36.6066, -72.1023),
-('20000014-5', 'Daniela Vidal', '1996-06-02', 1, 'danielavidal@example.com', 'pass8904', -53.7850, -67.7500),
+('20000014-5', 'Daniela Vidal', '1996-06-02', 1, 'danielavidal@example.com', 'pass8904', -53.7850, -70.7500),
 ('20000015-6', 'Andrés Guerrero', '1982-07-07', 1, 'andresguerrero@example.com', 'pass9015', -18.4783, -70.3126),
 ('20000016-7', 'Verónica Moya', '1997-08-12', 1, 'veronicamoya@example.com', 'pass0126', -33.4569, -70.6483),
 ('20000017-8', 'Ricardo Tapia', '1981-09-17', 1, 'ricardotapia@example.com', 'pass1237', -29.9045, -71.2489),
@@ -23,15 +23,15 @@ INSERT INTO Voluntary (rut, fullname, birthday, state, email, password, latitude
 ('20000019-0', 'Luis Navarro', '1979-11-27', 1, 'luisnavarro@example.com', 'pass3459', -38.7359, -72.5904),
 ('20000020-1', 'Patricia Muñoz', '1980-12-31', 1, 'patriciamunoz@example.com', 'pass4560', -20.5352, -70.1813),
 ('20000021-1', 'Valentina Núñez', '1995-02-14', 1, 'valentinanunez@example.com', 'pass8901', -40.4689, -70.9411),
-('20000022-2', 'Juan Ángel Torres', '1986-03-19', 1, 'juanangel@example.com', 'pass5671', -35.9087, -69.1997),
+('20000022-2', 'Juan Ángel Torres', '1986-03-19', 1, 'juanangel@example.com', 'pass5671', -35.9087, -70.1997),
 ('20000023-3', 'Pia Castillo', '1994-04-23', 1, 'piacastillo@example.com', 'pass6782', -30.0153, -70.5500),
-('20000024-4', 'Manuel Tapia', '1983-05-28', 1, 'manueltapia@example.com', 'pass7893', -55.6066, -72.1023),
-('20000025-5', 'Arturo Vidal', '1996-06-02', 1, 'arturovidal@example.com', 'pass8904', -60.7850, -68.7500),
-('20000026-6', 'Alexis Guerrero', '1982-07-07', 1, 'alexisguerrero@example.com', 'pass9015', -60.4783, -70.3126),
+('20000024-4', 'Manuel Tapia', '1983-05-28', 1, 'manueltapia@example.com', 'pass7893', -48.6066, -72.1023),
+('20000025-5', 'Arturo Vidal', '1996-06-02', 1, 'arturovidal@example.com', 'pass8904', -30.7850, -68.7500),
+('20000026-6', 'Alexis Guerrero', '1982-07-07', 1, 'alexisguerrero@example.com', 'pass9015', -50.4783, -70.3126),
 ('20000027-7', 'Jorge Gonzalez', '1997-08-12', 1, 'jorgegonzalez@example.com', 'pass0126', -38.4569, -69.6483),
-('20000028-8', 'Freddy Mercury', '1981-09-17', 1, 'freddymercury@example.com', 'pass1237', -57.9045, -71.2489),
-('20000029-9', 'Cecilia Contreras', '1998-10-22', 1, 'ceciliacontreras@example.com', 'pass2348', -47.4232, -71.6485),
-('20000030-0', 'Montserrat Lopez', '1979-11-27', 1, 'montserratlopez@example.com', 'pass3459', -44.7359, -71.5904),
+('20000028-8', 'Freddy Mercury', '1981-09-17', 1, 'freddymercury@example.com', 'pass1237', -49.9045, -71.2489),
+('20000029-9', 'Cecilia Contreras', '1998-10-22', 1, 'ceciliacontreras@example.com', 'pass2348', -47.4232, -70.6485),
+('20000030-0', 'Montserrat Lopez', '1979-11-27', 1, 'montserratlopez@example.com', 'pass3459', -44.7359, -70.5904),
 ('20000031-1', 'Patricia Ayala', '1980-12-31', 1, 'patriciaayala@example.com', 'pass4560', -19.5352, -70.1113);
 
 
