@@ -67,7 +67,7 @@
 							@click="GetPoints(emergency.id_emergency, index)"
 							class="p-2 rounded-xl shadow-md bg-slate-500 w-32 px-1 py-2"
 						>
-							Ver mapa
+							Ver voluntarios en el mapa
 						</button>
 					</div>
 				</div>
@@ -77,10 +77,32 @@
 			</p>
 		</div>
 		<div
-			v-if="show_map"
-			class="w-[50vh] h-[65vh] rounded-xl overflow-hidden"
+			v-if="show_map || true"
+			class="flex flex-row gap-5 h-[65vh]"
 		>
-			<Map :points="points" />
+			<div class="w-[50vh]  rounded-xl overflow-hidden">
+				<Map :points="points" />
+			</div>
+			<div class="bg-white p-8 rounded-lg shadow-xl min-w-[20rem] overflow-scroll">
+				<div
+					v-for="(voluntary, index) in points.list"
+					:key="voluntary.id_voluntary"
+					class="flex justify-between items-center bg-slate-100 shadow-lg p-4 rounded-lg mb-3"
+				>
+					<div
+						class="flex flex-col items-start justify-center m-2"
+						style="min-width: 0"
+					>
+						<p>
+							<strong>ID Voluntario:</strong>
+							{{ voluntary.id_voluntary }}
+						</p>
+						<p><strong>Nombre:</strong> {{ voluntary.fullname }}</p>
+						<p><strong>Estado:</strong> {{ voluntary.state?"Activo/a": "Inactivo/a" }}</p>
+						<p class="break-words"><strong>Email:</strong>  {{ voluntary.email }}</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -180,5 +202,32 @@ onMounted(async () => {
 		console.error("Error en la petición: ", err.message);
 	}
 	GetDatos();
+	emergenciesList.value.push({
+		"id_emergency": 101,
+		"name": "Emergencia Central",
+		"description": "Descripción detallada de la emergencia.",
+		"state": "Activa",
+		"id_institution": 57,
+		"latitude": -33.4489,
+		"longitude": -70.6693
+	});
+	let asd = {
+		"id_voluntary": 22,
+		"rut": "2000020-1",
+		"fullname": "Luis Recabarren",
+		"birthday": "1979-11-27",
+		"state": 1,
+		"email": "luisnavarro@example.com",
+		"password": "pass3459",
+		"latitude": -38.7359,
+		"longitude": -72.5904,
+		"geom": null
+	};
+	points.list.push(asd);
+	points.list.push(asd);
+	points.list.push(asd);
+	points.list.push(asd);
+	points.list.push(asd);
+
 });
 </script>
