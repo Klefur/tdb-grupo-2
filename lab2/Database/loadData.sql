@@ -1,5 +1,5 @@
 ------------------------------------------
--- 1. Tabla Voluntary: 10 registros
+-- 1. Tabla Voluntary: 20 registros
 ------------------------------------------
 INSERT INTO Voluntary (rut, fullname, birthday, state, email, password, latitude, longitude) VALUES
 ('20000001-2', 'Juan Pérez', '1988-04-15', 1, 'juanperez@example.com', 'pass5678', -33.0451, -71.6198),
@@ -21,7 +21,18 @@ INSERT INTO Voluntary (rut, fullname, birthday, state, email, password, latitude
 ('20000017-8', 'Ricardo Tapia', '1981-09-17', 1, 'ricardotapia@example.com', 'pass1237', -29.9045, -71.2489),
 ('20000018-9', 'Sandra Contreras', '1998-10-22', 1, 'sandracontreras@example.com', 'pass2348', -35.4232, -71.6485),
 ('20000019-0', 'Luis Navarro', '1979-11-27', 1, 'luisnavarro@example.com', 'pass3459', -38.7359, -72.5904),
-('20000020-1', 'Patricia Muñoz', '1980-12-31', 1, 'patriciamunoz@example.com', 'pass4560', -20.5352, -70.1813);
+('20000020-1', 'Patricia Muñoz', '1980-12-31', 1, 'patriciamunoz@example.com', 'pass4560', -20.5352, -70.1813),
+('20000021-1', 'Valentina Núñez', '1995-02-14', 1, 'valentinanunez@example.com', 'pass8901', -40.4689, -70.9411),
+('20000022-2', 'Juan Ángel Torres', '1986-03-19', 1, 'juanangel@example.com', 'pass5671', -35.9087, -69.1997),
+('20000023-3', 'Pia Castillo', '1994-04-23', 1, 'piacastillo@example.com', 'pass6782', -30.0153, -70.5500),
+('20000024-4', 'Manuel Tapia', '1983-05-28', 1, 'manueltapia@example.com', 'pass7893', -55.6066, -72.1023),
+('20000025-5', 'Arturo Vidal', '1996-06-02', 1, 'arturovidal@example.com', 'pass8904', -60.7850, -68.7500),
+('20000026-6', 'Alexis Guerrero', '1982-07-07', 1, 'alexisguerrero@example.com', 'pass9015', -60.4783, -70.3126),
+('20000027-7', 'Jorge Gonzalez', '1997-08-12', 1, 'jorgegonzalez@example.com', 'pass0126', -38.4569, -69.6483),
+('20000028-8', 'Freddy Mercury', '1981-09-17', 1, 'freddymercury@example.com', 'pass1237', -57.9045, -71.2489),
+('20000029-9', 'Cecilia Contreras', '1998-10-22', 1, 'ceciliacontreras@example.com', 'pass2348', -47.4232, -71.6485),
+('20000030-0', 'Montserrat Lopez', '1979-11-27', 1, 'montserratlopez@example.com', 'pass3459', -44.7359, -71.5904),
+('20000031-1', 'Patricia Ayala', '1980-12-31', 1, 'patriciaayala@example.com', 'pass4560', -19.5352, -70.1113);
 
 
 ------------------------------------------
@@ -68,7 +79,7 @@ INSERT INTO Institution (name, coordinator_name, email, password) VALUES
 ('Municipalidad de Valparaíso', 'Laura Fernández', 'valparaiso@gmail.com', 'valparaisopass');
 
 ------------------------------------------
--- 5. Tabla Emergency: 5 registros
+-- 5. Tabla Emergency: 10 registros
 ------------------------------------------
 
 INSERT INTO Emergency (name, description, state, id_institution, latitude, longitude) VALUES
@@ -140,3 +151,40 @@ INSERT INTO Ranking (id_task, id_voluntary) VALUES
 (8, 8),
 (9, 9),
 (10, 10);
+
+------------------------------------------
+-- 10. Tabla Emergency_Voluntary: 10 registros
+------------------------------------------
+
+INSERT INTO Emergency_Voluntary (id_emergency, id_voluntary) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 5),
+(3, 6),
+(4, 7),
+(4, 8),
+(5, 9),
+(5, 10),
+(6, 11),
+(6, 12),
+(7, 13),
+(7, 14),
+(8, 15),
+(8, 16),
+(9, 17),
+(9, 18),
+(10, 19),
+(10, 20),
+(1, 21),
+(2, 22),
+(3, 23), 
+(4, 24),
+(5, 25), 
+(6, 26),
+(7, 27),
+(8, 28),
+(9, 29),
+(10, 30),
+(10, 31);

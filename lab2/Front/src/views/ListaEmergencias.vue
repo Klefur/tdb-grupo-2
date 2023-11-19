@@ -175,7 +175,7 @@ async function GetPoints(id_emergencia, index) {
 	await axios
 		.get(
 			url +
-				"/voluntaries/location/" +
+				"/emergencies_voluntaries/location/" +
 				String(id_emergencia) +
 				"/" +
 				String(radio.value * 1000),

@@ -71,9 +71,4 @@ public class VoluntaryService {
         }
     }
 
-    @GetMapping("/voluntaries/location/{id_emergency}/{radius}")
-    public List<Voluntary> findVoluntariesByLocationNear(@PathVariable("id_emergency") Integer id_emergency, @PathVariable Double radius){
-        return voluntaryRepository.findVoluntariesByLocationNear(id_emergency, radius);
-    }
-
 }

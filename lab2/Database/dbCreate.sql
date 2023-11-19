@@ -144,6 +144,18 @@ CREATE TABLE IF NOT EXISTS Ranking(
 );
 
 ----------------------------------------
+-- Tabla de Emergency_Voluntary --
+----------------------------------------
+
+CREATE TABLE IF NOT EXISTS Emergency_Voluntary(
+    "id_emergency_voluntary" SERIAL NOT NULL PRIMARY KEY,
+    "id_emergency" int,
+    "id_voluntary" int,
+    FOREIGN KEY ("id_emergency") REFERENCES Emergency ("id_emergency") ON DELETE CASCADE,
+    FOREIGN KEY ("id_voluntary") REFERENCES Voluntary ("id_voluntary") ON DELETE CASCADE
+);
+
+----------------------------------------
 -- Tabla de Login_Action --
 ----------------------------------------
 CREATE TABLE IF NOT EXISTS Login_Action(

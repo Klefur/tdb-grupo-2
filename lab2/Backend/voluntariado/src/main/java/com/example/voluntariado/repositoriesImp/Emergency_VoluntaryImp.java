@@ -76,16 +76,49 @@ public class Emergency_VoluntaryImp implements Emergency_VoluntaryRepository {
 
     @Override
     public boolean deleteEmergencyVoluntaryById(Integer id) {
-        return false;
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("DELETE FROM emergency_voluntary WHERE id_emergency_voluntary = :id")
+                    .addParameter("id_emergency_voluntary", id)
+                    .executeUpdate();
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
     public boolean deleteAllEmergenciesVoluntaries() {
-        return false;
+        try(Connection connection = sql2o.open()){
+            connection
+                    .createQuery("TRUNCATE emergency_voluntary CASCADE")
+                    .executeUpdate()
+                    .getResult();
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
     public List<Voluntary> findVoluntariesByLocationNear(Integer id_emergency, Double distance) {
-        return null;
+        String sql = "SELECT voluntary.* " +
+                "FROM voluntary, emergency " +
+                "WHERE voluntary.state = 1 AND emergency.id_emergency = :id_emergency " +
+                "AND ST_Distance(voluntary.geom::geography, emergency.geom::geography) < :distance " +
+                "ORDER BY ST_Distance(voluntary.geom::geography, emergency.geom::geography);";
+
+        try(Connection connection = sql2o.open()){
+            return connection
+                    .createQuery(sql)
+                    .addParameter("id_emergency", id_emergency)
+                    .addParameter("distance", distance)
+                    .executeAndFetch(Voluntary.class);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }
