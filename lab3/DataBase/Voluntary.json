@@ -1,0 +1,313 @@
+[
+    {
+      "rut": "20000001-2",
+      "fullname": "Juan Pérez",
+      "birthday": "1988-04-15",
+      "state": 1,
+      "email": "juanperez@example.com",
+      "password": "pass5678",
+      "latitude": -39.8116,
+      "longitude": -73.2240
+    },
+    {
+      "rut": "20000002-3",
+      "fullname": "Ana Gómez",
+      "birthday": "1990-06-20",
+      "state": 1,
+      "email": "anagomez@example.com",
+      "password": "pass9012",
+      "latitude": -39.8201,
+      "longitude": -73.2457
+    },
+    {
+      "rut": "20000003-4",
+      "fullname": "Carlos Ruiz",
+      "birthday": "1985-07-30",
+      "state": 1,
+      "email": "carlosruiz@example.com",
+      "password": "pass3456",
+      "latitude": -39.8617,
+      "longitude": -73.2476
+    },
+    {
+      "rut": "20000004-5",
+      "fullname": "María López",
+      "birthday": "1992-08-25",
+      "state": 1,
+      "email": "marialopez@example.com",
+      "password": "pass7890",
+      "latitude": -33.1121,
+      "longitude": -71.7094
+    },
+    {
+      "rut": "20000005-6",
+      "fullname": "Diego Morales",
+      "birthday": "1987-09-10",
+      "state": 1,
+      "email": "diegomorales@example.com",
+      "password": "pass2345",
+      "latitude": -33.0268,
+      "longitude": -71.5522
+    },
+    {
+      "rut": "20000006-7",
+      "fullname": "Lucía Fernández",
+      "birthday": "1991-10-05",
+      "state": 1,
+      "email": "luciafernandez@example.com",
+      "password": "pass6789",
+      "latitude": -33.0842,
+      "longitude": -71.6459
+    },
+    {
+      "rut": "20000007-8",
+      "fullname": "Roberto Díaz",
+      "birthday": "1984-11-20",
+      "state": 1,
+      "email": "robertodiaz@example.com",
+      "password": "pass1235",
+      "latitude": -36.2208,
+      "longitude": -72.0931
+    },
+    {
+      "rut": "20000008-9",
+      "fullname": "Carmen Soto",
+      "birthday": "1993-12-15",
+      "state": 1,
+      "email": "carmensoto@example.com",
+      "password": "pass4567",
+      "latitude": -36.7833,
+      "longitude": -72.0479
+    },
+    {
+      "rut": "20000009-0",
+      "fullname": "Francisco Vargas",
+      "birthday": "1989-01-10",
+      "state": 1,
+      "email": "franciscovargas@example.com",
+      "password": "pass7891",
+      "latitude": -36.7878,
+      "longitude": -72.9104
+    },
+    {
+      "rut": "20000010-1",
+      "fullname": "Elena Núñez",
+      "birthday": "1995-02-14",
+      "state": 1,
+      "email": "elenanunez@example.com",
+      "password": "pass8901",
+      "latitude": -27.4689,
+      "longitude": -70.3111
+    },
+    {
+      "rut": "20000011-2",
+      "fullname": "Miguel Ángel Torres",
+      "birthday": "1986-03-19",
+      "state": 1,
+      "email": "miguelangel@example.com",
+      "password": "pass5671",
+      "latitude": -27.9087,
+      "longitude": -70.1997
+    },
+    {
+      "rut": "20000012-3",
+      "fullname": "Isabel Castillo",
+      "birthday": "1994-04-23",
+      "state": 1,
+      "email": "isabelcastillo@example.com",
+      "password": "pass6782",
+      "latitude": -27.0153,
+      "longitude": -70.5500
+    },
+    {
+      "rut": "20000013-4",
+      "fullname": "Jorge Martínez",
+      "birthday": "1983-05-28",
+      "state": 1,
+      "email": "jorgemartinez@example.com",
+      "password": "pass7893",
+      "latitude": -39.3066,
+      "longitude": -72.1023
+    },
+    {
+      "rut": "20000014-5",
+      "fullname": "Daniela Vidal",
+      "birthday": "1996-06-02",
+      "state": 1,
+      "email": "danielavidal@example.com",
+      "password": "pass8904",
+      "latitude": -39.9550,
+      "longitude": -71.9900
+    },
+    {
+      "rut": "20000015-6",
+      "fullname": "Andrés Guerrero",
+      "birthday": "1982-07-07",
+      "state": 1,
+      "email": "andresguerrero@example.com",
+      "password": "pass9015",
+      "latitude": -38.7483,
+      "longitude": -72.3226
+    },
+    {
+      "rut": "20000016-7",
+      "fullname": "Verónica Moya",
+      "birthday": "1997-08-12",
+      "state": 1,
+      "email": "veronicamoya@example.com",
+      "password": "pass0126",
+      "latitude": -42.9311,
+      "longitude": -72.7183
+    },
+    {
+      "rut": "20000017-8",
+      "fullname": "Ricardo Tapia",
+      "birthday": "1981-09-17",
+      "state": 1,
+      "email": "ricardotapia@example.com",
+      "password": "pass1237",
+      "latitude": -42.9245,
+      "longitude": -72.7089
+    },
+    {
+      "rut": "20000018-9",
+      "fullname": "Sandra Contreras",
+      "birthday": "1998-10-22",
+      "state": 1,
+      "email": "sandracontreras@example.com",
+      "password": "pass2348",
+      "latitude": -42.9132,
+      "longitude": -72.6985
+    },
+    {
+      "rut": "20000019-0",
+      "fullname": "Luis Navarro",
+      "birthday": "1979-11-27",
+      "state": 1,
+      "email": "luisnavarro@example.com",
+      "password": "pass3459",
+      "latitude": -52.9070,
+      "longitude": -70.9256
+    },
+    {
+      "rut": "20000020-1",
+      "fullname": "Patricia Muñoz",
+      "birthday": "1980-12-31",
+      "state": 1,
+      "email": "patriciamunoz@example.com",
+      "password": "pass4560",
+      "latitude": -53.2795,
+      "longitude": -70.9518
+    },
+    {
+      "rut": "20000021-1",
+      "fullname": "Valentina Núñez",
+      "birthday": "1995-02-14",
+      "state": 1,
+      "email": "valentinanunez@example.com",
+      "password": "pass8901",
+      "latitude": -53.1470,
+      "longitude": -70.8959
+    },
+    {
+      "rut": "20000022-2",
+      "fullname": "Juan Ángel Torres",
+      "birthday": "1986-03-19",
+      "state": 1,
+      "email": "juanangel@example.com",
+      "password": "pass5671",
+      "latitude": -33.2452,
+      "longitude": -71.5926
+    },
+    {
+      "rut": "20000023-3",
+      "fullname": "Pia Castillo",
+      "birthday": "1994-04-23",
+      "state": 1,
+      "email": "piacastillo@example.com",
+      "password": "pass6782",
+      "latitude": -33.3824,
+      "longitude": -71.3900
+    },
+    {
+      "rut": "20000024-4",
+      "fullname": "Manuel Tapia",
+      "birthday": "1983-05-28",
+      "state": 1,
+      "email": "manueltapia@example.com",
+      "password": "pass7893",
+      "latitude": -33.1056,
+      "longitude": -70.4930
+    },
+    {
+        "rut": "20000025-5",
+        "fullname": "Arturo Vidal",
+        "birthday": "1996-06-02",
+        "state": 1,
+        "email": "arturovidal@example.com",
+        "password": "pass8904",
+        "latitude": -30.4050,
+        "longitude": -71.5877
+    },
+    {
+        "rut": "20000026-6",
+        "fullname": "Alexis Guerrero",
+        "birthday": "1982-07-07",
+        "state": 1,
+        "email": "alexisguerrero@example.com",
+        "password": "pass9015",
+        "latitude": -29.5437,
+        "longitude": -71.2180
+    },
+    {
+        "rut": "20000027-7",
+        "fullname": "Jorge Gonzalez",
+        "birthday": "1997-08-12",
+        "state": 1,
+        "email": "jorgegonzalez@example.com",
+        "password": "pass0126",
+        "latitude": -30.1056,
+        "longitude": -70.4930
+    },
+    {
+        "rut": "20000028-8",
+        "fullname": "Freddy Mercury",
+        "birthday": "1981-09-17",
+        "state": 1,
+        "email": "freddymercury@example.com",
+        "password": "pass1237",
+        "latitude": -33.8190,
+        "longitude": -70.7328
+    },
+    {
+        "rut": "20000029-9",
+        "fullname": "Cecilia Contreras",
+        "birthday": "1998-10-22",
+        "state": 1,
+        "email": "ceciliacontreras@example.com",
+        "password": "pass2348",
+        "latitude": -33.5405,
+        "longitude": -70.5823
+    },
+    {
+        "rut": "20000030-0",
+        "fullname": "Montserrat Lopez",
+        "birthday": "1979-11-27",
+        "state": 1,
+        "email": "montserratlopez@example.com",
+        "password": "pass3459",
+        "latitude": -33.5253,
+        "longitude": -70.7909
+    },
+    {
+        "rut": "20000031-1",
+        "fullname": "Patricia Ayala",
+        "birthday": "1980-12-31",
+        "state": 1,
+        "email": "patriciaayala@example.com",
+        "password": "pass4560",
+        "latitude": -33.4235,
+        "longitude": -70.5526
+    }
+    ]
+
