@@ -1,25 +1,22 @@
 package com.tbd.lab3.models;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
 /**
  * This class represents an ability.
  */
+@Document(collection = "Ability")
 public class Ability {
-        private Integer id_ability;
+        @Id
+        private ObjectId _id;
         private String code;
         private String name;
         private List<String> items;
         private String description;
-
-
-        /**
-         * Gets the ID of an Ability.
-         * @return Integer
-         */
-        public Integer getId_ability() {
-                return id_ability;
-        }
 
 
         /**
@@ -35,15 +32,6 @@ public class Ability {
          */
         public void setId_code(String code) {
                 this.code = code;
-        }
-
-
-        /**
-         * Sets the ID of an ability.
-         * @param id_ability
-         */
-        public void setId_ability(Integer id_ability) {
-                this.id_ability = id_ability;
         }
 
         /**
@@ -98,4 +86,15 @@ public class Ability {
          * Gets the information of an Ability.
          * @return String
          */
+
+        @Override
+        public String toString(){
+                return "Ability{" +
+                        "id="+ _id +
+                        ", code='" + code + '\'' +
+                        ", name='" + name + '\'' +
+                        ", items='" + items + '\'' +
+                        ", description='" + description + '\'' +
+                        '}';
+        }
 }
