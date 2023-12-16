@@ -97,11 +97,13 @@ public class VoluntaryService {
         MongoCollection<Document> collection = mongoTemplate.getCollection("Voluntary");
 
         Bson unwind = Aggregates.unwind("$abilities");
-        Bson group = Aggregates.group("$_id", Accumulators.sum("count", 1));
+        Bson group = Aggregates.group("$rut",
+                Accumulators.sum("count", 1),
+                Accumulators.first("rut", "$rut"));
         Bson project = Aggregates.project(Projections.fields(
                 Projections.excludeId(),
                 Projections.include("count"),
-                Projections.computed("id_voluntary", "$_id")
+                Projections.computed("rut", "$rut")
         ));
 
         AggregateIterable<Document> result = collection.aggregate(Arrays.asList(unwind, group, project));
@@ -113,6 +115,5 @@ public class VoluntaryService {
         }
 
         return voluntariesAbilities;
-
     }
 }
