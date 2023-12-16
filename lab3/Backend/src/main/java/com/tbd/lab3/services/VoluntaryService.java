@@ -14,9 +14,6 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,9 +23,6 @@ import com.tbd.lab3.models.Voluntary;
 import com.tbd.lab3.repositories.VoluntaryRepository;
 
 import org.springframework.web.bind.annotation.*;
-
-import javax.print.Doc;
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -67,7 +61,7 @@ public class VoluntaryService {
     @ResponseBody
     public String editVoluntary(@PathVariable("rut") String rut, @RequestBody Voluntary voluntary){
         voluntary.setRut(rut);
-        Voluntary result = voluntaryRepository.save(voluntary);
+        voluntaryRepository.save(voluntary);
         if (!voluntaryRepository.findByRut(rut).isEmpty()){
             return "Edited voluntary";
         }else{
@@ -102,7 +96,7 @@ public class VoluntaryService {
     public List<Document> countAbilitiesVoluntaries(){
         MongoCollection<Document> collection = mongoTemplate.getCollection("Voluntary");
 
-        Bson unwind = Aggregates.unwind("Ability");
+        Bson unwind = Aggregates.unwind("$abilities");
         Bson group = Aggregates.group("$_id", Accumulators.sum("count", 1));
         Bson project = Aggregates.project(Projections.fields(
                 Projections.excludeId(),
@@ -121,7 +115,4 @@ public class VoluntaryService {
         return voluntariesAbilities;
 
     }
-
-
-
 }
